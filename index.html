@@ -12,13 +12,13 @@
 <body>
     <div class="container">
         <div class="row mt-5">
-            <div class="col">
+            <div class="col-2">
                 <a id="btnOne" class="btn btn-primary mr-2" href="#" role="button" value=1>id=1</a>
             </div>
-            <div class="col">
+            <div class="col-2">
                 <a id="btnTwo" class="btn btn-secondary" href="#" role="button">id=2</a>
             </div>
-            <div class="col mt-5">
+            <div class="col-12 mt-5">
                 <h5 class="showData"></h5>
             </div>
         </div>
@@ -41,16 +41,48 @@
     
         $(document).ready(function () {
             $("#btnOne").bind("click", function () {
-                // var id = $("#btnOne").val();
-                $.get( "test.py", { id: 1 } )
-                    .done(function( data ) {
-                        console.log( data );
+                
+                $.ajax({
+                    type: 'GET',
+                    url: '127.0.0.1:5000',
+                    data: { id: 1 },
+                    // dataType: 'script',
+                    success: function(data) {
+                        console.log('hi');
+                    //     jQuery.each(data, function(i,item){   
+                    //         alert(item);   
+                    //     });   
+                    //    for (var i=0;i<data.length;i++){
+                    //         var list = data[i];
+                    //         console.log(list);
+                    //         //var name = data[i].userName;
+                    //         var str = "<ul><li>" + list+ "</li></ul>";
+                    //         $(".showData").append(str);
+                        }
+
+                        // var dataObj = "";     
+                        // for(var i=0;i<dataObj.length;i++){      
+                        //     alert(dataObj[i]);     
+                        // }  
+                                    
+                        // var jsonObj=eval("("+data+")");  
+                        // $.each(jsonObj, function (i, item) {  
+                        //     alert(item[i]);  
+                        // }); 
+
+                        // $( ".showData" )
+                        //     .append(dataObj);
+                    }
+                });
+                // $.get( "test.py", { id: 1 } )
+                //     .done(function( data ) {
+                //         console.log( data );
                         
-                        $( ".showData" )
-                            .append(data);
-                        //$(window).attr('location','/getTransRec?id=[id]');
-                },"json");
-                return id;
+                //         $( ".showData" )
+                //             .append(data);
+                        
+                // },"json");
+                // return id;
 
             });
 
