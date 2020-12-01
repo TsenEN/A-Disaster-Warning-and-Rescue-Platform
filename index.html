@@ -137,11 +137,18 @@
                     data:{id:1},    
                     contentType: 'application/json;charset=UTF-8', 
                         success: function(data) {
-                        var str = "";
+                        
                         jQuery.each(data, function (i, item) {
-                            var list = data[i];
-                            var str = "<ul><li>" + item + "</li></ul>";
-                            $(".showData").append(str);
+                            var list =  data[i];
+                            var str = "";
+                            jQuery.each(list, function (i, item) {
+                                console.log(list[i]);
+                                var numberlist = list[i];
+                                str = "<ul><li>" + numberlist + "</li></ul>";
+                                $(".showData").append(str);
+                            })
+                            //console.log(list);
+                            
                         });  
                     }
                 });
