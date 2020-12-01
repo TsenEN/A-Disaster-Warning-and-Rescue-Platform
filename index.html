@@ -13,10 +13,10 @@
     <div class="container">
         <div class="row mt-5">
             <div class="col-2">
-                <a id="btnOne" class="btn btn-primary mr-2"  role="button" value=1>id=1</a>
+                <a id="btnOne" class="btn btn-primary mr-2"  role="button" value=1>POST</a>
             </div>
             <div class="col-2">
-                <a id="btnTwo" class="btn btn-secondary" role="button" value="ok">id=ok</a>
+                <a id="btnTwo" class="btn btn-secondary" role="button" value="ok">GET</a>
             </div>
             <div class="col-12 mt-5">
                 <h5 class="showData"></h5>
@@ -136,9 +136,13 @@
                     //data:JSON.stringify(datajson),
                     data:{id:1},    
                     contentType: 'application/json;charset=UTF-8', 
-                        success: function(gg) {
-                        alert("hi");    
-                        console.log(gg);
+                        success: function(data) {
+                        var str = "";
+                        jQuery.each(data, function (i, item) {
+                            var list = data[i];
+                            var str = "<ul><li>" + item + "</li></ul>";
+                            $(".showData").append(str);
+                        });  
                     }
                 });
             })
