@@ -68,20 +68,28 @@
                     data:{id:1},    
                     contentType: 'application/json;charset=UTF-8', 
                         success: function(data) {
-                        
-                        jQuery.each(data, function (i, item) {
-                            var list =  data[i];
-                            var str = "";
-                            jQuery.each(list, function (i, item) {
-                                console.log(list[i]);
-                                var numberlist = list[i];
-                                str = "<ul><li>" + numberlist + "</li></ul>";
+                            jQuery.each(data, function (i, item) {
+                                var str = "";
+                                var numberTitle = "";
+                                var list = data[i];
+                                //console.log(list);
+                                // for (var o in list) {
+                                //     var numberTitle = parseInt(o) + 1;
+                                //     console.log(numberTitle);
+                                // }
+                                var numberTitle = parseInt(i) + 1;
+                                // for (var o in list) {
+                                //     //console.log(list[i]);
+                                //     var eee = list[i];
+                                // }
+                                console.log(list);
+                                str = "<ul><li>" + numberTitle + "<ul><li>" + list + "</ul></li></li></ul>";
                                 $(".showData").append(str);
-                            })
-                            //console.log(list);
+                            });
+
                             
-                        });  
-                    }
+                            
+                        }
                 });
             })
         });
