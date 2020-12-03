@@ -76,17 +76,13 @@
                                 
                                 list = data[i];
                                 numberTitle = parseInt(i) + 1;
+                                $(".showData").append(numberTitle);
                                 jQuery.each(list, function (i, item) {
                                     var answer = list[i];
-                                    str = "<ul><li>" + numberTitle + "<ul><li>" + answer + "</ul></li></li></ul>";
+                                    str = "<ul>" + answer + "</ul>";
                                     $(".showData").append(str);
                                 });
-                                
                             });
-
-                            
-                            
-                            
                         }
                 });
             })
