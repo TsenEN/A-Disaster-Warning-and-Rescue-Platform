@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="Css/template.css">
+	<link rel="stylesheet" href="Css/SubTab.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+	<script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
+	<script
+	  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuG6FAiIfDF7NMrvp8z0itQNungR9_X8M&callback=initMap&libraries=&v=weekly"
+	  defer
+	></script>
+	
+</head>
+
+<body  style="position: relative">
+<h1>邊坡種子管理</h1>
+<ul class="tabs">
+	<li><a href="#tab1">大數據資料串接</a></li>
+	<li><a href="#tab2">救災車輛指派與管理</a></li>
+</ul>
+	<div id="Header">
+		<div id="map"></div>
+	</div>
+
+	<div id="Sidebar">
+		<div id = SelectRegion>
+			<select  style="width: 200px;height: 50px;">
+				<option>請選擇地區</option>
+				<option>東區</option>
+				<option>北區</option>
+				<option>永康區</option>
+				<option>安南區</option>
+				<option>南化區</option>
+				<option>新化區</option>
+			</select>
+		</div>
+		<div id = "RegisterSeed">
+			<h2>註冊種子</h2>
+			<form class="login" onsubmit='return onSubmit(this)'>
+			  <!-- <input name='seedID' placeholder='種子地區'><br> -->
+			  <input name='seedID' placeholder='種子編號'><br>
+			  <input name='seedID' placeholder='北緯'><br>
+			  <input name='seedID' placeholder='東經'><br>
+			  <button type='submit'>註冊</button>
+			  <p>請再三確認資料是否正確</p>
+			</form>
+		</div>
+
+		<div id = "SelectRegion">
+
+		</div>
+	</div>
+
+	<div id="Body" >
+		<table id="SeedsTable" class = "border-img">
+			<thead>
+				<tr>
+					<th>地區</th>
+					<th>種子編號</th>
+					<th>電量</th>
+					<th>警告等級</th>
+					<th>北緯</th>
+					<th>東經</th>
+				</tr>
+			</thead>
+
+			<tbody id="SeedsList"></tbody>
+		</table>
+	</div>
+
+	<div style='clear:both;'></div>
+	<div id="Footer"></div>
+
+	<script src="Js/GetSeedJson.js"></script>
+	<script src="Js/GoogleMap.js"></script>
+</body>
+</html>
