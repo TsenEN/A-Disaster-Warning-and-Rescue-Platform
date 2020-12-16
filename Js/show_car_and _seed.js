@@ -60,6 +60,7 @@ var interval = setInterval(function () {
                 else string_car_stat = "值勤中"
                 car_markers[i] = new google.maps.Marker({
                     position: car_latlng.get(JData[i]["car_license_plate"]),
+                    icon: './icon/ambulance_s.png',
                     map: map,
                     label: JData[i]["car_license_plate"]
                 });
