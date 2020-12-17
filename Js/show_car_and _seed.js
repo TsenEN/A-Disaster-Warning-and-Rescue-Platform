@@ -23,11 +23,6 @@ var interval = setInterval(function () {
                 var string_seed_stat; //用中文表示種子狀態
                 if (JData[i]["seed_status"] == 0) string_seed_stat = "安全";
                 else string_seed_stat = "警戒"
-                infowindow[i] = new google.maps.InfoWindow({
-                    content: '<h2>種子ID:' + JData[i]["seed_id"] + '</h2>'
-                        + '<span>經緯度:</br>' + JData[i]["seed_latitude"] + ',' + JData[i]["seed_longitude"] + '</br>'
-                        + '種子狀態:' + string_seed_stat + '</span>'
-                });
                 seed_markers[i] = new google.maps.Marker({
                     position: seed_latlng.get(JData[i]["seed_id"]),
                     map: map,
@@ -37,7 +32,11 @@ var interval = setInterval(function () {
                 seed_markers[i].setMap(map);
                 seed_markers[i].addListener('click', (function (i) {
                     return function () {
-                        infowindow[i].open(map, seed_markers[i]);
+                        var el = document.getElementById('seed_detail_block');
+                        el.remove();
+                        $('<div id="seed_detail_block">' + '<h2>種子ID:' + JData[i]["seed_id"] + '</h2>'
+                            + '<span>經緯度:</br>' + JData[i]["seed_latitude"] + ',' + JData[i]["seed_longitude"] + '</br>'
+                            + '種子狀態:' + string_seed_stat + '</span>' + '</div>').appendTo('.seed_detail');
                     }
                 })(i));
             }
@@ -58,6 +57,11 @@ var interval = setInterval(function () {
                 var string_car_stat;
                 if (JData[i]["car_status"] == 0) string_car_stat = "未派遣";
                 else string_car_stat = "值勤中"
+                infowindow[i] = new google.maps.InfoWindow({
+                    content: '<h2>車牌:' + JData[i]["car_license_plate"] + '</h2>'
+                        + '<span>經緯度:</br>' + JData[i]["car_latitude"] + ',' + JData[i]["car_longitude"] + '</br>'
+                        + '車子狀態:' + string_car_stat + '</span>'
+                });
                 car_markers[i] = new google.maps.Marker({
                     position: car_latlng.get(JData[i]["car_license_plate"]),
                     icon: './icon/ambulance_s.png',
@@ -68,6 +72,8 @@ var interval = setInterval(function () {
                 car_markers[i].setMap(map);
                 car_markers[i].addListener('click', (function (i) {
                     return function () {
+                        infowindow[i].open(map, car_markers[i]);
+
                     }
                 })(i));
             }
