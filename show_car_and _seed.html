@@ -12,7 +12,14 @@
         }
 
         #map {
-            height: 85%;
+            left: 250px;
+            height: 100%;
+        }
+
+        .seed_detail {
+            position: absolute;
+            top: 0px;
+            left: 0px;
         }
     </style>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -27,11 +34,11 @@
                 center: { lat: 23.075, lng: 120.521 },
                 zoom: 14
             });
-            marker.setMap(map);
         }
     </script>
-    <div class="white_space">
-        <h3>空白處</h3><!-- 先空著 -->
+    <div class="seed_detail">
+        <h3>災害通報點</h3>
+        <div id="seed_detail_block"></div>
     </div>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2W_uQWbt27DpkkUnCrystlgxY7YcJzsc&callback=initMap">
