@@ -4,7 +4,7 @@ var locations = [];
 function initMap() {
 	$.ajax({ 
 		type: 'GET', 
-		url: 'http://140.116.245.229:2000/GetSeedJson', 
+		url: 'http://140.116.245.229:3000/GetSeedsJson', 
 		dataType: 'json',
 		success: function (JData) {
 			var i = 0; 
