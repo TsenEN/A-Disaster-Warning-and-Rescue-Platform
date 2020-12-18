@@ -9,7 +9,7 @@ function initMap() {
 		success: function (JData) {
 			var i = 0; 
 			$.each(JData, function() {
-				locations[i] = {lat: parseFloat(JData[i].n), lng: parseFloat(JData[i].e)};
+				locations[i] = {lat: parseFloat(JData[i].seed_latitude), lng: parseFloat(JData[i].seed_longitude)};
 				i++;
 			});
 			const map = new google.maps.Map(document.getElementById("map"), {
