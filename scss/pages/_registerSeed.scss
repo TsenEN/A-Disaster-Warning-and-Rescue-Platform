@@ -148,10 +148,10 @@ textarea:focus {
   background-color: rgba(134, 193, 102, 1);
   left: 0px;
   top: 0px;
-  transition: all .5s ease, top .5s ease .5s, height .5s ease .5s, background-color .5s ease .75s;
+  transition: all .5s;
 }
 
-.btn-animate a {
+.btn-animate button {
   color: #26453d;
   text-decoration: none;
 }
