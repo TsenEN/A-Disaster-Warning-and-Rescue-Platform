@@ -1,10 +1,11 @@
-html, body * { box-sizing: border-box; font-family: 'Open Sans', sans-serif; }
+html,
+body * {
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+}
 
 body {
-  background:
-    linear-gradient(
-    rgba(246,247,249,0.8),
-    rgba(246,247,249,0.8)),
+  background: linear-gradient(rgba(246, 247, 249, 0.8), rgba(246, 247, 249, 0.8)), ;
 }
 
 .container {
@@ -16,17 +17,13 @@ body {
 .frame {
   height: 575px;
   width: 430px;
-  background:
-    linear-gradient(
-    rgba(100,106,88,0.75),
-    rgba(55,60,56,0.95)),
-    url(https://dl.dropboxusercontent.com/u/22006283/preview/codepen/clouds-cloudy-forest-mountain.jpg) no-repeat center center;
+  background: linear-gradient(rgba(100, 106, 88, 0.75), rgba(55, 60, 56, 0.95)), url(https://dl.dropboxusercontent.com/u/22006283/preview/codepen/clouds-cloudy-forest-mountain.jpg) no-repeat center center;
   background-size: cover;
   margin-left: auto;
   margin-right: auto;
-  border-top: solid 1px rgba(255,255,255,.5);
+  border-top: solid 1px rgba(255, 255, 255, .5);
   border-radius: 5px;
-  box-shadow: 0px 2px 7px rgba(0,0,0,0.2);
+  box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   transition: all .5s ease;
 }
@@ -62,20 +59,19 @@ li {
   cursor: pointer;
 }
 
-
 .form-signin {
   width: 430px;
   height: 375px;
-	font-size: 16px;
-	font-weight: 300;
+  font-size: 16px;
+  font-weight: 300;
   padding-left: 37px;
   padding-right: 37px;
   padding-top: 55px;
   transition: opacity .5s ease, transform .5s ease;
 }
 
-
-.form-signin input, .form-signup input {
+.form-signin input,
+.form-signup input {
   color: #26453d;
   font-size: 16px;
 }
@@ -83,11 +79,11 @@ li {
 .form-styling {
   width: 100%;
   height: 35px;
-	padding-left: 15px;
-	border: none;
-	border-radius: 20px;
+  padding-left: 15px;
+  border: none;
+  border-radius: 20px;
   margin-bottom: 20px;
-  background: rgba(255,255,255,.2);
+  background: rgba(255, 255, 255, .2);
 }
 
 label {
@@ -100,9 +96,11 @@ label {
   display: block;
 }
 
-:focus { outline: none; }
+:focus {
+  outline: none;
+}
 
-::placeholder { 
+::placeholder {
   font-size: 13px;
   color: rgba(241, 241, 241, 0.6);
 }
@@ -111,25 +109,26 @@ label {
   color: rgba(241, 241, 241, 0.6);
 }
 
-::-ms-input-placeholder { 
+::-ms-input-placeholder {
   color: rgba(241, 241, 241, 0.6);
 }
 
-.form-signin input:focus, textarea:focus,  textarea:focus {
+.form-signin input:focus,
+textarea:focus,
+textarea:focus {
   background: rgba(255, 255, 255, 0.548);
-  border: none; 
+  border: none;
   padding-right: 40px;
   transition: all .5s ease;
 }
-
 
 .btn-signin {
   float: left;
   padding-top: 8px;
   width: 100%;
   height: 35px;
-	border: none;
-	border-radius: 20px;
+  border: none;
+  border-radius: 20px;
   margin-top: -8px;
 }
 
@@ -138,7 +137,7 @@ label {
   font-weight: 700;
   font-size: 16px;
   text-align: center;
-  color: rgba(38,69,61, 1);
+  color: rgba(38, 69, 61, 1);
   padding-top: 7px;
   padding-bottom: 7px;
   width: 100%;
@@ -146,10 +145,10 @@ label {
   border: none;
   border-radius: 20px;
   margin-top: 23px;
-  background-color: rgba(134,193,102, 1);
+  background-color: rgba(134, 193, 102, 1);
   left: 0px;
   top: 0px;
-  transition: all .5s ease, top .5s ease .5s, height .5s ease .5s, background-color .5s ease .75s; 
+  transition: all .5s ease, top .5s ease .5s, height .5s ease .5s, background-color .5s ease .75s;
 }
 
 .btn-animate a {
@@ -163,12 +162,12 @@ label {
   position: relative;
   left: -55px;
   top: -420px;
-  color: rgba(255,255,255,0);
-  background-color: rgba(255,255,255,1);
+  color: rgba(255, 255, 255, 0);
+  background-color: rgba(255, 255, 255, 1);
 }
 
 a.btn-signin:hover {
-    cursor: pointer; 
-    background-color: #63a13f;
-    transition: all .5s;
+  cursor: pointer;
+  background-color: #63a13f;
+  transition: all .5s;
 }
