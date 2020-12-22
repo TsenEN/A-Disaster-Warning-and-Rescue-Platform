@@ -21,12 +21,12 @@
       </div>
       <form class="form-signin" action="" method="" name="form">
         <label for="longitude">經度</label>
-        <input class="form-styling" type="text" name="longitude" placeholder="請輸入種子經度" required>
+        <input class="form-styling" type="text" name="longitude" id="longitude" placeholder="請輸入種子經度" required>
         <label for="latitude">緯度</label>
-        <input class="form-styling" type="text" name="latitude" placeholder="請輸入種子緯度" required>
+        <input class="form-styling" type="text" name="latitude" id="latitude" placeholder="請輸入種子緯度" required>
         <label for="number">編號</label>
         <input class="form-styling" type="text" name="number" id="number" placeholder="請輸入種子編號" required>
-        <button type="submit" class="btn-animate btn-signin btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+        <button type="button" class="btn-animate btn-signin btn-primary text-white" id="formSubmit" data-toggle="modal" data-target="#exampleModalCenter">
           我要註冊
         </button>
         <!-- Modal -->
@@ -42,13 +42,13 @@
               </div>
               <div class="modal-body">
                 您輸入的種子資訊為
-                <br>經度：
-                <br>緯度：
-                <br>編號：
+                <br>經度：<span class="longitude" id="longitudeCheck"></span>
+                <br>緯度：<span class="latitude" id="latitudeCheck"></span>
+                <br>編號：<span class="number" id="numberCheck"></span>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-info">修改</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">確認</button>
+                <button type="button" class="btn btn-primary text-white" data-dismiss="modal">確認</button>
               </div>
             </div>
           </div>
@@ -63,8 +63,7 @@
   integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
   integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-
-
+<script src="Js/RegisterSeed.js"></script>
 </body>
 
 </html>
