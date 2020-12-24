@@ -1,27 +1,26 @@
-#RegisterSeed{
+/* #RegisterSeed{
 	position: absolute;
 	top :500px;
-
 }
 
 #SelectRegion{
 	position: absolute;
 	top :100px;
-}
+} */
 
-#SeedsTable{
+/* #SeedsTable{
 	position: absolute;
 	top :800px;
 	left: 200px;
-}
+} */
 
-#map {
+/* #map {
 	height: 700px;
-	width: 1200px;
+	max-width: 1200px;
 	left: 210px;
-}
+} */
 
-th {
+/* th {
 	border: 1px solid	#000000;
 	background-color: #606060;
 	width:300px;
@@ -34,7 +33,7 @@ td {
 	width:200px;
 	height:50px;
 	text-align:center;
-}
+} */
 
 /* #Header{
 	position: absolute;
