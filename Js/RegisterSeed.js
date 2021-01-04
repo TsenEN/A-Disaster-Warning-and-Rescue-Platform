@@ -13,6 +13,20 @@ $(document).ready(function(){
 
     // 按下確認鈕後將 form submit 至後端
     $("#confirm").click(function () {
-        $("#seedForm").submit();
+    var seed = [{ seed_id: numberValue, seed_longitude: longitudeValue, seed_latitude: latitudeValue, seed_status: 0}];
+    $.ajax({
+      type: "POST",
+      url: "http://140.116.245.229:3000/RegisterSeeds",
+      contentType: "application/json;charset=UTF-8",
+      dataType: "json", //宣告用JSON 
+      clearForm: true, //發送後清空FORM的值
+      data: JSON.stringify(seed),
+      headers: { 
+        'Access-Control-Allow-Origin': '*'
+      },
+      success: function (res) {
+        console.log(seed);
+      },
+    });
     });
 });
