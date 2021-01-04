@@ -1,22 +1,22 @@
 
 $(document).ready(function () {
-
+  
   var longitudeValue = "";
   var latitudeValue = "";
   var numberValue = "";
-    // 將input值傳入modal欄位
-    $("#formSubmit").click(function () {
+  // 將input值傳入modal欄位
+  $("#formSubmit").click(function () {
     longitudeValue = document.getElementById("longitude").value;
     latitudeValue = document.getElementById("latitude").value;
     numberValue = document.getElementById("number").value;
     
-        document.getElementById("longitudeCheck").innerHTML = longitudeValue;
-        document.getElementById("latitudeCheck").innerHTML = latitudeValue;
-        document.getElementById("numberCheck").innerHTML = numberValue;
-    });
+    document.getElementById("longitudeCheck").innerHTML = longitudeValue;
+    document.getElementById("latitudeCheck").innerHTML = latitudeValue;
+    document.getElementById("numberCheck").innerHTML = numberValue;
+  });
 
-    // 按下確認鈕後將 form submit 至後端
-    $("#confirm").click(function () {
+  // 按下確認鈕後將 form submit 至後端
+  $("#confirm").click(function () {
     var seed = [{ seed_id: numberValue, seed_longitude: longitudeValue, seed_latitude: latitudeValue, seed_status: 0}];
     $.ajax({
       type: "POST",
@@ -32,5 +32,5 @@ $(document).ready(function () {
         console.log(seed);
       },
     });
-    });
+  });
 });
