@@ -6,9 +6,10 @@ $(document).ready(function () {
   var numberValue = "";
     // 將input值傳入modal欄位
     $("#formSubmit").click(function () {
-        var longitudeValue = document.getElementById("longitude").value;
-        var latitudeValue = document.getElementById("latitude").value;
-        var numberValue = document.getElementById("number").value;
+    longitudeValue = document.getElementById("longitude").value;
+    latitudeValue = document.getElementById("latitude").value;
+    numberValue = document.getElementById("number").value;
+    
         document.getElementById("longitudeCheck").innerHTML = longitudeValue;
         document.getElementById("latitudeCheck").innerHTML = latitudeValue;
         document.getElementById("numberCheck").innerHTML = numberValue;
