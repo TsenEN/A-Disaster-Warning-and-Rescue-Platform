@@ -1,6 +1,9 @@
 
-$(document).ready(function(){
+$(document).ready(function () {
 
+  var longitudeValue = "";
+  var latitudeValue = "";
+  var numberValue = "";
     // 將input值傳入modal欄位
     $("#formSubmit").click(function () {
         var longitudeValue = document.getElementById("longitude").value;
