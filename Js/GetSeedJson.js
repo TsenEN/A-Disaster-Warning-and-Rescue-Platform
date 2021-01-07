@@ -6,7 +6,7 @@ $(document).ready(function() {
 function refreshTable() {
 		$.ajax({ 
 			type: 'GET', 
-			url: 'http://140.116.245.229:2000/GetSeedJson', 
+			url: 'http://140.116.245.229:3000/GetSeedsJson', 
 			dataType: 'json',
 			success: function (JData) {
 				var i = 0; 
@@ -14,11 +14,11 @@ function refreshTable() {
 				$.each(JData, function() {
 					SeedsListData += '<tr id="rowSeedsStatus" class="">';
 					SeedsListData += '<td>'+'北區'+'</td>';
-					SeedsListData += '<td>'+JData[i].seedID +'</td>';
-					SeedsListData += '<td>'+JData[i].battery+'</td>';
-					SeedsListData += '<td>'+JData[i].status+'</td>';
-					SeedsListData += '<td>'+JData[i].n+'</td>';
-					SeedsListData += '<td>'+JData[i].e+'</td>';
+					SeedsListData += '<td>'+JData[i].seed_id +'</td>';
+					SeedsListData += '<td>'+JData[i].seed_battery+'</td>';
+					SeedsListData += '<td>'+JData[i].seed_status+'</td>';
+					SeedsListData += '<td>'+JData[i].seed_latitude+'</td>';
+					SeedsListData += '<td>'+JData[i].seed_longitude+'</td>';
 					SeedsListData += '</tr>'; 
 
 				i++;
