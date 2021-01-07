@@ -1,74 +1,131 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<link rel="stylesheet" href="Css/template.css">
-	<link rel="stylesheet" href="Css/SubTab.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-	<script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
-	<script
-	  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuG6FAiIfDF7NMrvp8z0itQNungR9_X8M&callback=initMap&libraries=&v=weekly"
-	  defer
-	></script>
-	
-</head>
 
+<head>
+  <link rel="stylesheet" href="Css/template.css">
+  <!-- <link rel="stylesheet" href="Css/SubTab.css"> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="Css/all.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuG6FAiIfDF7NMrvp8z0itQNungR9_X8M&callback=initMap&libraries=&v=weekly"
+    defer></script>
+
+<<<<<<< HEAD
 <body  style="position: relative">
 <h1>邊坡種子管理</h1>
 	<div id="Header">
 		<div id="map"></div>
 	</div>
+=======
+</head>
+>>>>>>> UI
 
-	<div id="Sidebar">
-		<div id = SelectRegion>
-			<select  style="width: 200px;height: 50px;">
-				<option>請選擇地區</option>
-				<option>東區</option>
-				<option>北區</option>
-				<option>永康區</option>
-				<option>安南區</option>
-				<option>南化區</option>
-				<option>新化區</option>
-			</select>
-		</div>
-		<div id = "RegisterSeed">
-			<h2>註冊種子</h2>
-			<form class="login" onsubmit='return onSubmit(this)'>
-			  <!-- <input name='seedID' placeholder='種子地區'><br> -->
-			  <input name='seedID' placeholder='種子編號'><br>
-			  <input name='seedID' placeholder='北緯'><br>
-			  <input name='seedID' placeholder='東經'><br>
-			  <button type='submit'>註冊</button>
-			  <p>請再三確認資料是否正確</p>
-			</form>
-		</div>
+<body>
+  <!-- nav -->
+  <nav class="nav nav__bg navbar sticky-top navbar-light navbar-expand-lg mb-5">
+    <!-- logo -->
+    <a class="navbar-brand" href="SeedInfo.html">
+      <img src="Img/logo-white-sm.png" alt="logo" class="nav__logo d-inline-block">
+      <h1 class="h5 d-inline-block text-light">邊坡偵測防災與救災派遣管理系統</h1>
+    </a>
+    <!-- 選單 -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+      aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <a class="nav__link nav-link" href="SeedInfo.html">邊坡種子 <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav__link nav-link" href="#">救災派遣</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-3">
+        <div id="Sidebar">
+          <div id=SelectRegion>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1" class="text-dark pl-0 ">請選擇地區：</label>
+              <select class="form-control text-dark" id="exampleFormControlSelect1">
+                <option>東區</option>
+                <option>北區</option>
+                <option>永康區</option>
+                <option>安南區</option>
+                <option>南化區</option>
+                <option>新化區</option>
+              </select>
+            </div>
+          </div>
+          <!-- <div id="RegisterSeed">
+                <h2>註冊種子</h2>
+                <form class="login" onsubmit='return onSubmit(this)'>
+                  <input name='seedID' placeholder='種子地區'><br> 
+                  <input name='seedID' placeholder='種子編號'><br>
+                  <input name='seedID' placeholder='北緯'><br>
+                  <input name='seedID' placeholder='東經'><br>
+                  <button type='submit'>註冊</button>
+                  <p>請再三確認資料是否正確</p>
+                </form>
+              </div> -->
+          <div id="SelectRegion">
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-9">
+        <div id="Header">
+          <div id="map" class="map">
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mt-4">
+        <div id="Body">
+          <table class="table table-bordered table-hover" id="SeedsTable">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">地區</th>
+                <th scope="col">種子編號</th>
+                <th scope="col">電量</th>
+                <th scope="col">警告等級</th>
+                <th scope="col">北緯</th>
+                <th scope="col">東經</th>
+              </tr>
+            </thead>
+            <tbody id="SeedsList"></tbody>
+          </table>
+        </div>
+        <div style='clear:both;'></div>
+      </div>
+    </div>
+  </div>
 
-		<div id = "SelectRegion">
+  <button type="button" class="btn btn-info">Primary</button>
 
-		</div>
-	</div>
+  <footer id="Footer" class="footer__bg w-100 py-3 mt-5">
+    <div class="container">
+      <div class="row">
+        <small>
+          <div class="text-light">Logo通過<a href="https://www.designevo.com/tw/logo-maker/" class="text-light" title="免費線上logo製作軟體">DesignEvo</a>設計製作</div>
+        </small>
+      </div>
+    </div>
+  </footer>
 
-	<div id="Body" >
-		<table id="SeedsTable" class = "border-img">
-			<thead>
-				<tr>
-					<th>地區</th>
-					<th>種子編號</th>
-					<th>電量</th>
-					<th>警告等級</th>
-					<th>北緯</th>
-					<th>東經</th>
-				</tr>
-			</thead>
 
-			<tbody id="SeedsList"></tbody>
-		</table>
-	</div>
 
-	<div style='clear:both;'></div>
-	<div id="Footer"></div>
 
-	<script src="Js/GetSeedJson.js"></script>
-	<script src="Js/GoogleMap.js"></script>
+  <script src="Js/GetSeedJson.js"></script>
+  <script src="Js/GoogleMap.js"></script>
 </body>
+
 </html>
