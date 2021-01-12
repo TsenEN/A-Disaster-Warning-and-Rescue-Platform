@@ -10,12 +10,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
   <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUFkl3AtCa0FyA78CZs6hvCWAPFigJuxw&callback=initMap">
-        </script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUFkl3AtCa0FyA78CZs6hvCWAPFigJuxw&callback=initMap">
+    </script>
 
 <body>
- 
+
   <!-- nav -->
   <nav class="nav nav__bg navbar sticky-top navbar-light navbar-expand-lg mb-5">
     <!-- logo -->
@@ -60,7 +60,19 @@
           <div id="SelectRegion">
           </div>
         </div>
-        <a href="RegisterSeed.html" class="btn btn-primary text-light w-100">註冊種子</a>
+        <a href="RegisterSeed.html" class="btn btn-primary text-light w-100 ">註冊種子</a>
+        <div id=CarContainer>
+          <table class="table table-bordered table-hover" id="CarsTable">
+            <thead class="thead-light">
+              <tr>
+                <td Align="Center" scope="col"><B>車牌</B></Td>
+                <td Align="Center" scope="col"><B>派遣狀態</B></Td>
+                <td Align="Center" scope="col"><B>派遣</B></Td>
+              </tr>
+            </thead>
+            <tbody id="CarsList"></tbody>
+          </table>
+        </div>
       </div>
       <div class="col-12 col-md-9">
         <div id="Header">
@@ -94,18 +106,17 @@
     <div class="container">
       <div class="row">
         <small>
-          <div class="text-light">Logo通過<a href="https://www.designevo.com/tw/logo-maker/" class="text-light" title="免費線上logo製作軟體">DesignEvo</a>設計製作</div>
+          <div class="text-light">Logo通過<a href="https://www.designevo.com/tw/logo-maker/" class="text-light"
+              title="免費線上logo製作軟體">DesignEvo</a>設計製作</div>
         </small>
       </div>
     </div>
   </footer>
 
 
-
-
   <script src="Js/GetSeedJson.js"></script>
   <script src="Js/GoogleMap.js"></script>
+
 </body>
 
 </html>
-
