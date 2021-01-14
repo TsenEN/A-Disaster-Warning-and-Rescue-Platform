@@ -1,6 +1,27 @@
 $(document).ready(function () {
 	// Fetch the initial table
 	refreshTable();
+	// $(document).on('click', '.updateButton', function () {
+
+	// 	var member_id = $(this).attr('member_id');
+
+	// 	var name = $('#nameInput' + member_id).val();
+	// 	var email = $('#emailInput' + member_id).val();
+
+	// 	req = $.ajax({
+	// 		url: '/update',
+	// 		type: 'POST',
+	// 		data: { name: name, email: email, id: member_id }
+	// 	});
+
+	// 	req.done(function (data) {
+
+	// 		$('#memberSection' + member_id).fadeOut(1000).fadeIn(1000);
+	// 		//$('#memberNumber'+member_id).text(data.member_num);
+	// 		$('#memberSection' + member_id).html(data);
+
+	// 	});
+	// });
 });
 
 function refreshTable() {
@@ -29,7 +50,7 @@ function refreshTable() {
 		},
 
 		error: function (xhr) {
-			alert("ERROR: " + xhr.status + " " + xhr.statusText);
+			alert("ERROR IN SEED: " + xhr.status + " " + xhr.statusText);
 		},
 
 	});
@@ -41,32 +62,29 @@ function refreshTable() {
 			var i = 0;
 			var CarsListData = '';
 			var CarStatString = '';
+			var CarButtonString = '';
 			$.each(JData, function () {
 				if (JData[i].car_status == 1) {
 					CarStatString = "派遣中";
+					CarButtonString = '<td><button id = CarButton button_id = ' + JData[i].car_license_plate + '" class="btn btn-primary  text-light disabled">派遣</button></td>'
 				}
 				else {
 					CarStatString = "未派遣";
+					CarButtonString = '<td><button id = CarButton button_id = ' + JData[i].car_license_plate + '" class="btn btn-primary text-light">派遣</button></td>'
 				}
 				CarsListData += '<tr id="rowCarsStatus" class="">';
 				CarsListData += '<td>' + JData[i].car_license_plate + '</td>';
 				CarsListData += '<td>' + CarStatString + '</td>';
-				if (JData[i].car_status == 1) {
-					CarsListData += '<td><button id = "CarButton' + JData[i].car_license_plate + '" class="btn btn-primary  text-light disabled">派遣</button></td>';
-				}
-				else {
-					CarsListData += '<td><button id = "CarButton' + JData[i].car_license_plate + '" class="btn btn-primary text-light">派遣</button></td>';
-				}
+				CarsListData += CarButtonString;
 				CarsListData += '</tr>';
 				i++;
 			});
 			$('#CarsList').html(CarsListData);
-			setTimeout(refreshTable, 1000000);
-			//Fetch every 1 seconds
+			//Fetch every 1.5 seconds
 		},
 
 		error: function (xhr) {
-			alert("ERROR: " + xhr.status + " " + xhr.statusText);
+			alert("ERROR IN CAR: " + xhr.status + " " + xhr.statusText);
 		},
 	});
 }	
