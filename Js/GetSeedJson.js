@@ -1,27 +1,33 @@
 $(document).ready(function () {
 	// Fetch the initial table
 	refreshTable();
-	// $(document).on('click', '.updateButton', function () {
+	$(document).on('click', '#CarButton', function () {
+		var car_license_plate = $(this).attr('button_id');
+		var stat = $(this).attr('stat');
+		if (stat == 1) {
+			stat = 0;
+		}
+		else {
+			stat = 1;
+		}
+		//alert(car_license_plate + " 車牌 " + stat + "狀態");
+		var data = [{ "car_license_plate": car_license_plate, "car_status": stat }];
+		$.ajax({
+			url: 'http://140.116.245.229:3000/ChangeCarStatus',
+			type: 'POST',
+			contentType: 'application/x-www-form-urlencoded',
+			dataType: "json",
+			crossDomain: true,
+			data: JSON.stringify(data),
+			success: function () {
+				alert("send json success!");
+			},
+			error: function (xhr) {
+				alert("ERROR IN CHANGE STAT: " + xhr.status + " " + xhr.statusText);
+			},
+		});
 
-	// 	var member_id = $(this).attr('member_id');
-
-	// 	var name = $('#nameInput' + member_id).val();
-	// 	var email = $('#emailInput' + member_id).val();
-
-	// 	req = $.ajax({
-	// 		url: '/update',
-	// 		type: 'POST',
-	// 		data: { name: name, email: email, id: member_id }
-	// 	});
-
-	// 	req.done(function (data) {
-
-	// 		$('#memberSection' + member_id).fadeOut(1000).fadeIn(1000);
-	// 		//$('#memberNumber'+member_id).text(data.member_num);
-	// 		$('#memberSection' + member_id).html(data);
-
-	// 	});
-	// });
+	});
 });
 
 function refreshTable() {
@@ -66,11 +72,11 @@ function refreshTable() {
 			$.each(JData, function () {
 				if (JData[i].car_status == 1) {
 					CarStatString = "派遣中";
-					CarButtonString = '<td><button id = CarButton button_id = ' + JData[i].car_license_plate + '" class="btn btn-primary  text-light disabled">派遣</button></td>'
+					CarButtonString = '<td><button id = CarButton button_id = "' + JData[i].car_license_plate + '"stat = 1 class="btn btn-primary  text-light disabled">派遣</button></td>'
 				}
 				else {
 					CarStatString = "未派遣";
-					CarButtonString = '<td><button id = CarButton button_id = ' + JData[i].car_license_plate + '" class="btn btn-primary text-light">派遣</button></td>'
+					CarButtonString = '<td><button id = CarButton button_id = "' + JData[i].car_license_plate + '" stat = 0 class="btn btn-primary text-light">派遣</button></td>'
 				}
 				CarsListData += '<tr id="rowCarsStatus" class="">';
 				CarsListData += '<td>' + JData[i].car_license_plate + '</td>';
@@ -80,7 +86,6 @@ function refreshTable() {
 				i++;
 			});
 			$('#CarsList').html(CarsListData);
-			//Fetch every 1.5 seconds
 		},
 
 		error: function (xhr) {
