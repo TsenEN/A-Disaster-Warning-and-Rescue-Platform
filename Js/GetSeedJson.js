@@ -1,6 +1,7 @@
 $(document).ready(function () {
 	// Fetch the initial table
 	refreshTable();
+	//button change car stat
 	$(document).on('click', '#CarButton', function () {
 		var car_license_plate = $(this).attr('button_id');
 		var stat = $(this).attr('stat');
@@ -10,7 +11,6 @@ $(document).ready(function () {
 		else {
 			stat = 1;
 		}
-		//alert(car_license_plate + " 車牌 " + stat + "狀態");
 		var data = [{ "car_license_plate": car_license_plate, "car_status": stat }];
 		$.ajax({
 			url: 'http://140.116.245.229:3000/ChangeCarStatus',
