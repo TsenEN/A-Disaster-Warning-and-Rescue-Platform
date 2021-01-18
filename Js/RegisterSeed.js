@@ -4,6 +4,10 @@ $(document).ready(function () {
   var longitudeValue = "";
   var latitudeValue = "";
   var numberValue = "";
+
+  // 防呆驗證
+  
+
   // 將input值傳入modal欄位
   $("#formSubmit").click(function () {
     longitudeValue = document.getElementById("longitude").value;
