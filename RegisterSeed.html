@@ -19,14 +19,26 @@
           <li class="signin-active"><a class="btn">註冊種子</a></li>
         </ul>
       </div>
-      <form class="form-signin" id="seedForm" action="" method="" name="form" data-toggle="validator" role="form">
+      <form class="form-signin needs-validation" id="seedForm" novalidate>
         <label for="longitude">經度</label>
-        <input class="form-styling" type="text" name="longitude" id="longitude" placeholder="請輸入種子經度" required>
+        <input class="form-styling" type="text" name="longitude" id="longitude" placeholder="請輸入種子經度"
+          pattern="[A-Za-z0-9]{6,18}" required>
+        <div class="invalid-feedback pl-3">
+          數值長度為6到18碼，不能有中文字
+        </div>
         <label for="latitude">緯度</label>
-        <input class="form-styling" type="text" name="latitude" id="latitude" placeholder="請輸入種子緯度" required>
+        <input class="form-styling" type="text" name="latitude" id="latitude" placeholder="請輸入種子緯度"
+          pattern="[A-Za-z0-9]{6,18}" required>
+        <div class="invalid-feedback pl-3">
+          數值長度為6到18碼，不能有中文字
+        </div>
         <label for="number">編號</label>
-        <input class="form-styling" type="text" name="number" id="number" placeholder="請輸入種子編號" required>
-        <button type="button" class="btn-animate btn-signin btn-primary text-white" id="formSubmit" data-toggle="modal" data-target="#exampleModalCenter">
+        <input class="form-styling" type="text" name="number" id="number" placeholder="請輸入種子編號"
+          pattern="[A-Za-z0-9]{6,18}" required>
+        <div class="invalid-feedback pl-3">
+          數值長度為6到18碼，不能有中文字
+        </div>
+        <button type="submit" class="btn-animate btn-signin btn-primary text-white" id="formSubmit" data-toggle="" data-target="">
           我要註冊
         </button>
         <!-- Modal -->
@@ -56,6 +68,62 @@
       </form>
     </div>
   </div>
+
+<div class="container">
+ 
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Email</label>
+      <div class="col-sm-10">
+        <input type="email" class="form-control" required>
+        <div class="invalid-feedback">请输入正确格式的邮箱</div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Password</label>
+      <div class="col-sm-10">
+        <input type="password" class="form-control" pattern="[A-Za-z0-9]{6,30}" required>
+        <div class="invalid-feedback">密码长度至少为六位,只能是大小写字母或数字！</div>
+      </div>
+    </div>
+    <fieldset class="form-group">
+      <div class="row">
+        <legend class="col-form-label col-sm-2 pt-0">Radio</legend>
+        <div class="col-sm-10">
+          <div class="form-check">
+            <input type="radio" class="form-check-input" name="radio" required>
+            <label class="form-check-label">radio1</label>
+          </div>
+          <div class="form-check">
+            <input type="radio" class="form-check-input" name="radio">
+            <label class="form-check-label">radio2</label>
+          </div>
+          <div class="form-check">
+            <input type="radio" class="form-check-input" name="radio" disabled>
+            <label class="form-check-label">radio3</label>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label pt-0">Checkbox</label>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" required>
+          <label class="form-check-label">Example checkbox</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col">
+        <button class="btn btn-primary">Sign in</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+  
+  
+  
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
   integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

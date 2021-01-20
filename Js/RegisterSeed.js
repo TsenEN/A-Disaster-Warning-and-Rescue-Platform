@@ -5,18 +5,21 @@ $(document).ready(function () {
   var latitudeValue = "";
   var numberValue = "";
 
-  // 防呆驗證
-  
-
-  // 將input值傳入modal欄位
-  $("#formSubmit").click(function () {
+  $("form").submit(function (event) {
     longitudeValue = document.getElementById("longitude").value;
     latitudeValue = document.getElementById("latitude").value;
     numberValue = document.getElementById("number").value;
+    if ($(this)[0].checkValidity() === false) {
+      event.preventDefault();// 阻止提交表单
+      event.stopPropagation();
+      $(this).addClass("was-validated");
+    }
+    else {
+      document.getElementById("longitudeCheck").innerHTML = longitudeValue;
+      document.getElementById("latitudeCheck").innerHTML = latitudeValue;
+      document.getElementById("numberCheck").innerHTML = numberValue;
+    }
     
-    document.getElementById("longitudeCheck").innerHTML = longitudeValue;
-    document.getElementById("latitudeCheck").innerHTML = latitudeValue;
-    document.getElementById("numberCheck").innerHTML = numberValue;
   });
 
   // 按下確認鈕後將 form submit 至後端
