@@ -43,6 +43,8 @@
   <div class="container">
     <div class="row">
       <div class="col-12 col-md-3">
+        <a href="RegisterSeed.html" class="btn btn-primary text-light w-100 ">註冊種子</a>
+        <hr />
         <div id="Sidebar">
           <div id=SelectRegion>
             <div class="form-group">
@@ -57,17 +59,24 @@
               </select>
             </div>
           </div>
-          <div id="SelectRegion">
+          <div id=SelectFireStation>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1" class="text-dark pl-0 ">請選擇單位：</label>
+              <select class="form-control text-dark" id="exampleFormControlSelect1">
+              </select>
+            </div>
+          </div>
+          <div id=FireStationInfo>
+            <!--for fire station information -->
           </div>
         </div>
-        <a href="RegisterSeed.html" class="btn btn-primary text-light w-100 ">註冊種子</a>
+        <hr />
         <div id=CarContainer>
           <table class="table table-bordered table-hover" id="CarsTable">
             <thead class="thead-light">
               <tr>
                 <td Align="Center" scope="col"><B>車牌</B></Td>
                 <td Align="Center" scope="col"><B>派遣狀態</B></Td>
-                <td Align="Center" scope="col"><B>派遣</B></Td>
               </tr>
             </thead>
             <tbody id="CarsList"></tbody>
