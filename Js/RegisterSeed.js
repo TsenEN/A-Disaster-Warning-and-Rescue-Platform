@@ -4,22 +4,31 @@ $(document).ready(function () {
   var longitudeValue = "";
   var latitudeValue = "";
   var numberValue = "";
+  $('.btn').on('click', function () {
+    $('.btn').toggleClass('active');
+  });
 
-  $("form").submit(function (event) {
+  $("#submitBtn").click(function (event) {
     longitudeValue = document.getElementById("longitude").value;
     latitudeValue = document.getElementById("latitude").value;
     numberValue = document.getElementById("number").value;
-    if ($(this)[0].checkValidity() === false) {
-      event.preventDefault();// 阻止提交表单
-      event.stopPropagation();
-      $(this).addClass("was-validated");
-    }
-    else {
-      document.getElementById("longitudeCheck").innerHTML = longitudeValue;
-      document.getElementById("latitudeCheck").innerHTML = latitudeValue;
-      document.getElementById("numberCheck").innerHTML = numberValue;
-    }
     
+    // if ($(this)[0].checkValidity() === false) {
+    //   event.preventDefault();// 阻止提交表单
+    //   event.stopPropagation();
+    //   $(this).addClass("was-validated");
+    // }
+    // else {
+    //   $('#modal').modal('show');
+    //   document.getElementById("longitudeCheck").innerHTML = longitudeValue;
+    //   document.getElementById("latitudeCheck").innerHTML = latitudeValue;
+    //   document.getElementById("numberCheck").innerHTML = numberValue;
+    // }
+    
+    // $('.btn').toggleClass('active');
+    document.getElementById("longitudeCheck").innerHTML = longitudeValue;
+    document.getElementById("latitudeCheck").innerHTML = latitudeValue;
+    document.getElementById("numberCheck").innerHTML = numberValue;
   });
 
   // 按下確認鈕後將 form submit 至後端
@@ -41,3 +50,12 @@ $(document).ready(function () {
     });
   });
 });
+
+// function checkform(form) {
+
+//   if (readcount == 0) {
+//     return false;
+//   }
+//   return true;
+// };
+
