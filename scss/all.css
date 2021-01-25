@@ -10837,9 +10837,9 @@ body {
 }
 
 .frame {
-  height: 575px;
+  height: 675px;
   width: 430px;
-  background-color: #575757;
+  background-color: white;
   margin-left: auto;
   margin-right: auto;
   border-top: solid 1px rgba(255, 255, 255, 0.5);
@@ -10857,7 +10857,7 @@ body {
 
 .nav {
   width: 100%;
-  height: 100px;
+  height: 60px;
   padding-top: 40px;
   opacity: 1;
   -webkit-transition: all .5s ease;
@@ -10910,7 +10910,6 @@ li {
   padding-left: 15px;
   border: none;
   border-radius: 20px;
-  margin-bottom: 20px;
   background: rgba(204, 204, 204, 0.2);
 }
 
@@ -10920,8 +10919,9 @@ label {
   font-size: 16px;
   padding-left: 15px;
   padding-bottom: 10px;
-  color: #d1d1d1;
+  color: #2e2e2e;
   display: block;
+  margin-top: 20px;
 }
 
 :focus {
@@ -10930,36 +10930,36 @@ label {
 
 ::-webkit-input-placeholder {
   font-size: 13px;
-  color: rgba(241, 241, 241, 0.6);
+  color: rgba(63, 63, 63, 0.6);
 }
 
 :-ms-input-placeholder {
   font-size: 13px;
-  color: rgba(241, 241, 241, 0.6);
+  color: rgba(63, 63, 63, 0.6);
 }
 
 ::-ms-input-placeholder {
   font-size: 13px;
-  color: rgba(241, 241, 241, 0.6);
+  color: rgba(63, 63, 63, 0.6);
 }
 
 ::placeholder {
   font-size: 13px;
-  color: rgba(241, 241, 241, 0.6);
+  color: rgba(63, 63, 63, 0.6);
 }
 
 :-ms-input-placeholder {
-  color: rgba(241, 241, 241, 0.6);
+  color: rgba(63, 63, 63, 0.6);
 }
 
 ::-ms-input-placeholder {
-  color: rgba(241, 241, 241, 0.6);
+  color: rgba(63, 63, 63, 0.6);
 }
 
 .form-signin input:focus,
 textarea:focus,
 textarea:focus {
-  background: rgba(255, 255, 255, 0.548);
+  background: rgba(143, 143, 143, 0.548);
   border: none;
   padding-right: 40px;
   -webkit-transition: all .5s ease;
@@ -10988,7 +10988,7 @@ textarea:focus {
   height: 35px;
   border: none;
   border-radius: 20px;
-  margin-top: 23px;
+  margin-top: 43px;
   background-color: #86c166;
   left: 0px;
   top: 0px;
@@ -11016,5 +11016,9 @@ a.btn-signin:hover {
   background-color: #63a13f;
   -webkit-transition: all .5s;
   transition: all .5s;
+}
+
+.errorClass {
+  border: 1px #dc3545 solid !important;
 }
 /*# sourceMappingURL=all.css.map */

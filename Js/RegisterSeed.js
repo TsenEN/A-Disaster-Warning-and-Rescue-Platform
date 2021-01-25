@@ -1,31 +1,42 @@
 
 $(document).ready(function () {
   
-  var longitudeValue = "";
-  var latitudeValue = "";
-  var numberValue = "";
-  $('.btn').on('click', function () {
-    $('.btn').toggleClass('active');
+  var longitudeValue = document.getElementById("longitude").value;
+  var latitudeValue = document.getElementById("latitude").value;
+  var numberValue = document.getElementById("number").value;
+  // var longitudeValue = parseInt($('#longitude').val());
+  // var latitudeValue = parseInt($('#latitude').val());
+  // var numberValue = parseInt($('#number').val());
+
+  $("#longitude").blur(function () {
+    console.log(typeof longitudeValue);
+    if (longitudeValue == "" || longitudeValue.length > 8 || longitudeValue.length < 13 || longitudeValue <= 180 || longitudeValue >= -180 ) {
+      $('#error-feedback').addClass('error-feedback');
+      $('.error-feedback').text('請輸入有效數值，長度為9到12碼');
+      $('#longitude').addClass('errorClass');
+      return false;
+    } else {
+      $('#error-feedback').removeClass('error-class');
+      // modal.show
+      console.log("有效數值");
+      return true;
+    }
+  });
+
+  $("#latitude").blur(function () {
+
+    if (latitudeValue == "" || latitudeValue.length < 8 || latitudeValue.length > 12 || -180 <= latitudeValue <= 180) {
+
+    } else {
+
+    }
   });
 
   $("#submitBtn").click(function (event) {
-    longitudeValue = document.getElementById("longitude").value;
-    latitudeValue = document.getElementById("latitude").value;
-    numberValue = document.getElementById("number").value;
+    var longitudeValue = document.getElementById("longitude").value;
+    var latitudeValue = document.getElementById("latitude").value;
+    var numberValue = document.getElementById("number").value;
     
-    // if ($(this)[0].checkValidity() === false) {
-    //   event.preventDefault();// 阻止提交表单
-    //   event.stopPropagation();
-    //   $(this).addClass("was-validated");
-    // }
-    // else {
-    //   $('#modal').modal('show');
-    //   document.getElementById("longitudeCheck").innerHTML = longitudeValue;
-    //   document.getElementById("latitudeCheck").innerHTML = latitudeValue;
-    //   document.getElementById("numberCheck").innerHTML = numberValue;
-    // }
-    
-    // $('.btn').toggleClass('active');
     document.getElementById("longitudeCheck").innerHTML = longitudeValue;
     document.getElementById("latitudeCheck").innerHTML = latitudeValue;
     document.getElementById("numberCheck").innerHTML = numberValue;
@@ -48,6 +59,7 @@ $(document).ready(function () {
         console.log(seed);
       },
     });
+    $('input').val(""); 
   });
 });
 

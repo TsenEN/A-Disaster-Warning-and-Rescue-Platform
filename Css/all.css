@@ -10104,3 +10104,7 @@ a.btn-signin:hover {
   background-color: #63a13f;
   transition: all 0.5s;
 }
+
+.errorClass {
+  border: 1px #dc3545 solid !important;
+}
