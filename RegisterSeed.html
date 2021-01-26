@@ -37,22 +37,16 @@
             請使用度表示法：如121.336111</p>
         </div>
         <label for="longitude">經度</label>
-        <input class="form-styling" type="number" name="longitude" id="longitude" placeholder="請輸入種子經度"
-          required>
-        <div class="pl-3 text-danger" id="error-feedback">
-          
+        <input class="form-styling" type="number" name="longitude" id="longitude" placeholder="請輸入種子經度" required>
+        <div class="pl-3 text-danger" id="longitude-error">
         </div>
         <label for="latitude">緯度</label>
-        <input class="form-styling" type="number" name="latitude" id="latitude" placeholder="請輸入種子緯度"
-          pattern="[A-Za-z0-9.]{6,18}" required>
-        <div class="invalid-feedback pl-3">
-          數值長度為6到18碼，不能有中文字
+        <input class="form-styling" type="number" name="latitude" id="latitude" placeholder="請輸入種子緯度" required>
+        <div class="pl-3 text-danger" id="latitude-error">
         </div>
         <label for="number">編號</label>
-        <input class="form-styling" type="number" name="number" id="number" placeholder="請輸入種子編號"
-          pattern="[A-Za-z0-9.]{6,18}" required>
-        <div class="invalid-feedback pl-3">
-          數值長度為6到18碼，不能有中文字
+        <input class="form-styling" type="number" name="number" id="number" placeholder="請輸入種子編號" required>
+        <div class="pl-3 text-danger" id="number-error">
         </div>
         <button type="button" class="btn-animate btn-signin btn-primary text-white" id="submitBtn" data-toggle="modal" data-target="#modal">
           我要註冊
@@ -74,7 +68,7 @@
                 <br>編號：<span class="number" id="numberCheck"></span>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-info">修改</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal">修改</button>
                 <button type="button" class="btn btn-primary text-white" id="confirm" data-dismiss="modal">確認</button>
               </div>
             </div>
