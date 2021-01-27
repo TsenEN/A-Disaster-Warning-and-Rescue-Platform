@@ -3,8 +3,12 @@ var car_status = new Map();
 let car_markers = [];
 var locations = [];
 let map;
+// create direction service and direction display layer
+var directionsService;
+var directionsDisplay;
 function initMap() {
-
+	directionsService = new google.maps.DirectionsService();
+	directionsDisplay = new google.maps.DirectionsRenderer();
 	$.ajax({
 		type: 'GET',
 		url: 'http://140.116.245.229:3000/GetSeedsJson',
@@ -19,6 +23,8 @@ function initMap() {
 				zoom: 8,
 				center: { lat: 23.745523, lng: 120.912494 },
 			});
+			//set direction display layer
+			directionsDisplay.setMap(map);
 			// Create an array of alphabetical characters used to label the markers.
 			const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 			// Add some markers to the map.
@@ -45,6 +51,7 @@ function initMap() {
 
 	});
 	setAllCarMarkers();
+	add_directions();
 }
 var count = 0;
 function setAllCarMarkers() {
@@ -55,7 +62,6 @@ function setAllCarMarkers() {
 			icon: './Img/ambulance_s.png',
 			label: null
 		});
-		//alert(" " + car_markers[i]);
 	}
 }
 var interval = setInterval(function () {
