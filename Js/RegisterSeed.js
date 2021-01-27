@@ -27,12 +27,10 @@ $(document).ready(function () {
     //console.log(typeof longitudeValue);
     var longitudeValue = document.getElementById("longitude").value;
     if (!(/^[\-\+]?(0(\.\d{1,10})?|([1-9](\d)?)(\.\d{1,10})?|1[0-7]\d{1}(\.\d{1,10})?|180\.0{1,10})$/.test(longitudeValue)) || longitudeValue == "") {
-      $('#longitude-error').text('請輸入有效數值，長度為9到12碼');
+      $('#longitude-error').text('請輸入有效經度數值');
       $('#longitude').addClass('errorClass');
-      console.log("無效數值");
       return false;
     } else {
-      console.log("有效數值");
       $('#longitude').addClass('rightClass');
       return true;
     }
@@ -42,12 +40,10 @@ $(document).ready(function () {
   function veritylatitude() {
     var latitudeValue = document.getElementById("latitude").value;
     if (!(/^[\-\+]?((0|([1-8]\d?))(\.\d{1,10})?|90(\.0{1,10})?)$/.test(latitudeValue)) || latitudeValue == "" ) {
-      $('#latitude-error').text('請輸入有效數值，長度為9到12碼');
+      $('#latitude-error').text('請輸入有效緯度數值');
       $('#latitude').addClass('errorClass');
-      console.log("無效數值");
       return false;
     } else {
-      console.log("有效數值");
       $('#latitude').addClass('rightClass');
       return true;
     }
@@ -59,10 +55,8 @@ $(document).ready(function () {
     if (!(/^[0-9]*$/.test(numberValue)) || numberValue == "" ) {
       $('#number-error').text('請輸入數字');
       $('#number').addClass('errorClass');
-      console.log("無效數值");
       return false;
     } else {
-      console.log("有效數值");
       $('#number').addClass('rightClass');
       return true;
     }
