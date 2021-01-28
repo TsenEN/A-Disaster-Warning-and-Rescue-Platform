@@ -62,20 +62,12 @@ function initMap() {
 		},
 
 	});
-	setAllCarMarkers();
-	add_directions();
+	//navigation function
+	// add_directions();
 }
-var count = 0;
-function setAllCarMarkers() {
-	for (var i = 0; i < 100; i++) {
-		car_markers[i] = new google.maps.Marker({
-			position: null,
-			map: null,
-			icon: './Img/ambulance_s.png',
-			label: null
-		});
-	}
-}
+//for deciding whether set markers to null or not 
+var first_load_in = 1;
+
 var interval = setInterval(function () {
 	/* do something that will execute every 3000 milliseconds*/
 	$.ajax({
@@ -85,20 +77,27 @@ var interval = setInterval(function () {
 		success: function (JData) {
 			var NumOfJData = JData.length;
 			for (var i = 0; i < NumOfJData; i++) {
+				if (first_load_in == 0) {
+					car_markers[i].setMap(null);
+				}
 				car_status.set(JData[i]["car_license_plate"], JData[i]["car_status"]);
 				car_latlng.set(JData[i]["car_license_plate"], { lat: JData[i]["car_latitude"], lng: JData[i]["car_longitude"] });
-				car_markers[i].setMap(map);
-				car_markers[i].setLabel(JData[i]["car_license_plate"]);
-				car_markers[i].setPosition(car_latlng.get(JData[i]["car_license_plate"]));
+				car_markers[i] = new google.maps.Marker({
+					position: car_latlng.get(JData[i]["car_license_plate"]),
+					map: null,
+					icon: './Img/ambulance_s.png',
+					label: JData[i]["car_license_plate"]
+				});
+
 				if (JData[i]["car_status"] == 0) {
 					car_markers[i].setMap(null);
 				}
 				else {
 					car_markers[i].setMap(map);
 				}
-				count = count + 0.1;
 
 			}
+			first_load_in = 0;
 		},
 		error: function () {
 			alert("ERROR!!!");
