@@ -6,6 +6,7 @@ let map;
 // create direction service and direction display layer
 var directionsService;
 var directionsDisplay;
+
 function initMap() {
 	directionsService = new google.maps.DirectionsService();
 	directionsDisplay = new google.maps.DirectionsRenderer();
@@ -31,18 +32,29 @@ function initMap() {
 			// Note: The code uses the JavaScript Array.prototype.map() method to
 			// create an array of markers based on a given "locations" array.
 			// The map() method here has nothing to do with the Google Maps API.
+
+			//blue spot image
+			var blue_marker = {
+				url: "./Img/blue_spot.png",
+				size: new google.maps.Size(42, 42),
+				scaledSize: new google.maps.Size(42, 42)
+			};
+
+
 			const markers = locations.map((location, i) => {
 				return new google.maps.Marker({
 					position: location,
+					map: map,
 					label: labels[i % labels.length],
+					icon: blue_marker,
 				});
 			});
 
 			// Add a marker clusterer to manage the markers.
-			new MarkerClusterer(map, markers, {
-				imagePath:
-					"https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
-			});
+			// new MarkerClusterer(map, markers, {
+			// 	imagePath:
+			// 		"https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+			// });
 		},
 
 		error: function (xhr) {
