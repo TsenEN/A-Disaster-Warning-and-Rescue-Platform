@@ -50,11 +50,6 @@ function initMap() {
 				});
 			});
 
-			// Add a marker clusterer to manage the markers.
-			// new MarkerClusterer(map, markers, {
-			// 	imagePath:
-			// 		"https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
-			// });
 		},
 
 		error: function (xhr) {
@@ -65,11 +60,28 @@ function initMap() {
 	//navigation function
 	// add_directions();
 }
+
 //for deciding whether set markers to null or not 
 var first_load_in = 1;
 
 var interval = setInterval(function () {
-	/* do something that will execute every 3000 milliseconds*/
+	/* do something that will execute every 1000 milliseconds*/
+
+	//edit image size by zoom
+	var zoom = map.getZoom();
+	var ambu_size;
+	if (zoom < 13) {
+		ambu_size = new google.maps.Size(21, 9);
+	}
+	else ambu_size = new google.maps.Size(21 + 3.5 * zoom, 9 + 1.5 * zoom);
+
+	//ambulance marker
+	var ambulance_marker = {
+		url: "./Img/ambulance_s.png",
+		size: ambu_size,
+		scaledSize: ambu_size,
+	};
+
 	$.ajax({
 		url: "http://140.116.245.229:3000/GetCarsJson",
 		type: "POST",
@@ -85,7 +97,7 @@ var interval = setInterval(function () {
 				car_markers[i] = new google.maps.Marker({
 					position: car_latlng.get(JData[i]["car_license_plate"]),
 					map: null,
-					icon: './Img/ambulance_s.png',
+					icon: ambulance_marker,
 					label: JData[i]["car_license_plate"]
 				});
 
@@ -97,11 +109,14 @@ var interval = setInterval(function () {
 				}
 
 			}
+
 			first_load_in = 0;
+
+			// Add a marker clusterer to manage the markers.
+
 		},
 		error: function () {
 			alert("ERROR!!!");
 		}
 	});
 }, 1000);
-
