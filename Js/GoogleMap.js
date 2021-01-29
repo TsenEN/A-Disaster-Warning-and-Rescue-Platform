@@ -66,6 +66,7 @@ var first_load_in = 1;
 
 var interval = setInterval(function () {
 	/* do something that will execute every 1000 milliseconds*/
+	//set car markers on map
 
 	//edit image size by zoom
 	var zoom = map.getZoom();
@@ -81,6 +82,7 @@ var interval = setInterval(function () {
 		size: ambu_size,
 		scaledSize: ambu_size,
 	};
+	var car_marker_cluster;
 
 	$.ajax({
 		url: "http://140.116.245.229:3000/GetCarsJson",
@@ -88,10 +90,11 @@ var interval = setInterval(function () {
 		dataType: "json",
 		success: function (JData) {
 			var NumOfJData = JData.length;
+			if (first_load_in == 0) {
+				delete_car_markers(car_markers);
+			}
 			for (var i = 0; i < NumOfJData; i++) {
-				if (first_load_in == 0) {
-					car_markers[i].setMap(null);
-				}
+
 				car_status.set(JData[i]["car_license_plate"], JData[i]["car_status"]);
 				car_latlng.set(JData[i]["car_license_plate"], { lat: JData[i]["car_latitude"], lng: JData[i]["car_longitude"] });
 				car_markers[i] = new google.maps.Marker({
@@ -109,10 +112,7 @@ var interval = setInterval(function () {
 				}
 
 			}
-
 			first_load_in = 0;
-
-			// Add a marker clusterer to manage the markers.
 
 		},
 		error: function () {
@@ -120,3 +120,10 @@ var interval = setInterval(function () {
 		}
 	});
 }, 1000);
+
+function delete_car_markers(m) {
+	for (var i = 0; i < m.length; i++) {
+		m[i].setMap(null);
+	}
+	m = [];
+}
