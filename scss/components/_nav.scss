@@ -1,0 +1,27 @@
+.nav {
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  padding-top: 0;
+  padding-bottom: 0;
+
+  &__bg {
+    background: linear-gradient(45deg, $primary, $secondary);
+  }
+
+  &__logo {
+    transform: scale(.5);
+  }
+
+  &__link {
+    transition: 0.4s ease;
+    text-decoration: none;
+    border-top: 3px solid #3fa46a;
+    border-bottom: 3px solid #3fa46a;
+    padding: 10px 0;
+  }
+
+  &__link:hover {
+    border-top: 3px solid #ffffffb4;
+    border-bottom: 3px solid #ffffffb4;
+    padding: 6px 0;
+  }
+}

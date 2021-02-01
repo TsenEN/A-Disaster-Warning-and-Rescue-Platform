@@ -2,5 +2,8 @@
 @import "custom/variables";
 @import "../bootstrap-4.5-5.3/scss/mixins";
 @import "../bootstrap-4.5-5.3/scss/bootstrap";
+@import "components/nav";
+@import "components/footer";
 @import "pages/registerSeed";
+@import "pages/seedInfo";
 
