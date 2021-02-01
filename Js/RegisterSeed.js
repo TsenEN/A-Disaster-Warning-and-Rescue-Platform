@@ -25,7 +25,7 @@ $(document).ready(function () {
   // 驗證經度
   function verityLongitude() {
     //console.log(typeof longitudeValue);
-    var longitudeValue = document.getElementById("longitude").value;
+    longitudeValue = document.getElementById("longitude").value;
     if (!(/^[\-\+]?(0(\.\d{1,10})?|([1-9](\d)?)(\.\d{1,10})?|1[0-7]\d{1}(\.\d{1,10})?|180\.0{1,10})$/.test(longitudeValue)) || longitudeValue == "") {
       $('#longitude-error').text('請輸入有效經度數值');
       $('#longitude').addClass('errorClass');
@@ -38,7 +38,7 @@ $(document).ready(function () {
 
   // 驗證緯度
   function veritylatitude() {
-    var latitudeValue = document.getElementById("latitude").value;
+    latitudeValue = document.getElementById("latitude").value;
     if (!(/^[\-\+]?((0|([1-8]\d?))(\.\d{1,10})?|90(\.0{1,10})?)$/.test(latitudeValue)) || latitudeValue == "" ) {
       $('#latitude-error').text('請輸入有效緯度數值');
       $('#latitude').addClass('errorClass');
@@ -51,7 +51,7 @@ $(document).ready(function () {
 
   // 驗證種子編號：只能是數字
   function verityNumber() {
-    var numberValue = document.getElementById("number").value;
+    numberValue = document.getElementById("number").value;
     if (!(/^[0-9]*$/.test(numberValue)) || numberValue == "" ) {
       $('#number-error').text('請輸入數字');
       $('#number').addClass('errorClass');
@@ -71,12 +71,16 @@ $(document).ready(function () {
   $("#latitude").blur(veritylatitude);
   $("#number").blur(verityNumber);
 
+  // 數值若正確 button會取消disable狀態
+  
+  
+
 
   // 傳值到彈跳確認視窗
   $("#submitBtn").click(function (event) {
-    var longitudeValue = document.getElementById("longitude").value;
-    var latitudeValue = document.getElementById("latitude").value;
-    var numberValue = document.getElementById("number").value;
+    longitudeValue = document.getElementById("longitude").value;
+    latitudeValue = document.getElementById("latitude").value;
+    numberValue = document.getElementById("number").value;
     if (longitudeValue == "" || latitudeValue == "" || numberValue == "") {
       alert("欄位不能空白");
       return false;
@@ -106,6 +110,9 @@ $(document).ready(function () {
       },
     });
     $('input').val(""); 
+    $('#number').removeClass('rightClass');
+    $('#longitude').removeClass('rightClass');
+    $('#latitude').removeClass('rightClass');
   });
 });
 
