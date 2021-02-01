@@ -1,22 +1,91 @@
 
 $(document).ready(function () {
   
-  var longitudeValue = "";
-  var latitudeValue = "";
-  var numberValue = "";
+  var longitudeValue = document.getElementById("longitude").value;
+  var latitudeValue = document.getElementById("latitude").value;
+  var numberValue = document.getElementById("number").value;
 
-  // 防呆驗證
   
+  // 獲得焦點時，警告訊息移除
+  function focusLongitude(){
+    $('#longitude-error').empty();
+    $('#longitude').removeClass('errorClass');
+  };
 
-  // 將input值傳入modal欄位
-  $("#formSubmit").click(function () {
-    longitudeValue = document.getElementById("longitude").value;
-    latitudeValue = document.getElementById("latitude").value;
-    numberValue = document.getElementById("number").value;
-    
-    document.getElementById("longitudeCheck").innerHTML = longitudeValue;
-    document.getElementById("latitudeCheck").innerHTML = latitudeValue;
-    document.getElementById("numberCheck").innerHTML = numberValue;
+  function focuslatitude() {
+    $('#latitude-error').empty();
+    $('#latitude').removeClass('errorClass');
+  };
+
+  function focusNumber() {
+    $('#number-error').empty();
+    $('#number').removeClass('errorClass');
+  };
+
+  // 驗證經度
+  function verityLongitude() {
+    //console.log(typeof longitudeValue);
+    var longitudeValue = document.getElementById("longitude").value;
+    if (!(/^[\-\+]?(0(\.\d{1,10})?|([1-9](\d)?)(\.\d{1,10})?|1[0-7]\d{1}(\.\d{1,10})?|180\.0{1,10})$/.test(longitudeValue)) || longitudeValue == "") {
+      $('#longitude-error').text('請輸入有效經度數值');
+      $('#longitude').addClass('errorClass');
+      return false;
+    } else {
+      $('#longitude').addClass('rightClass');
+      return true;
+    }
+  };
+
+  // 驗證緯度
+  function veritylatitude() {
+    var latitudeValue = document.getElementById("latitude").value;
+    if (!(/^[\-\+]?((0|([1-8]\d?))(\.\d{1,10})?|90(\.0{1,10})?)$/.test(latitudeValue)) || latitudeValue == "" ) {
+      $('#latitude-error').text('請輸入有效緯度數值');
+      $('#latitude').addClass('errorClass');
+      return false;
+    } else {
+      $('#latitude').addClass('rightClass');
+      return true;
+    }
+  };
+
+  // 驗證種子編號：只能是數字
+  function verityNumber() {
+    var numberValue = document.getElementById("number").value;
+    if (!(/^[0-9]*$/.test(numberValue)) || numberValue == "" ) {
+      $('#number-error').text('請輸入數字');
+      $('#number').addClass('errorClass');
+      return false;
+    } else {
+      $('#number').addClass('rightClass');
+      return true;
+    }
+  };
+  
+  // 監聽事件
+  $("#longitude").focus(focusLongitude);
+  $("#latitude").focus(focuslatitude);
+  $("#number").focus(focusNumber);
+
+  $("#longitude").blur(verityLongitude);
+  $("#latitude").blur(veritylatitude);
+  $("#number").blur(verityNumber);
+
+
+  // 傳值到彈跳確認視窗
+  $("#submitBtn").click(function (event) {
+    var longitudeValue = document.getElementById("longitude").value;
+    var latitudeValue = document.getElementById("latitude").value;
+    var numberValue = document.getElementById("number").value;
+    if (longitudeValue == "" || latitudeValue == "" || numberValue == "") {
+      alert("欄位不能空白");
+      return false;
+    } else {
+      document.getElementById("longitudeCheck").innerHTML = longitudeValue;
+      document.getElementById("latitudeCheck").innerHTML = latitudeValue;
+      document.getElementById("numberCheck").innerHTML = numberValue;
+      return true;
+    }
   });
 
   // 按下確認鈕後將 form submit 至後端
@@ -36,5 +105,7 @@ $(document).ready(function () {
         console.log(seed);
       },
     });
+    $('input').val(""); 
   });
 });
+
