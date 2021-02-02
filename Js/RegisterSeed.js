@@ -24,10 +24,14 @@ $(document).ready(function () {
 
   // 驗證經度
   function verityLongitude() {
-    //console.log(typeof longitudeValue);
+   
     longitudeValue = document.getElementById("longitude").value;
-    if (!(/^[\-\+]?(0(\.\d{1,10})?|([1-9](\d)?)(\.\d{1,10})?|1[0-7]\d{1}(\.\d{1,10})?|180\.0{1,10})$/.test(longitudeValue)) || longitudeValue == "") {
+    if (!(/^[\-\+]?(0(\.\d{1,10})?|([1-9](\d)?)(\.\d{1,10})?|1[0-7]\d{1}(\.\d{1,10})?|180\.0{1,10})?|$/.test(longitudeValue)) || longitudeValue == ""  ) {
       $('#longitude-error').text('請輸入有效經度數值');
+      $('#longitude').addClass('errorClass');
+      return false;
+    } else if (!(/^(\-)?\d+(\.\d{7})?$/.test(longitudeValue))) {
+      $('#longitude-error').text('請含小數點後七位');
       $('#longitude').addClass('errorClass');
       return false;
     } else {
@@ -41,6 +45,10 @@ $(document).ready(function () {
     latitudeValue = document.getElementById("latitude").value;
     if (!(/^[\-\+]?((0|([1-8]\d?))(\.\d{1,10})?|90(\.0{1,10})?)$/.test(latitudeValue)) || latitudeValue == "" ) {
       $('#latitude-error').text('請輸入有效緯度數值');
+      $('#latitude').addClass('errorClass');
+      return false;
+    } else if (!(/^(\-)?\d+(\.\d{7})?$/.test(latitudeValue))) {
+      $('#latitude-error').text('請含小數點後七位');
       $('#latitude').addClass('errorClass');
       return false;
     } else {
@@ -71,10 +79,6 @@ $(document).ready(function () {
   $("#latitude").blur(veritylatitude);
   $("#number").blur(verityNumber);
 
-  // 數值若正確 button會取消disable狀態
-  
-  
-
 
   // 傳值到彈跳確認視窗
   $("#submitBtn").click(function (event) {
@@ -83,6 +87,12 @@ $(document).ready(function () {
     numberValue = document.getElementById("number").value;
     if (longitudeValue == "" || latitudeValue == "" || numberValue == "") {
       alert("欄位不能空白");
+      return false;
+    } else if ( !(/^[\-\+]?(0(\.\d{1,10})?|([1-9](\d)?)(\.\d{1,10})?|1[0-7]\d{1}(\.\d{1,10})?|180\.0{1,10})$/.test(longitudeValue)) || !(/^[\-\+]?((0|([1-8]\d?))(\.\d{1,10})?|90(\.0{1,10})?)$/.test(latitudeValue)) || !(/^[0-9]*$/.test(numberValue)) ) {
+      alert("錯誤提示: 1.請輸入正確數值 2.使用度表示法 3.含小數點後七位");
+      return false;
+    } else if ( !(/^(\-)?\d+(\.\d{7})?$/.test(latitudeValue)) || !(/^(\-)?\d+(\.\d{7})?$/.test(longitudeValue)) ) {
+      alert("錯誤提示: 1.請輸入正確數值 2.使用度表示法 3.含小數點後七位");
       return false;
     } else {
       document.getElementById("longitudeCheck").innerHTML = longitudeValue;
