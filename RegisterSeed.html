@@ -30,11 +30,10 @@
       <form class="form-signin needs-validation" id="seedForm" novalidate>
         <!-- form添加novalidate参数，代表取消前端h5驗證 -->
         <div class="pl-3 text-primary">
-          <p>
-            <i class="material-icons align-middle">
+            <i class="material-icons align-middle d-inline-block h2 mr-2">
               report_problem
             </i>
-            請使用度表示法：如121.336111</p>
+            <p class="d-inline-block  align-middle">請使用度表示法，並含小數點後七位，<br>如121.3361112</p>
         </div>
         <label for="longitude">經度</label>
         <input class="form-styling" type="number" name="longitude" id="longitude" placeholder="請輸入種子經度" required>
@@ -48,7 +47,7 @@
         <input class="form-styling" type="number" name="number" id="number" placeholder="請輸入種子編號" required>
         <div class="pl-3 text-danger" id="number-error">
         </div>
-        <button type="button" class="btn-animate btn-signin btn-primary text-white" id="submitBtn" data-toggle="modal" data-target="#modal" disabled>
+        <button type="button" class="btn-animate btn-signin btn-primary text-white" id="submitBtn" data-toggle="modal" data-target="#modal">
           我要註冊
         </button>
         <!-- Modal -->
