@@ -108,11 +108,6 @@ var interval = setInterval(function () {
 				}
 				else {
 					car_status.set(JData[i]["car_license_plate"], JData[i]["car_status"]);
-					console.log("num" + i);
-					console.log("last");
-					console.log(car_last_status.get(JData[i]["car_license_plate"]));
-					console.log("this");
-					console.log(car_status.get(JData[i]["car_license_plate"]));
 					if (JData[i]["car_status"] == 0) {
 						if (car_last_status.get(JData[i]["car_license_plate"]) == 1) {
 							car_cluster.removeMarker(car_markers[i], true);
