@@ -1,11 +1,14 @@
 var car_latlng = new Map();
 var car_status = new Map();
+var car_last_status = new Map();
 let car_markers = [];
+var car_cluster;
 var locations = [];
 let map;
 // create direction service and direction display layer
 var directionsService;
 var directionsDisplay;
+
 
 function initMap() {
 	directionsService = new google.maps.DirectionsService();
@@ -82,7 +85,6 @@ var interval = setInterval(function () {
 		size: ambu_size,
 		scaledSize: ambu_size,
 	};
-	var car_marker_cluster;
 
 	$.ajax({
 		url: "http://140.116.245.229:3000/GetCarsJson",
@@ -90,40 +92,59 @@ var interval = setInterval(function () {
 		dataType: "json",
 		success: function (JData) {
 			var NumOfJData = JData.length;
-			if (first_load_in == 0) {
-				delete_car_markers(car_markers);
-			}
 			for (var i = 0; i < NumOfJData; i++) {
+				if (first_load_in == 1) {
+					car_status.set(JData[i]["car_license_plate"], JData[i]["car_status"]);
+					(JData[i]["car_license_plate"], JData[i]["car_status"]);
+					car_latlng.set(JData[i]["car_license_plate"], { lat: JData[i]["car_latitude"], lng: JData[i]["car_longitude"] });
+					car_markers[i] = new google.maps.Marker({
+						position: car_latlng.get(JData[i]["car_license_plate"]),
+						icon: ambulance_marker,
+						label: JData[i]["car_license_plate"],
+						map: null
+					});
 
-				car_status.set(JData[i]["car_license_plate"], JData[i]["car_status"]);
-				car_latlng.set(JData[i]["car_license_plate"], { lat: JData[i]["car_latitude"], lng: JData[i]["car_longitude"] });
-				car_markers[i] = new google.maps.Marker({
-					position: car_latlng.get(JData[i]["car_license_plate"]),
-					map: null,
-					icon: ambulance_marker,
-					label: JData[i]["car_license_plate"]
-				});
 
-				if (JData[i]["car_status"] == 0) {
-					car_markers[i].setMap(null);
 				}
 				else {
-					car_markers[i].setMap(map);
+					car_status.set(JData[i]["car_license_plate"], JData[i]["car_status"]);
+					console.log("num" + i);
+					console.log("last");
+					console.log(car_last_status.get(JData[i]["car_license_plate"]));
+					console.log("this");
+					console.log(car_status.get(JData[i]["car_license_plate"]));
+					if (JData[i]["car_status"] == 0) {
+						if (car_last_status.get(JData[i]["car_license_plate"]) == 1) {
+							car_cluster.removeMarker(car_markers[i], true);
+						}
+						car_last_status.set(JData[i]["car_license_plate"], 0);
+					}
+					else {
+						if (car_last_status.get(JData[i]["car_license_plate"]) == 0) {
+							car_cluster.addMarker(car_markers[i], true);
+						}
+						car_markers[i].setPosition({ lat: JData[i]["car_latitude"], lng: JData[i]["car_longitude"] });
+						car_markers[i].setIcon(ambulance_marker);
+						car_last_status.set(JData[i]["car_license_plate"], 1);
+					}
 				}
 
 			}
+			if (first_load_in == 1) {
+				car_cluster = new MarkerClusterer(map, car_markers, {
+					imagePath:
+						"https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+				});
+				for (var i = 0; i < car_markers.length; i++) {
+					if (JData[i]["car_status"] == 0) {
+						car_cluster.removeMarker(car_markers[i], true);
+					}
+				}
+			}
 			first_load_in = 0;
-
 		},
 		error: function () {
 			alert("ERROR!!!");
 		}
 	});
 }, 1000);
-
-function delete_car_markers(m) {
-	for (var i = 0; i < m.length; i++) {
-		m[i].setMap(null);
-	}
-	m = [];
-}
