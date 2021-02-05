@@ -103,8 +103,6 @@ var interval = setInterval(function () {
 						label: JData[i]["car_license_plate"],
 						map: null
 					});
-
-
 				}
 				else {
 					car_status.set(JData[i]["car_license_plate"], JData[i]["car_status"]);
@@ -137,6 +135,8 @@ var interval = setInterval(function () {
 				}
 			}
 			first_load_in = 0;
+			car_cluster.resetViewport_();
+			car_cluster.redraw_();
 		},
 		error: function () {
 			alert("ERROR!!!");
