@@ -1,23 +1,3 @@
-$(document).ready(function () {
-  // Fetch the initial table
-  GetFireStation();
-  $(document).on('change', '#team_1', function () {
-    $('#FireStationInfo').html('');
-    SelectTeam1(this.value);
-  });
-  $(document).on('change', '#team_2', function () {
-    $('#FireStationInfo').html('');
-    var element = document.getElementById('team_1');
-    SelectTeam2(element.value, this.value);
-  });
-  $(document).on('change', '#team_3', function () {
-    $('#FireStationInfo').html('');
-    var element1 = document.getElementById('team_1');
-    var element2 = document.getElementById('team_2');
-    SelectTeam3(element1.value, element2.value, this.value);
-  });
-});
-
 function GetFireStation() {
   $.ajax({
     type: 'GET',
