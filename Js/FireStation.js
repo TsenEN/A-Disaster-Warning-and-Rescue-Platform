@@ -2,13 +2,16 @@ $(document).ready(function () {
   // Fetch the initial table
   GetFireStation();
   $(document).on('change', '#team_1', function () {
+    $('#FireStationInfo').html('');
     SelectTeam1(this.value);
   });
   $(document).on('change', '#team_2', function () {
+    $('#FireStationInfo').html('');
     var element = document.getElementById('team_1');
     SelectTeam2(element.value, this.value);
   });
   $(document).on('change', '#team_3', function () {
+    $('#FireStationInfo').html('');
     var element1 = document.getElementById('team_1');
     var element2 = document.getElementById('team_2');
     SelectTeam3(element1.value, element2.value, this.value);
@@ -128,6 +131,11 @@ function SelectTeam2(value_1, value_2) {
 }
 
 function SelectTeam3(value_1, value_2, value_3) {
+  if (value_3 == '-分隊-') {
+    var back = '';
+    $('#FireStationInfo').html(back);
+    return;
+  }
   var address_str = '';
   var tel_str = '';
   $.ajax({
@@ -136,7 +144,6 @@ function SelectTeam3(value_1, value_2, value_3) {
     dataType: 'json',
     success: function (FireStations) {
       address_str = eval('FireStations.' + value_3 + '.地址');
-      console.log(address_str);
       tel_str = eval('FireStations.' + value_3 + '.電話號碼');
       var back =
         '<p>結果: <strong>' +
