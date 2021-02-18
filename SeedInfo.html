@@ -43,28 +43,29 @@
     </div>
   </nav>
   <!-- content -->
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-12 col-md-3">
         <div id="Sidebar">
-          <div id=SelectRegion>
-            <div class="form-group">
-              <label for="exampleFormControlSelect1" class="text-dark pl-0 ">請選擇地區：</label>
-              <select class="form-control text-dark" id="exampleFormControlSelect1">
-                <option>東區</option>
-                <option>北區</option>
-                <option>永康區</option>
-                <option>安南區</option>
-                <option>南化區</option>
-                <option>新化區</option>
-              </select>
-            </div>
-          </div>
           <div id=SelectFireStation>
             <div class="form-group">
-              <label for="exampleFormControlSelect1" class="text-dark pl-0 ">請選擇單位：</label>
-              <select class="form-control text-dark" id="exampleFormControlSelect1">
-              </select>
+              <div class="row">
+                <div class="col">
+                  <select class="form-control text-dark" id="team_1">
+                    <option>-大隊-</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <select class="form-control text-dark" id="team_2">
+                    <option>-中隊-</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <select class="form-control text-dark" id="team_3">
+                    <option>-分隊-</option>
+                  </select>
+                </div>
+              </div>
             </div>
           </div>
           <div id=FireStationInfo>
@@ -87,6 +88,7 @@
       <div class="col-12 col-md-9">
         <div id="Header">
           <div id="map" class="map">
+
           </div>
         </div>
       </div>
@@ -127,6 +129,7 @@
   <script src="Js/GetSeedJson.js"></script>
   <script src="Js/GoogleMap.js"></script>
   <script src="Js/ChangeStatus.js"></script>
+  <script src="Js/FireStation.js"></script>
   <!-- <script src="Js/MapDirections.js"></script> -->
 
 </body>
