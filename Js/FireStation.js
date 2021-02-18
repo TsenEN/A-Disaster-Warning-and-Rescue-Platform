@@ -8,6 +8,11 @@ $(document).ready(function () {
     var element = document.getElementById('team_1');
     SelectTeam2(element.value, this.value);
   });
+  $(document).on('change', '#team_3', function () {
+    var element1 = document.getElementById('team_1');
+    var element2 = document.getElementById('team_2');
+    SelectTeam3(element1.value, element2.value, this.value);
+  });
 });
 
 function GetFireStation() {
@@ -114,11 +119,38 @@ function SelectTeam2(value_1, value_2) {
 
       //write back to SeedInfo.html
       var team_3_back = '<option>-分隊-</option>';
-
       for (i = 0; i < team_3.length; i++) {
         team_3_back += '<option>' + team_3[i] + '</option>';
       }
       $('#team_3').html(team_3_back);
+    },
+  });
+}
+
+function SelectTeam3(value_1, value_2, value_3) {
+  var address_str = '';
+  var tel_str = '';
+  $.ajax({
+    type: 'GET',
+    url: 'http://140.116.245.229:3000/GetFireStationJson',
+    dataType: 'json',
+    success: function (FireStations) {
+      address_str = eval('FireStations.' + value_3 + '.地址');
+      console.log(address_str);
+      tel_str = eval('FireStations.' + value_3 + '.電話號碼');
+      var back =
+        '<p>結果: <strong>' +
+        value_1 +
+        '>' +
+        value_2 +
+        '>' +
+        value_3 +
+        '</strong><br>．地址: ' +
+        address_str +
+        '<br>．電話: ' +
+        tel_str +
+        '</p>';
+      $('#FireStationInfo').html(back);
     },
   });
 }
