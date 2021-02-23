@@ -10,7 +10,6 @@ function GetFireStation() {
         var tmp_string =
           'FireStations.' + Object.keys(FireStations)[i] + '.隸屬大隊';
         team_1[i] = eval(tmp_string);
-
         i++;
       });
 

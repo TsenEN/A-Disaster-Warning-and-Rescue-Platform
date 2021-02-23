@@ -1,16 +1,21 @@
 $(document).ready(function () {
   // Fetch the initial table
   refreshTable();
+  //fire station info
   GetFireStation();
+  //change select bar 1
   $(document).on('change', '#team_1', function () {
     $('#FireStationInfo').html('');
+    $('#team_3').html('<option>-分隊-</option>');
     SelectTeam1(this.value);
   });
+  //change select bar 2
   $(document).on('change', '#team_2', function () {
     $('#FireStationInfo').html('');
     var element = document.getElementById('team_1');
     SelectTeam2(element.value, this.value);
   });
+  //change select bar 3
   $(document).on('change', '#team_3', function () {
     $('#FireStationInfo').html('');
     var element1 = document.getElementById('team_1');
