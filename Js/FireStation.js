@@ -27,6 +27,7 @@ function GetFireStation() {
       }
       $('#team_1').html(team_1_back);
       //$('#SeedsList').html(SeedsListData); 會把寫好的內容填回去 #id .class
+      console.log('內');
     },
 
     error: function (xhr) {

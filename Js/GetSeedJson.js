@@ -1,8 +1,7 @@
 $(document).ready(function () {
   // Fetch the initial table
   refreshTable();
-  //fire station info
-  GetFireStation();
+
   //change select bar 1
   $(document).on('change', '#team_1', function () {
     $('#FireStationInfo').html('');
