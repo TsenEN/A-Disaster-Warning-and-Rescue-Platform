@@ -6,6 +6,7 @@ var car_cluster;
 var locations = [];
 var firestaions_location = [];
 let map;
+let layer1;
 // create direction service and direction display layer
 var directionsService;
 var directionsDisplay;
@@ -30,14 +31,39 @@ function initMap() {
         zoom: 8,
         center: { lat: 23.745523, lng: 120.912494 },
       });
-      //set direction display layer
-      directionsDisplay.setMap(map);
+
       // Create an array of alphabetical characters used to label the markers.
       const labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
       // Add some markers to the map.
       // Note: The code uses the JavaScript Array.prototype.map() method to
       // create an array of markers based on a given "locations" array.
       // The map() method here has nothing to do with the Google Maps API.
+
+      //add layer
+      //layer1 - ground slip
+      layer1 = new google.maps.Data({ map: map });
+      layer1.setStyle({
+        visible: false,
+      });
+      //GeoJson
+      //玉井
+      layer1.loadGeoJson(
+        'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E8%87%BA%E5%8D%97%E5%B8%82&town=%E7%8E%89%E4%BA%95%E5%8D%80&all=true'
+      );
+      //南化
+      layer1.loadGeoJson(
+        'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E8%87%BA%E5%8D%97%E5%B8%82&town=%E5%8D%97%E5%8C%96%E5%8D%80&all=true'
+      );
+
+      //layer2 - under water
+      layer2 = new google.maps.Data({ map: map });
+      layer2.setStyle({
+        visible: false,
+      });
+      //嘉南平原
+      layer2.loadGeoJson(
+        'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%9C%B0%E4%B8%8B%E6%B0%B4%E8%A3%9C%E6%B3%A8&name=%E5%98%89%E5%8D%97%E5%B9%B3%E5%8E%9F'
+      );
 
       //blue spot image
       var blue_marker = {
@@ -61,11 +87,12 @@ function initMap() {
     },
   });
   //navigation function
+  //set direction display layer
+  directionsDisplay.setMap(map);
   // add_directions();
 
   //fire station info
   GetFireStation();
-  console.log('load玩Firestation');
 }
 
 //for deciding whether set markers to null or not
@@ -174,7 +201,6 @@ function load_fireStation_on_map() {
       lat: tmp_lat,
       lng: tmp_lng,
     };
-    console.log(firestaions_location[i]);
     firestation_markers[i] = new google.maps.Marker({
       position: firestaions_location[i],
       icon: firestaion_img,
@@ -185,4 +211,30 @@ function load_fireStation_on_map() {
   var firestation_cluster = new MarkerClusterer(map, firestation_markers, {
     imagePath: './Img/cluster_orange/m',
   });
+}
+
+function load_layer(value) {
+  if (value == '-選擇圖層-') {
+    layer1.setStyle({
+      visible: false,
+    });
+    layer2.setStyle({
+      visible: false,
+    });
+    return;
+  } else if (value == '山崩與地滑') {
+    layer1.setStyle({
+      fillColor: 'green',
+      strokeColor: 'green',
+      strokeWeight: 1,
+      visible: true,
+    });
+  } else if (value == '地下水補注') {
+    layer2.setStyle({
+      fillColor: 'blue',
+      strokeColor: 'blue',
+      strokeWeight: 1,
+      visible: true,
+    });
+  }
 }

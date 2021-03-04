@@ -26,8 +26,7 @@ function GetFireStation() {
         team_1_back += '<option>' + team_1[i] + '</option>';
       }
       $('#team_1').html(team_1_back);
-      //$('#SeedsList').html(SeedsListData); 會把寫好的內容填回去 #id .class
-      console.log('內');
+      // 會把寫好的內容填回去 #id .class
     },
 
     error: function (xhr) {

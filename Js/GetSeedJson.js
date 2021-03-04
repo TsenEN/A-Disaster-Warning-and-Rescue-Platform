@@ -21,6 +21,11 @@ $(document).ready(function () {
     var element2 = document.getElementById('team_2');
     SelectTeam3(element1.value, element2.value, this.value);
   });
+  //change select bar-map layer
+  $(document).on('change', '#layer_type', function () {
+    var e = document.getElementById('layer_type');
+    load_layer(e.value);
+  });
 });
 
 function refreshTable() {
