@@ -54,6 +54,10 @@ function initMap() {
       layer1.loadGeoJson(
         'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E8%87%BA%E5%8D%97%E5%B8%82&town=%E5%8D%97%E5%8C%96%E5%8D%80&all=true'
       );
+      //楠西
+      layer1.loadGeoJson(
+        'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E8%87%BA%E5%8D%97%E5%B8%82&town=%E6%A5%A0%E8%A5%BF%E5%8D%80&all=true'
+      );
 
       //layer2 - under water
       layer2 = new google.maps.Data({ map: map });
@@ -63,6 +67,20 @@ function initMap() {
       //嘉南平原
       layer2.loadGeoJson(
         'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%9C%B0%E4%B8%8B%E6%B0%B4%E8%A3%9C%E6%B3%A8&name=%E5%98%89%E5%8D%97%E5%B9%B3%E5%8E%9F'
+      );
+
+      //layer 3 - fault
+      layer3 = new google.maps.Data({ map: map });
+      layer3.setStyle({
+        visible: false,
+      });
+      //六甲斷層
+      layer3.loadGeoJson(
+        'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E6%B4%BB%E5%8B%95%E6%96%B7%E5%B1%A4&name=%E5%85%AD%E7%94%B2%E6%96%B7%E5%B1%A4'
+      );
+      //新化斷層
+      layer3.loadGeoJson(
+        'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E6%B4%BB%E5%8B%95%E6%96%B7%E5%B1%A4&name=%E6%96%B0%E5%8C%96%E6%96%B7%E5%B1%A4'
       );
 
       //blue spot image
@@ -213,28 +231,42 @@ function load_fireStation_on_map() {
   });
 }
 
-function load_layer(value) {
-  if (value == '-選擇圖層-') {
-    layer1.setStyle({
-      visible: false,
-    });
-    layer2.setStyle({
-      visible: false,
-    });
-    return;
-  } else if (value == '山崩與地滑') {
-    layer1.setStyle({
-      fillColor: 'green',
-      strokeColor: 'green',
-      strokeWeight: 1,
-      visible: true,
-    });
+function load_layer(checked, value) {
+  if (value == '山崩與地滑') {
+    if (checked == true) {
+      layer1.setStyle({
+        fillColor: 'green',
+        strokeColor: 'green',
+        strokeWeight: 1,
+        visible: true,
+      });
+    } else
+      layer1.setStyle({
+        visible: false,
+      });
   } else if (value == '地下水補注') {
-    layer2.setStyle({
-      fillColor: 'blue',
-      strokeColor: 'blue',
-      strokeWeight: 1,
-      visible: true,
-    });
+    if (checked == true) {
+      layer2.setStyle({
+        fillColor: 'blue',
+        strokeColor: 'blue',
+        strokeWeight: 1,
+        visible: true,
+      });
+    } else
+      layer2.setStyle({
+        visible: false,
+      });
+  } else if (value == '活動斷層') {
+    if (checked == true) {
+      layer3.setStyle({
+        fillColor: 'red',
+        strokeColor: 'red',
+        strokeWeight: 1,
+        visible: true,
+      });
+    } else
+      layer3.setStyle({
+        visible: false,
+      });
   }
 }

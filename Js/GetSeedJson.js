@@ -21,10 +21,22 @@ $(document).ready(function () {
     var element2 = document.getElementById('team_2');
     SelectTeam3(element1.value, element2.value, this.value);
   });
-  //change select bar-map layer
-  $(document).on('change', '#layer_type', function () {
-    var e = document.getElementById('layer_type');
-    load_layer(e.value);
+  // //change select bar-map layer
+  // $(document).on('change', '#layer_type', function () {
+  //   var e = document.getElementById('layer_type');
+  //   load_layer(e.value);
+  // });
+  $(document).on('click', '#layer_1_checkbox', function () {
+    var e = document.getElementById('layer_1_checkbox');
+    load_layer(e.checked, e.value);
+  });
+  $(document).on('click', '#layer_2_checkbox', function () {
+    var e = document.getElementById('layer_2_checkbox');
+    load_layer(e.checked, e.value);
+  });
+  $(document).on('click', '#layer_3_checkbox', function () {
+    var e = document.getElementById('layer_3_checkbox');
+    load_layer(e.checked, e.value);
   });
 });
 
