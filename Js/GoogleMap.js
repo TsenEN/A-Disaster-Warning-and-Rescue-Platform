@@ -88,15 +88,23 @@ function initMap() {
         size: new google.maps.Size(42, 42),
         scaledSize: new google.maps.Size(42, 42),
       };
+
+      var red_marker = {
+        url: './Img/red_spot.png',
+        size: new google.maps.Size(42, 42),
+        scaledSize: new google.maps.Size(42, 42),
+      };
       i = 0;
-      const markers = locations.map((location, i) => {
-        return new google.maps.Marker({
-          position: location,
-          map: map,
+
+      let seed_markers = [];
+      for (i = 0; i < JData.length; i++) {
+        seed_markers[i] = new google.maps.Marker({
+          position: locations[i],
+          icon: JData[i].seed_status ? red_marker : blue_marker,
           label: String(seed_id[i]),
-          icon: blue_marker,
+          map: map,
         });
-      });
+      }
     },
 
     error: function (xhr) {
