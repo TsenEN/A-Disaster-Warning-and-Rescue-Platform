@@ -87,22 +87,22 @@ function initMap() {
       );
 
       //layer 4 - 中寮隧道
-      layer4 = new google.maps.KmlLayer();
+      // layer4 = new google.maps.KmlLayer();
 
       layer4.setStyle({
         visible: false,
       });
 
       
-        kmlLayer = new google.maps.KmlLayer({
-          url: 'https://shunnien.github.io/Victoria/ty_bike_lane.kml',
+      layer4 = new google.maps.KmlLayer({
+          url: 'https://github.com/TsenEN/A-Disaster-Warning-and-Rescue-Platform/blob/seedMap/%E9%82%8A%E5%9D%A1%E7%A8%AE%E5%AD%902.kml',
           clickable: true,
           preserveViewport: true,
           //screenOverlays: false,
           //suppressInfoWindows: false,
           map: map
         });
-        kmlLayer.setMap(map);
+        layer4.setMap(map);
       
 
       //blue spot image
