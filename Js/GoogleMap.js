@@ -2,6 +2,7 @@ let car_latlng = new Map();
 let car_status = new Map();
 let car_last_status = new Map();
 let car_markers = [];
+let seed_markers = [];
 let car_cluster;
 let locations = [];
 let firestaions_location = [];
@@ -88,7 +89,7 @@ function initMap() {
         size: new google.maps.Size(42, 42),
         scaledSize: new google.maps.Size(42, 42),
       };
-
+      //red spot image
       var red_marker = {
         url: './Img/red_spot.png',
         size: new google.maps.Size(42, 42),
@@ -96,7 +97,6 @@ function initMap() {
       };
       i = 0;
 
-      let seed_markers = [];
       for (i = 0; i < JData.length; i++) {
         seed_markers[i] = new google.maps.Marker({
           position: locations[i],
@@ -124,24 +124,46 @@ function initMap() {
 var first_load_in = 1;
 
 var interval = setInterval(function () {
-  /* do something that will execute every 1000 milliseconds*/
-  //set car markers on map
-
-  //edit image size by zoom
-  var zoom = map.getZoom();
   var ambu_size;
   ambu_size = new google.maps.Size(42, 42);
-  // if (zoom < 13) {
-  //   ambu_size = new google.maps.Size(42, 42);
-  // } else ambu_size = new google.maps.Size(42 + 1.5 * zoom, 42 + 1.5 * zoom);
 
-  //ambulance marker
+  //ambulance marker image
   var ambulance_marker = {
     url: './Img/ambulance_red.png',
     size: ambu_size,
     scaledSize: ambu_size,
   };
-
+  //blue spot image
+  var blue_marker = {
+    url: './Img/blue_spot.png',
+    size: new google.maps.Size(42, 42),
+    scaledSize: new google.maps.Size(42, 42),
+  };
+  //red spot image
+  var red_marker = {
+    url: './Img/red_spot.png',
+    size: new google.maps.Size(42, 42),
+    scaledSize: new google.maps.Size(42, 42),
+  };
+  //if seed status changed
+  $.ajax({
+    url: 'http://140.116.245.229:3000/GetSeedsJson',
+    type: 'POST',
+    dataType: 'json',
+    success: function (JData) {
+      for (let i = 0; i < JData.length; i++) {
+        if (JData[i].seed_status == 1) {
+          seed_markers[i].setIcon(red_marker);
+        } else {
+          seed_markers[i].setIcon(blue_marker);
+        }
+      }
+    },
+    error: function () {
+      alert('ERROR!!!');
+    },
+  });
+  //set car markers on map
   $.ajax({
     url: 'http://140.116.245.229:3000/GetCarsJson',
     type: 'POST',
