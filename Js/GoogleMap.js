@@ -10,6 +10,8 @@ let map;
 let layer1;
 let layer2;
 let layer3;
+let seed_infobox = [];
+let fire_station_infobox = [];
 
 // create direction service and direction display layer
 var directionsService;
@@ -31,7 +33,6 @@ function initMap() {
           lng: parseFloat(JData[i].seed_longitude),
         };
         seed_id[i] = JData[i].seed_id.toString();
-        console.log(seed_id[i]);
         i++;
       });
       map = new google.maps.Map(document.getElementById('map'), {
@@ -98,12 +99,37 @@ function initMap() {
       i = 0;
 
       for (i = 0; i < JData.length; i++) {
+        seed_infobox[i] = new google.maps.InfoWindow({
+          content:
+            '<div id="infoDiv' +
+            i +
+            '" class="infoDiv">' +
+            '<h6>種子ID:' +
+            seed_id[i] +
+            '</h6>' +
+            '<p id="infoDivSeedStat' +
+            i +
+            '" class="infoDiv">' +
+            '種子狀態:' +
+            (JData[i].seed_status ? '危險' : '安全') +
+            '</p><p>電量:' +
+            JData[i].seed_battery +
+            '</p></div>',
+        });
         seed_markers[i] = new google.maps.Marker({
           position: locations[i],
           icon: JData[i].seed_status ? red_marker : blue_marker,
           label: String(seed_id[i]),
           map: map,
         });
+        seed_markers[i].addListener(
+          'click',
+          (function (i) {
+            return function () {
+              seed_infobox[i].open(map, seed_markers[i]);
+            };
+          })(i)
+        );
       }
     },
 
@@ -248,11 +274,41 @@ function load_fireStation_on_map() {
       lat: tmp_lat,
       lng: tmp_lng,
     };
+    let tmp_address = 'FireStations.' + Object.keys(FireStations)[i] + '.地址';
+    tmp_address = eval(tmp_address);
+    let tmp_tel = 'FireStations.' + Object.keys(FireStations)[i] + '.電話號碼';
+    tmp_tel = eval(tmp_tel);
+    let name = Object.keys(FireStations)[i];
+    fire_station_infobox[i] = new google.maps.InfoWindow({
+      content:
+        '<div id="infoDiv' +
+        i +
+        '" class="infoDiv">' +
+        '<h6>分隊:' +
+        name +
+        '</h6>' +
+        '<p id="infoDivFSAdress' +
+        i +
+        '" class="infoDiv">' +
+        '地址:' +
+        tmp_address +
+        '</p><p>電話:' +
+        tmp_tel +
+        '</p></div>',
+    });
     firestation_markers[i] = new google.maps.Marker({
       position: firestaions_location[i],
       icon: firestaion_img,
       map: map,
     });
+    firestation_markers[i].addListener(
+      'click',
+      (function (i) {
+        return function () {
+          fire_station_infobox[i].open(map, firestation_markers[i]);
+        };
+      })(i)
+    );
     i++;
   });
   var firestation_cluster = new MarkerClusterer(map, firestation_markers, {
