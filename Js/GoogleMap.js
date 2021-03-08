@@ -1,12 +1,15 @@
-var car_latlng = new Map();
-var car_status = new Map();
-var car_last_status = new Map();
+let car_latlng = new Map();
+let car_status = new Map();
+let car_last_status = new Map();
 let car_markers = [];
-var car_cluster;
-var locations = [];
-var firestaions_location = [];
+let car_cluster;
+let locations = [];
+let firestaions_location = [];
 let map;
 let layer1;
+let layer2;
+let layer3;
+
 // create direction service and direction display layer
 var directionsService;
 var directionsDisplay;
@@ -19,25 +22,21 @@ function initMap() {
     url: 'http://140.116.245.229:3000/GetSeedsJson',
     dataType: 'json',
     success: function (JData) {
+      let seed_id = [];
       var i = 0;
       $.each(JData, function () {
         locations[i] = {
           lat: parseFloat(JData[i].seed_latitude),
           lng: parseFloat(JData[i].seed_longitude),
         };
+        seed_id[i] = JData[i].seed_id.toString();
+        console.log(seed_id[i]);
         i++;
       });
       map = new google.maps.Map(document.getElementById('map'), {
         zoom: 8,
         center: { lat: 23.745523, lng: 120.912494 },
       });
-
-      // Create an array of alphabetical characters used to label the markers.
-      const labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-      // Add some markers to the map.
-      // Note: The code uses the JavaScript Array.prototype.map() method to
-      // create an array of markers based on a given "locations" array.
-      // The map() method here has nothing to do with the Google Maps API.
 
       //add layer
       //layer1 - ground slip
@@ -89,12 +88,12 @@ function initMap() {
         size: new google.maps.Size(42, 42),
         scaledSize: new google.maps.Size(42, 42),
       };
-
+      i = 0;
       const markers = locations.map((location, i) => {
         return new google.maps.Marker({
           position: location,
           map: map,
-          label: labels[i % labels.length],
+          label: String(seed_id[i]),
           icon: blue_marker,
         });
       });
