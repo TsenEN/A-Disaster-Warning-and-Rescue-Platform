@@ -292,14 +292,14 @@ function load_layer(checked, value) {
       });
   } else if (value == '中寮隧道種子') {
     if (checked == true) {
-      layer3.setStyle({
+      layer4.setStyle({
         fillColor: 'red',
         strokeColor: 'red',
         strokeWeight: 1,
         visible: true,
       });
     } else
-      layer3.setStyle({
+      layer4.setStyle({
         visible: false,
       });
   }
