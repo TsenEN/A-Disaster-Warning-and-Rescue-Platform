@@ -13,6 +13,7 @@ var directionsDisplay;
 
 // 中寮隧道
 var kmzLayer, kmlLayer;
+var src = 'https://raw.githubusercontent.com/TsenEN/A-Disaster-Warning-and-Rescue-Platform/seedMap/%E9%82%8A%E5%9D%A1%E7%A8%AE%E5%AD%902.kml?token=AM765KOAAO4BJ6QVO2MM2YTAJMKGM';
 
 function initMap() {
   directionsService = new google.maps.DirectionsService();
@@ -87,23 +88,17 @@ function initMap() {
       );
 
       //layer 4 - 中寮隧道
-      // layer4 = new google.maps.KmlLayer();
-
+      layer4 = new google.maps.Data({ map: map });
+      
       layer4.setStyle({
         visible: false,
       });
 
-      
-      layer4 = new google.maps.KmlLayer({
-          url: 'https://github.com/TsenEN/A-Disaster-Warning-and-Rescue-Platform/blob/seedMap/%E9%82%8A%E5%9D%A1%E7%A8%AE%E5%AD%902.kml',
-          clickable: true,
-          preserveViewport: true,
-          //screenOverlays: false,
-          //suppressInfoWindows: false,
-          map: map
-        });
-        layer4.setMap(map);
-      
+      layer4 = new google.maps.KmlLayer(src, {
+        suppressInfoWindows: true,
+        preserveViewport: false,
+        map: map,
+      });
 
       //blue spot image
       var blue_marker = {
