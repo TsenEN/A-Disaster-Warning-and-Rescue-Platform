@@ -2,6 +2,8 @@ $(document).ready(function () {
   // Fetch the initial table
   refreshTable();
 
+  //Get firestation first
+  GetFireStation();
   //change select bar 1
   $(document).on('change', '#team_1', function () {
     $('#FireStationInfo').html('');
@@ -93,6 +95,15 @@ function refreshTable() {
             JData[i].car_license_plate +
             '" stat = 0 class="btn btn-primary text-light">派遣</button></td>';
         }
+        //for checkbox
+        // CarButtonString =
+        //   '<td><input type="checkbox" value="活動斷層" id="car_button_' +
+        //   JData[i].car_license_plate +
+        //   '"><label for="car_button_' +
+        //   JData[i].car_license_plate +
+        //   '"> ' +
+        //   JData[i].car_license_plate +
+        //   '</label></td>';
         CarsListData += '<tr id="rowCarsStatus" class="">';
         CarsListData += '<td>' + JData[i].car_license_plate + '</td>';
         CarsListData += '<td>' + CarStatString + '</td>';
