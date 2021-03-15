@@ -17,6 +17,10 @@ let fire_station_infobox = [];
 var directionsService;
 var directionsDisplay;
 
+// 中寮隧道
+var kmzLayer, kmlLayer;
+var src = 'https://raw.githubusercontent.com/TsenEN/A-Disaster-Warning-and-Rescue-Platform/seedMap/%E9%82%8A%E5%9D%A1%E7%A8%AE%E5%AD%902.kml?token=AM765KOAAO4BJ6QVO2MM2YTAJMKGM';
+
 function initMap() {
   directionsService = new google.maps.DirectionsService();
   directionsDisplay = new google.maps.DirectionsRenderer();
@@ -83,6 +87,19 @@ function initMap() {
       layer3.loadGeoJson(
         'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E6%B4%BB%E5%8B%95%E6%96%B7%E5%B1%A4&name=%E6%96%B0%E5%8C%96%E6%96%B7%E5%B1%A4'
       );
+
+      //layer 4 - 中寮隧道
+      layer4 = new google.maps.Data({ map: map });
+      
+      layer4.setStyle({
+        visible: false,
+      });
+
+      layer4 = new google.maps.KmlLayer(src, {
+        suppressInfoWindows: true,
+        preserveViewport: false,
+        map: map,
+      });
 
       //blue spot image
       var blue_marker = {
@@ -351,6 +368,18 @@ function load_layer(checked, value) {
       });
     } else
       layer3.setStyle({
+        visible: false,
+      });
+  } else if (value == '中寮隧道種子') {
+    if (checked == true) {
+      layer4.setStyle({
+        fillColor: 'red',
+        strokeColor: 'red',
+        strokeWeight: 1,
+        visible: true,
+      });
+    } else
+      layer4.setStyle({
         visible: false,
       });
   }
