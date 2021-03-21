@@ -1,17 +1,17 @@
 var FireStations;
 function GetFireStation() {
+  console.log('outside getfire');
   $.ajax({
     type: 'GET',
     url: 'http://140.116.245.229:3000/GetFireStationJson',
     dataType: 'json',
     success: function (JData) {
+      console.log('get fire');
       FireStations = JData;
       var i = 0;
       var team_1 = []; //存大隊資料
       $.each(FireStations, function () {
-        var tmp_string =
-          'FireStations.' + Object.keys(FireStations)[i] + '.隸屬大隊';
-        team_1[i] = eval(tmp_string);
+        team_1[i] = FireStations[i][i].隸屬大隊;
         i++;
       });
 
@@ -40,12 +40,8 @@ function SelectTeam1(value) {
   var i = 0;
   var j = 0;
   $.each(FireStations, function () {
-    var tmp_string =
-      'FireStations.' + Object.keys(FireStations)[i] + '.隸屬大隊';
-    if (value == eval(tmp_string)) {
-      var tmp_string_2 =
-        'FireStations.' + Object.keys(FireStations)[i] + '.隸屬中隊';
-      team_2[j] = eval(tmp_string_2);
+    if (value == FireStations[i][i].隸屬大隊) {
+      team_2[j] = FireStations[i][i].隸屬中隊;
       j++;
     }
     i++;
@@ -71,14 +67,11 @@ function SelectTeam2(value_1, value_2) {
   var i = 0;
   var j = 0;
   $.each(FireStations, function () {
-    var tmp_string =
-      'FireStations.' + Object.keys(FireStations)[i] + '.隸屬大隊';
-    var tmp_string_2 =
-      'FireStations.' + Object.keys(FireStations)[i] + '.隸屬中隊';
-    if (value_1 == eval(tmp_string) && value_2 == eval(tmp_string_2)) {
-      var tmp_string_3 =
-        'FireStations.' + Object.keys(FireStations)[i] + '.單位名稱';
-      team_3[j] = eval(tmp_string_3);
+    if (
+      value_1 == FireStations[i][i].隸屬大隊 &&
+      value_2 == FireStations[i][i].隸屬中隊
+    ) {
+      team_3[j] = FireStations[i][i].隊名;
       j++;
     }
     i++;
@@ -103,10 +96,17 @@ function SelectTeam3(value_1, value_2, value_3) {
     $('#FireStationInfo').html(back);
     return;
   }
+  var i = 0;
   var address_str = '';
   var tel_str = '';
-  address_str = eval('FireStations.' + value_3 + '.地址');
-  tel_str = eval('FireStations.' + value_3 + '.電話號碼');
+  $.each(FireStations, function () {
+    if (value_3 == FireStations[i][i].隊名) {
+      address_str = FireStations[i][i].地址;
+      tel_str = FireStations[i][i].電話號碼;
+    }
+    i++;
+  });
+
   var back =
     '<p>結果: <strong>' +
     value_1 +

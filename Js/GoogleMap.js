@@ -22,6 +22,7 @@ var kmzLayer, kmlLayer;
 var src = 'https://raw.githubusercontent.com/TsenEN/A-Disaster-Warning-and-Rescue-Platform/seedMap/%E9%82%8A%E5%9D%A1%E7%A8%AE%E5%AD%902.kml?token=AM765KOAAO4BJ6QVO2MM2YTAJMKGM';
 
 function initMap() {
+  console.log('MAP');
   directionsService = new google.maps.DirectionsService();
   directionsDisplay = new google.maps.DirectionsRenderer();
   $.ajax({
@@ -158,9 +159,6 @@ function initMap() {
   //set direction display layer
   directionsDisplay.setMap(map);
   // add_directions();
-
-  //fire station info
-  GetFireStation();
 }
 
 //for deciding whether set markers to null or not
@@ -283,19 +281,17 @@ function load_fireStation_on_map() {
   $.each(FireStations, function () {
     var tmp_lat = 'FireStations.' + Object.keys(FireStations)[i] + '.N';
     var tmp_lng = 'FireStations.' + Object.keys(FireStations)[i] + '.E';
-    tmp_lat = eval(tmp_lat);
-    tmp_lng = eval(tmp_lng);
-    tmp_lat = parseFloat(tmp_lat);
-    tmp_lng = parseFloat(tmp_lng);
+    // tmp_lat = eval(tmp_lat);
+    // tmp_lng = eval(tmp_lng);
+    // tmp_lat = parseFloat(tmp_lat);
+    // tmp_lng = parseFloat(tmp_lng);
     firestaions_location[i] = {
-      lat: tmp_lat,
-      lng: tmp_lng,
+      lat: FireStations[i][i].FireStation_latitude,
+      lng: FireStations[i][i].FireStation_longitude,
     };
-    let tmp_address = 'FireStations.' + Object.keys(FireStations)[i] + '.地址';
-    tmp_address = eval(tmp_address);
-    let tmp_tel = 'FireStations.' + Object.keys(FireStations)[i] + '.電話號碼';
-    tmp_tel = eval(tmp_tel);
-    let name = Object.keys(FireStations)[i];
+    let tmp_address = FireStations[i][i].地址;
+    let tmp_tel = FireStations[i][i].電話號碼;
+    let name = FireStations[i][i].隊名;
     fire_station_infobox[i] = new google.maps.InfoWindow({
       content:
         '<div id="infoDiv' +
