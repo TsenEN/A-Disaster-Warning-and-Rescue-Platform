@@ -12,7 +12,7 @@ $(document).ready(function () {
     $('#longitude').removeClass('errorClass');
   };
 
-  function focuslatitude() {
+  function focusLatitude() {
     $('#latitude-error').empty();
     $('#latitude').removeClass('errorClass');
   };
@@ -24,9 +24,9 @@ $(document).ready(function () {
 
   // 驗證經度
   function verityLongitude() {
-   
     longitudeValue = document.getElementById("longitude").value;
-    if (!(/^[\-\+]?(0(\.\d{1,10})?|([1-9](\d)?)(\.\d{1,10})?|1[0-7]\d{1}(\.\d{1,10})?|180\.0{1,10})?|$/.test(longitudeValue)) || longitudeValue == ""  ) {
+    // if (!(/^[\-\+]?(0(\.\d{1,10})?|([1-8](\d)?)(\.\d{1,10})?|1[0-7]\d{1}(\.\d{1,10})?|180\.0{1,10})?|$/.test(longitudeValue)) || longitudeValue == ""  ) {
+    if (!(/^[\-\+]?(0(\.\d{1,10})?|([1-9](\d)?)(\.\d{1,10})?|1[0-7]\d{1}(\.\d{1,10})?|180\.0{1,10})$/.test(longitudeValue)) || longitudeValue == ""  ) {
       $('#longitude-error').text('請輸入有效經度數值');
       $('#longitude').addClass('errorClass');
       return false;
@@ -41,8 +41,9 @@ $(document).ready(function () {
   };
 
   // 驗證緯度
-  function veritylatitude() {
+  function verityLatitude() {
     latitudeValue = document.getElementById("latitude").value;
+    // if (!(/^[\-\+]?((0|([1-8]\d?))(\.\d{1,10})?|90(\.0{1,10})?)$/.test(latitudeValue)) || latitudeValue == "" ) {
     if (!(/^[\-\+]?((0|([1-8]\d?))(\.\d{1,10})?|90(\.0{1,10})?)$/.test(latitudeValue)) || latitudeValue == "" ) {
       $('#latitude-error').text('請輸入有效緯度數值');
       $('#latitude').addClass('errorClass');
@@ -72,11 +73,11 @@ $(document).ready(function () {
   
   // 監聽事件
   $("#longitude").focus(focusLongitude);
-  $("#latitude").focus(focuslatitude);
+  $("#latitude").focus(focusLatitude);
   $("#number").focus(focusNumber);
 
   $("#longitude").blur(verityLongitude);
-  $("#latitude").blur(veritylatitude);
+  $("#latitude").blur(verityLatitude);
   $("#number").blur(verityNumber);
 
 
