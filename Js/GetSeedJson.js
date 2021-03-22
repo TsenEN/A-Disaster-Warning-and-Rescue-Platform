@@ -43,6 +43,10 @@ $(document).ready(function () {
     var e = document.getElementById('layer_3_checkbox');
     load_layer(e.checked, e.value);
   });
+  $(document).on('click', '#layer_4_checkbox', function () {
+    var e = document.getElementById('layer_4_checkbox');
+    load_layer(e.checked, e.value);
+  });
   $(document).on('click', '#rain_layer_checkbox', function () {
     var e = document.getElementById('rain_layer_checkbox');
     load_layer(e.checked, e.value);
