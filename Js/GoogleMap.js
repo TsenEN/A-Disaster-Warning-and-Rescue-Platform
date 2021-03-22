@@ -18,9 +18,9 @@ var directionsDisplay;
 let rain_layer;
 
 // 中寮隧道
-var kmzLayer, kmlLayer;
+let layer4;
 var src =
-  'https://raw.githubusercontent.com/TsenEN/A-Disaster-Warning-and-Rescue-Platform/seedMap/%E9%82%8A%E5%9D%A1%E7%A8%AE%E5%AD%902.kml?token=AM765KOAAO4BJ6QVO2MM2YTAJMKGM';
+  'https://unpkg.net/@kathleen074763/for_unpkh/%E9%82%8A%E5%9D%A1%E7%A8%AE%E5%AD%902.kml';
 
 function initMap() {
   directionsService = new google.maps.DirectionsService();
@@ -97,16 +97,10 @@ function initMap() {
       );
 
       //layer 4 - 中寮隧道
-      layer4 = new google.maps.Data({ map: map });
-
-      layer4.setStyle({
-        visible: false,
-      });
-
       layer4 = new google.maps.KmlLayer(src, {
         suppressInfoWindows: true,
         preserveViewport: false,
-        map: map,
+        map: null,
       });
 
       //blue spot image
@@ -373,15 +367,7 @@ function load_layer(checked, value) {
     } else rain_layer.setMap(null);
   } else if (value == '中寮隧道種子') {
     if (checked == true) {
-      layer4.setStyle({
-        fillColor: 'red',
-        strokeColor: 'red',
-        strokeWeight: 1,
-        visible: true,
-      });
-    } else
-      layer4.setStyle({
-        visible: false,
-      });
+      layer4.setMap(map);
+    } else layer4.setMap(null);
   }
 }
