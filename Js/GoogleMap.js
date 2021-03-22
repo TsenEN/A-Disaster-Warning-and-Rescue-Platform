@@ -12,17 +12,16 @@ let layer2;
 let layer3;
 let seed_infobox = [];
 let fire_station_infobox = [];
-
 // create direction service and direction display layer
 var directionsService;
 var directionsDisplay;
+let rain_layer;
 
 // 中寮隧道
 var kmzLayer, kmlLayer;
 var src = 'https://raw.githubusercontent.com/TsenEN/A-Disaster-Warning-and-Rescue-Platform/seedMap/%E9%82%8A%E5%9D%A1%E7%A8%AE%E5%AD%902.kml?token=AM765KOAAO4BJ6QVO2MM2YTAJMKGM';
 
 function initMap() {
-  console.log('MAP');
   directionsService = new google.maps.DirectionsService();
   directionsDisplay = new google.maps.DirectionsRenderer();
   $.ajax({
@@ -46,6 +45,13 @@ function initMap() {
       });
 
       //add layer
+      //rain layer
+
+      rain_layer = new google.maps.KmlLayer({
+        url: 'https://alerts.ncdr.nat.gov.tw/DownLoadNewAssistData.ashx/5',
+        map: map,
+      });
+
       //layer1 - ground slip
       layer1 = new google.maps.Data({ map: map });
       layer1.setStyle({
@@ -225,9 +231,6 @@ var interval = setInterval(function () {
             //label: JData[i]['car_license_plate'],
             map: null,
           });
-          //add firestaion on map
-          //I call this funtion here is because this function must execute after the map and the Firestation object are created
-          load_fireStation_on_map();
         } else {
           car_status.set(JData[i]['car_license_plate'], JData[i]['car_status']);
           if (JData[i]['car_status'] == 0) {
@@ -258,6 +261,9 @@ var interval = setInterval(function () {
             car_cluster.removeMarker(car_markers[i], true);
           }
         }
+        //add firestaion on map
+        //I call this funtion here is because this function must execute after the map and the Firestation object are created
+        load_fireStation_on_map();
       }
       first_load_in = 0;
       car_cluster.resetViewport_();
@@ -279,19 +285,13 @@ function load_fireStation_on_map() {
   };
   var firestation_markers = [];
   $.each(FireStations, function () {
-    var tmp_lat = 'FireStations.' + Object.keys(FireStations)[i] + '.N';
-    var tmp_lng = 'FireStations.' + Object.keys(FireStations)[i] + '.E';
-    // tmp_lat = eval(tmp_lat);
-    // tmp_lng = eval(tmp_lng);
-    // tmp_lat = parseFloat(tmp_lat);
-    // tmp_lng = parseFloat(tmp_lng);
     firestaions_location[i] = {
-      lat: FireStations[i][i].FireStation_latitude,
-      lng: FireStations[i][i].FireStation_longitude,
+      lat: FireStations[i].fireStation_latitude,
+      lng: FireStations[i].fireStation_longitude,
     };
-    let tmp_address = FireStations[i][i].地址;
-    let tmp_tel = FireStations[i][i].電話號碼;
-    let name = FireStations[i][i].隊名;
+    let tmp_address = FireStations[i].address;
+    let tmp_tel = FireStations[i].phone_number;
+    let name = FireStations[i].team_name;
     fire_station_infobox[i] = new google.maps.InfoWindow({
       content:
         '<div id="infoDiv' +

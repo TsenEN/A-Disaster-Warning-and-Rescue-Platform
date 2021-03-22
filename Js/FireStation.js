@@ -1,17 +1,15 @@
 var FireStations;
 function GetFireStation() {
-  console.log('outside getfire');
   $.ajax({
     type: 'GET',
     url: 'http://140.116.245.229:3000/GetFireStationJson',
     dataType: 'json',
     success: function (JData) {
-      console.log('get fire');
       FireStations = JData;
       var i = 0;
       var team_1 = []; //存大隊資料
       $.each(FireStations, function () {
-        team_1[i] = FireStations[i][i].隸屬大隊;
+        team_1[i] = FireStations[i].brigade;
         i++;
       });
 
@@ -40,8 +38,8 @@ function SelectTeam1(value) {
   var i = 0;
   var j = 0;
   $.each(FireStations, function () {
-    if (value == FireStations[i][i].隸屬大隊) {
-      team_2[j] = FireStations[i][i].隸屬中隊;
+    if (value == FireStations[i].brigade) {
+      team_2[j] = FireStations[i].squadron;
       j++;
     }
     i++;
@@ -68,10 +66,10 @@ function SelectTeam2(value_1, value_2) {
   var j = 0;
   $.each(FireStations, function () {
     if (
-      value_1 == FireStations[i][i].隸屬大隊 &&
-      value_2 == FireStations[i][i].隸屬中隊
+      value_1 == FireStations[i].brigade &&
+      value_2 == FireStations[i].squadron
     ) {
-      team_3[j] = FireStations[i][i].隊名;
+      team_3[j] = FireStations[i].team_name;
       j++;
     }
     i++;
@@ -100,9 +98,9 @@ function SelectTeam3(value_1, value_2, value_3) {
   var address_str = '';
   var tel_str = '';
   $.each(FireStations, function () {
-    if (value_3 == FireStations[i][i].隊名) {
-      address_str = FireStations[i][i].地址;
-      tel_str = FireStations[i][i].電話號碼;
+    if (value_3 == FireStations[i].team_name) {
+      address_str = FireStations[i].address;
+      tel_str = FireStations[i].phone_number;
     }
     i++;
   });
@@ -120,4 +118,55 @@ function SelectTeam3(value_1, value_2, value_3) {
     tel_str +
     '</p>';
   $('#FireStationInfo').html(back);
+  $.ajax({
+    //Get Car Json
+    type: 'GET',
+    url: 'http://140.116.245.229:3000/GetCarsJson',
+    dataType: 'json',
+    success: function (JData) {
+      var i = 0;
+      var CarsListData = '';
+      var CarStatString = '';
+      var CarButtonString = '';
+      $.each(JData, function () {
+        console.log(value_3);
+        console.log(JData[i].team_name);
+        if (value_3 == JData[i].team_name) {
+          if (JData[i].car_status == 1) {
+            CarStatString = '派遣中';
+            CarButtonString =
+              '<td><button id = CarButton button_id = "' +
+              JData[i].car_license_plate +
+              '"stat = 1 class="btn btn-primary  text-light disabled">派遣</button></td>';
+          } else {
+            CarStatString = '未派遣';
+            CarButtonString =
+              '<td><button id = CarButton button_id = "' +
+              JData[i].car_license_plate +
+              '" stat = 0 class="btn btn-primary text-light">派遣</button></td>';
+          }
+          //for checkbox
+          // CarButtonString =
+          //   '<td><input type="checkbox" value="活動斷層" id="car_button_' +
+          //   JData[i].car_license_plate +
+          //   '"><label for="car_button_' +
+          //   JData[i].car_license_plate +
+          //   '"> ' +
+          //   JData[i].car_license_plate +
+          //   '</label></td>';
+          CarsListData += '<tr id="rowCarsStatus" class="">';
+          CarsListData += '<td>' + JData[i].car_license_plate + '</td>';
+          CarsListData += '<td>' + CarStatString + '</td>';
+          CarsListData += CarButtonString;
+          CarsListData += '</tr>';
+        }
+        i++;
+      });
+      $('#CarsList').html(CarsListData);
+    },
+
+    error: function (xhr) {
+      alert('ERROR IN CAR: ' + xhr.status + ' ' + xhr.statusText);
+    },
+  });
 }
