@@ -125,12 +125,11 @@ function SelectTeam3(value_1, value_2, value_3) {
     dataType: 'json',
     success: function (JData) {
       var i = 0;
+      var j = 0;
       var CarsListData = '';
       var CarStatString = '';
       var CarButtonString = '';
       $.each(JData, function () {
-        console.log(value_3);
-        console.log(JData[i].team_name);
         if (value_3 == JData[i].team_name) {
           if (JData[i].car_status == 1) {
             CarStatString = '派遣中';
@@ -154,11 +153,15 @@ function SelectTeam3(value_1, value_2, value_3) {
           //   '"> ' +
           //   JData[i].car_license_plate +
           //   '</label></td>';
-          CarsListData += '<tr id="rowCarsStatus" class="">';
+          CarsListData +=
+            '<tr id="rowCarsStatus' +
+            JData[i].car_license_plate +
+            '" class="">';
           CarsListData += '<td>' + JData[i].car_license_plate + '</td>';
           CarsListData += '<td>' + CarStatString + '</td>';
           CarsListData += CarButtonString;
           CarsListData += '</tr>';
+          j++;
         }
         i++;
       });
