@@ -23,9 +23,7 @@ function GetFireStation() {
       for (i = 0; i < team_1.length; i++) {
         sort_team[i] = team_1[i];
       }
-      console.log(sort_team);
       for (i = 0; i < team_1.length; i++) {
-        console.log(sort_team);
         switch (sort_team[i]) {
           case '第一救災救護大隊':
             team_1[0] = sort_team[i];
@@ -85,9 +83,7 @@ function SelectTeam1(value) {
   for (i = 0; i < team_2.length; i++) {
     sort_team[i] = team_2[i];
   }
-  console.log(sort_team);
   for (i = 0; i < team_2.length; i++) {
-    console.log(sort_team);
     switch (sort_team[i]) {
       case '第一中隊':
         team_2[0] = sort_team[i];

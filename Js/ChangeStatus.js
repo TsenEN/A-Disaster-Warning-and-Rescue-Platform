@@ -17,7 +17,6 @@ $(document).ready(function () {
       crossDomain: true,
       data: JSON.stringify(data),
       success: function () {
-        alert('send json success!');
         var CarsListData = '';
         var CarStatString = '';
         var CarButtonString = '';

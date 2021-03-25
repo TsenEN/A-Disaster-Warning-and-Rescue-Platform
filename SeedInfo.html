@@ -12,9 +12,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
     integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
-  <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjKizr4VzV2pJ2zaT4FL0gQ-Baglyps-Q&callback=initMap">
-    </script>
+
 
 <body>
 
@@ -87,9 +85,17 @@
 
                 <td Align="Center" scope="col"><B>車牌</B></Td>
                 <td Align="Center" scope="col"><B>派遣狀態</B></Td>
+
               </tr>
             </thead>
-            <tbody id="CarsList"></tbody>
+            <tbody id="CarsList">
+              <tr>
+
+                <td Align="Center" scope="col">-先選擇消防隊-</Td>
+                <td Align="Center" scope="col">-先選擇消防隊-</Td>
+              </tr>
+            </tbody>
+
           </table>
         </div>
         <hr />
@@ -161,6 +167,9 @@
   <script src="Js/GoogleMap.js"></script>
   <script src="Js/ChangeStatus.js"></script>
   <!-- <script src="Js/MapDirections.js"></script> -->
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjKizr4VzV2pJ2zaT4FL0gQ-Baglyps-Q&callback=initMap">
+    </script>
 
 </body>
 
