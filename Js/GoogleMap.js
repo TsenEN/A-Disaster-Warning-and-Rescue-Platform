@@ -1,5 +1,3 @@
-let car_latlng = new Map();
-let car_status = new Map();
 let car_last_status = new Map();
 let firestation_infobox_num = new Map();
 let car_markers = [];
@@ -8,6 +6,7 @@ let car_cluster;
 let locations = [];
 let firestaions_location = [];
 let map;
+let rain_layer;
 let layer1;
 let layer2;
 let layer3;
@@ -16,7 +15,6 @@ let fire_station_infobox = [];
 // create direction service and direction display layer
 var directionsService;
 var directionsDisplay;
-let rain_layer;
 
 // 中寮隧道
 let layer4;
@@ -216,6 +214,7 @@ var interval = setInterval(function () {
     },
   });
   //set car markers on map
+  let car_location;
   $.ajax({
     url: 'http://140.116.245.229:3000/GetCarsJson',
     type: 'POST',
@@ -224,20 +223,16 @@ var interval = setInterval(function () {
       var NumOfJData = JData.length;
       for (var i = 0; i < NumOfJData; i++) {
         if (first_load_in == 1) {
-          car_status.set(JData[i]['car_license_plate'], JData[i]['car_status']);
-          JData[i]['car_license_plate'], JData[i]['car_status'];
-          car_latlng.set(JData[i]['car_license_plate'], {
-            lat: JData[i]['car_latitude'],
-            lng: JData[i]['car_longitude'],
-          });
+          car_location = {
+            lat: JData[i].car_latitude,
+            lng: JData[i].car_longitude,
+          };
           car_markers[i] = new google.maps.Marker({
-            position: car_latlng.get(JData[i]['car_license_plate']),
+            position: car_location,
             icon: ambulance_marker,
             map: null,
           });
         } else {
-          car_status.set(JData[i]['car_license_plate'], JData[i]['car_status']);
-
           if (JData[i]['car_status'] == 0) {
             if (car_last_status.get(JData[i]['car_license_plate']) == 1) {
               //changed
