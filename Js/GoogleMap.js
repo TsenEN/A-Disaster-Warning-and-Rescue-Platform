@@ -12,6 +12,7 @@ let layer2;
 let layer3;
 let seed_infobox = [];
 let fire_station_infobox = [];
+let car_infobox = [];
 // create direction service and direction display layer
 var directionsService;
 var directionsDisplay;
@@ -47,7 +48,6 @@ function initMap() {
       //add layer
 
       //rain layer
-
       rain_layer = new google.maps.KmlLayer({
         url:
           'https://opendata.cwb.gov.tw/fileapi/opendata/DIV2/O-A0038-002.kmz',
@@ -227,11 +227,33 @@ var interval = setInterval(function () {
             lat: JData[i].car_latitude,
             lng: JData[i].car_longitude,
           };
+          car_infobox[i] = new google.maps.InfoWindow({
+            content:
+              '<div id="car_info' +
+              i +
+              'class="infoDiv><h6>車牌: <br>  ' +
+              JData[i].car_license_plate +
+              '</h6>' +
+              '<p id="infoDivCarStat' +
+              i +
+              '" class="infoDiv">' +
+              '車輛狀態:' +
+              (JData[i].car_status ? '值勤中' : '待命中') +
+              '</p></div>',
+          });
           car_markers[i] = new google.maps.Marker({
             position: car_location,
             icon: ambulance_marker,
             map: null,
           });
+          car_markers[i].addListener(
+            'click',
+            (function (i) {
+              return function () {
+                car_infobox[i].open(map, car_markers[i]);
+              };
+            })(i)
+          );
         } else {
           if (JData[i]['car_status'] == 0) {
             if (car_last_status.get(JData[i]['car_license_plate']) == 1) {
