@@ -18,6 +18,36 @@ function GetFireStation() {
         return arr.indexOf(element) === index;
       });
 
+      //sort (in chinese)
+      let sort_team = [];
+      for (i = 0; i < team_1.length; i++) {
+        sort_team[i] = team_1[i];
+      }
+      console.log(sort_team);
+      for (i = 0; i < team_1.length; i++) {
+        console.log(sort_team);
+        switch (sort_team[i]) {
+          case '第一救災救護大隊':
+            team_1[0] = sort_team[i];
+            break;
+          case '第二救災救護大隊':
+            team_1[1] = sort_team[i];
+            break;
+          case '第三救災救護大隊':
+            team_1[2] = sort_team[i];
+            break;
+          case '第四救災救護大隊':
+            team_1[3] = sort_team[i];
+            break;
+          case '第五救災救護大隊':
+            team_1[4] = sort_team[i];
+            break;
+          case '第六救災救護大隊':
+            team_1[5] = sort_team[i];
+            break;
+        }
+      }
+
       //write back to SeedInfo.html
       var team_1_back = '<option>-大隊-</option>';
       for (i = 0; i < team_1.length; i++) {
@@ -49,6 +79,30 @@ function SelectTeam1(value) {
   team_2 = team_2.filter(function (element, index, arr) {
     return arr.indexOf(element) === index;
   });
+
+  //sort (in chinese)
+  let sort_team = [];
+  for (i = 0; i < team_2.length; i++) {
+    sort_team[i] = team_2[i];
+  }
+  console.log(sort_team);
+  for (i = 0; i < team_2.length; i++) {
+    console.log(sort_team);
+    switch (sort_team[i]) {
+      case '第一中隊':
+        team_2[0] = sort_team[i];
+        break;
+      case '第二中隊':
+        team_2[1] = sort_team[i];
+        break;
+      case '第三中隊':
+        team_2[2] = sort_team[i];
+        break;
+      case '第四中隊':
+        team_2[3] = sort_team[i];
+        break;
+    }
+  }
 
   //write back to SeedInfo.html
   var team_2_back = '<option>-中隊-</option>';
@@ -144,15 +198,6 @@ function SelectTeam3(value_1, value_2, value_3) {
               JData[i].car_license_plate +
               '" stat = 0 class="btn btn-primary text-light">派遣</button></td>';
           }
-          //for checkbox
-          // CarButtonString =
-          //   '<td><input type="checkbox" value="活動斷層" id="car_button_' +
-          //   JData[i].car_license_plate +
-          //   '"><label for="car_button_' +
-          //   JData[i].car_license_plate +
-          //   '"> ' +
-          //   JData[i].car_license_plate +
-          //   '</label></td>';
           CarsListData +=
             '<tr id="rowCarsStatus' +
             JData[i].car_license_plate +
