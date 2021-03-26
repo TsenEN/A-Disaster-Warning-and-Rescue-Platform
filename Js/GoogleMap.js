@@ -13,7 +13,7 @@ var directionsDisplay;
 
 // 中寮隧道
 var kmzLayer, kmlLayer;
-var src = 'https://raw.githubusercontent.com/TsenEN/A-Disaster-Warning-and-Rescue-Platform/seedMap/%E9%82%8A%E5%9D%A1%E7%A8%AE%E5%AD%902.kml?token=AM765KIRG5GIQA6GEKOFTI3AJ3KTY';
+var src = 'https://raw.githubusercontent.com/TsenEN/A-Disaster-Warning-and-Rescue-Platform/main/%E9%82%8A%E5%9D%A1%E7%A8%AE%E5%AD%902.kml?token=AM765KMRP2S6R7KLSSJBDM3ALWSAS';
 
 function initMap() {
   directionsService = new google.maps.DirectionsService();
