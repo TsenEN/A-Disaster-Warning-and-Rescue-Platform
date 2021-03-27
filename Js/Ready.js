@@ -5,7 +5,7 @@ $(document).ready(function () {
   //Get firestation first
   GetFireStation();
   let retun_tmp =
-    "<tr><td Align='Center' scope='col'>-先選擇消防隊-</Td><td Align='Center' scope='col'>-先選擇消防隊-</Td></tr>";
+    "<tr><td Align='Center' scope='col'>-先選擇消防隊-</Td><td Align='Center' scope='col'>-先選擇消防隊-</Td><td Align='Center' scope='col'>-先選擇消防隊-</Td><td Align='Center' scope='col'>-先選擇消防隊-</Td></tr>";
   //change select bar 1
   $(document).on('change', '#team_1', function () {
     $('#FireStationInfo').html('');
@@ -47,5 +47,11 @@ $(document).ready(function () {
   $(document).on('click', '#rain_layer_checkbox', function () {
     var e = document.getElementById('rain_layer_checkbox');
     load_layer(e.checked, e.value);
+  });
+  $(document).on('click', '#CarButton', function () {
+    change_status();
+  });
+  $(document).on('click', '#CarButtonReset', function () {
+    change_status2();
   });
 });

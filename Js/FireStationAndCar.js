@@ -177,38 +177,36 @@ function SelectTeam3(value_1, value_2, value_3) {
       var i = 0;
       var j = 0;
       var CarsListData = '';
-      var CarStatString = '';
-      var CarButtonString = '';
+      var CarCheckboxString = '';
+      //checkbarstring2 for reset
+      var CarCheckboxString2 = '';
       $.each(JData, function () {
         if (value_3 == JData[i].team_name) {
-          if (JData[i].car_status == 1) {
-            CarStatString = '派遣中';
-            // CarButtonString =
-            //   '<td><button id = CarButton button_id = "' +
-            //   JData[i].car_license_plate +
-            //   '"stat = 1 class="btn btn-primary  text-light disabled">派遣</button></td>';
-          } else {
-            CarStatString = '未派遣';
-            // CarButtonString =
-            //   '<td><button id = CarButton button_id = "' +
-            //   JData[i].car_license_plate +
-            //   '" stat = 0 class="btn btn-primary text-light">派遣</button></td>';
-          }
-          CarButtonString =
-            '<td><input type="checkbox"  id="car_button_' +
+          CarCheckboxString =
+            '<td><input type="checkbox"  id="car_checkbox_' +
+            j +
+            '" ' +
+            (JData[i].car_status ? 'disabled="true"' : ' ') +
+            'car_license_plate=' +
             JData[i].car_license_plate +
-            '"><label for="car_button_' +
+            '></td>';
+          CarCheckboxString2 =
+            '<td><input type="checkbox"  id="car_checkbox2_' +
+            j +
+            '" ' +
+            (JData[i].car_status ? '' : 'disabled="true" ') +
+            'car_license_plate=' +
             JData[i].car_license_plate +
-            '"> ' +
-            JData[i].car_license_plate +
-            '</label></td>';
-
+            '></td>';
           CarsListData +=
             '<tr id="rowCarsStatus' +
             JData[i].car_license_plate +
             '" class="">';
-          CarsListData += CarButtonString;
-          CarsListData += '<td>' + CarStatString + '</td>';
+          CarsListData += '<td>' + JData[i].car_license_plate + '</td>';
+          CarsListData +=
+            '<td>' + (JData[i].car_status ? '值勤中' : '待命中') + '</td>';
+          CarsListData += CarCheckboxString;
+          CarsListData += CarCheckboxString2;
           CarsListData += '</tr>';
           j++;
         }

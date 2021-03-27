@@ -239,6 +239,8 @@ var interval = setInterval(function () {
               '" class="infoDiv">' +
               '車輛狀態:' +
               (JData[i].car_status ? '值勤中' : '待命中') +
+              '<br>隸屬分隊:' +
+              JData[i].team_name +
               '</p></div>',
           });
           car_markers[i] = new google.maps.Marker({
