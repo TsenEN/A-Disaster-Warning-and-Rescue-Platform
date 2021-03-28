@@ -19,9 +19,6 @@ var directionsDisplay;
 
 // 中寮隧道
 let layer4;
-var src =
-  'https://raw.githubusercontent.com/TsenEN/A-Disaster-Warning-and-Rescue-Platform/main/%E9%82%8A%E5%9D%A1%E7%A8%AE%E5%AD%902.kml?token=APECVWPFXNIUFRERMCPQ23DALRV7A';
-
 function initMap() {
   directionsService = new google.maps.DirectionsService();
   directionsDisplay = new google.maps.DirectionsRenderer();
@@ -49,8 +46,7 @@ function initMap() {
 
       //rain layer
       rain_layer = new google.maps.KmlLayer({
-        url:
-          'https://opendata.cwb.gov.tw/fileapi/opendata/DIV2/O-A0038-002.kmz',
+        url: 'https://alerts.ncdr.nat.gov.tw/DownLoadNewAssistData.ashx/5',
         map: null,
       });
 
@@ -99,8 +95,7 @@ function initMap() {
 
       //layer 4 - 中寮隧道
       layer4 = new google.maps.KmlLayer({
-        url:
-          'https://raw.githubusercontent.com/TsenEN/A-Disaster-Warning-and-Rescue-Platform/main/%E9%82%8A%E5%9D%A1%E7%A8%AE%E5%AD%902.kml?token=APECVWPFXNIUFRERMCPQ23DALRV7A',
+        url: 'http://140.116.245.229:3000/GetTunnelKML',
         suppressInfoWindows: true,
         preserveViewport: false,
         map: null,
