@@ -385,6 +385,10 @@ function load_fireStation_on_map() {
             tmp_address +
             '<br>電話:' +
             tmp_tel +
+            '<br><br>' +
+            FireStations[i].brigade +
+            '>>' +
+            FireStations[i].squadron +
             '</p></div>';
 
           let sent_cars = 0;
