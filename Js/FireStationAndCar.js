@@ -1,4 +1,8 @@
 var FireStations;
+//team name - brigade
+let firestation_brigade = new Map();
+//team name - squadron
+let firestation_squadron = new Map();
 function GetFireStation() {
   $.ajax({
     type: 'GET',
@@ -10,6 +14,14 @@ function GetFireStation() {
       var team_1 = []; //存大隊資料
       $.each(FireStations, function () {
         team_1[i] = FireStations[i].brigade;
+        firestation_brigade.set(
+          FireStations[i].team_name,
+          FireStations[i].brigade
+        );
+        firestation_squadron.set(
+          FireStations[i].team_name,
+          FireStations[i].squadron
+        );
         i++;
       });
 

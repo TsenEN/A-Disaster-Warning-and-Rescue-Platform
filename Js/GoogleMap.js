@@ -1,4 +1,5 @@
 let car_last_status = new Map();
+//team name - num
 let firestation_infobox_num = new Map();
 let car_markers = [];
 let seed_markers = [];
@@ -134,7 +135,7 @@ function initMap() {
             '" class="infoDiv">' +
             '種子狀態:' +
             (JData[i].seed_status ? '危險' : '安全') +
-            '</p><p>電量:' +
+            '<br>地區:北區<br>電量:' +
             JData[i].seed_battery +
             '</p></div>',
         });
@@ -196,27 +197,28 @@ var interval = setInterval(function () {
     type: 'POST',
     dataType: 'json',
     success: function (JData) {
-      let seed_content =
-        '<div id="infoDiv' +
-        i +
-        '" class="infoDiv">' +
-        '<h6>種子ID:' +
-        seed_id[i] +
-        '</h6>' +
-        '<p id="infoDivSeedStat' +
-        i +
-        '" class="infoDiv">' +
-        '種子狀態:' +
-        (JData[i].seed_status ? '危險' : '安全') +
-        '</p><p>電量:' +
-        JData[i].seed_battery +
-        '</p></div>';
+      let seed_content = '';
       for (let i = 0; i < JData.length; i++) {
         if (JData[i].seed_status == 1) {
           seed_markers[i].setIcon(red_marker);
         } else {
           seed_markers[i].setIcon(blue_marker);
         }
+        seed_content =
+          '<div id="infoDiv' +
+          i +
+          '" class="infoDiv">' +
+          '<h6>種子ID:' +
+          JData[i].seed_id +
+          '</h6>' +
+          '<p id="infoDivSeedStat' +
+          i +
+          '" class="infoDiv">' +
+          '種子狀態:' +
+          (JData[i].seed_status ? '危險' : '安全') +
+          '<br>地區:北區<br>電量:' +
+          JData[i].seed_battery +
+          '</p></div>';
         seed_infobox[i].setContent(seed_content);
       }
     },
@@ -238,6 +240,9 @@ var interval = setInterval(function () {
             lat: JData[i].car_latitude,
             lng: JData[i].car_longitude,
           };
+          //get brigade and squadron for infobox
+          let tmp_b = firestation_brigade.get(JData[i].team_name);
+          let tmp_s = firestation_squadron.get(JData[i].team_name);
           car_infobox[i] = new google.maps.InfoWindow({
             content:
               '<div id="car_info' +
@@ -252,6 +257,10 @@ var interval = setInterval(function () {
               (JData[i].car_status ? '值勤中' : '待命中') +
               '<br>隸屬分隊:' +
               JData[i].team_name +
+              '<br>' +
+              tmp_b +
+              '>>' +
+              tmp_s +
               '</p></div>',
           });
           car_markers[i] = new google.maps.Marker({
