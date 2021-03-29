@@ -196,12 +196,28 @@ var interval = setInterval(function () {
     type: 'POST',
     dataType: 'json',
     success: function (JData) {
+      let seed_content =
+        '<div id="infoDiv' +
+        i +
+        '" class="infoDiv">' +
+        '<h6>種子ID:' +
+        seed_id[i] +
+        '</h6>' +
+        '<p id="infoDivSeedStat' +
+        i +
+        '" class="infoDiv">' +
+        '種子狀態:' +
+        (JData[i].seed_status ? '危險' : '安全') +
+        '</p><p>電量:' +
+        JData[i].seed_battery +
+        '</p></div>';
       for (let i = 0; i < JData.length; i++) {
         if (JData[i].seed_status == 1) {
           seed_markers[i].setIcon(red_marker);
         } else {
           seed_markers[i].setIcon(blue_marker);
         }
+        seed_infobox[i].setContent(seed_content);
       }
     },
     error: function () {
