@@ -32,8 +32,9 @@ $.ajax({
   success: function (re, i) {
     console.log(re); //先測試拿到了什麼
     data=re;  //透過 chrome.f12.console 輸入 data 確認內容
-    data=re.records.location[i]; 
-    console.log("hi");
-    console.log(data);
+    // data=re.records.location[1].lat; 
+    data.forEach(function (item) {
+        console.log(item.records.location);
+      });
   }
 })
