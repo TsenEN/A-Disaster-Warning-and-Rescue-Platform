@@ -25,16 +25,22 @@
 // });
 
 var data;
+var Kaohsiung = [];
 $.ajax({
   url: "https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0002-001?Authorization=CWB-60F77B1A-3D8B-468E-9D93-3FD7846A88C5&format=JSON",
   method: "GET",
   dataType: "json",
   success: function (re, i) {
-    console.log(re); //先測試拿到了什麼
-    data=re;  //透過 chrome.f12.console 輸入 data 確認內容
-    // data=re.records.location[1].lat; 
+    console.log(re); 
+    data=re.records.location; ;
+    console.log(data); 
     data.forEach(function (item) {
-        console.log(item.records.location);
+        console.log(item.parameter.parameterValue);
+        // if (item.parameter.parameterValue == "高雄市"){
+        //   Kaohsiung.push(item);
+        //   console.log(Kaohsiung);
+        // };
+
       });
   }
 })
