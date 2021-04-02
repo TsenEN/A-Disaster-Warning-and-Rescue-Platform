@@ -98,7 +98,7 @@ function initMap() {
       layer4 = new google.maps.KmlLayer({
         url: 'http://140.116.245.229:3000/GetTunnelKML',
         suppressInfoWindows: true,
-        preserveViewport: false,
+        preserveViewport: true,
         map: null,
       });
       // layer4 = new google.maps.KmlLayer(src, {
