@@ -15,7 +15,9 @@ let fire_station_infobox = [];
 // create direction service and direction display layer
 var directionsService;
 var directionsDisplay;
+//for rain
 let rain_layer;
+let Overlay;
 
 // 中寮隧道
 let layer4;
@@ -160,6 +162,9 @@ function initMap() {
   //set direction display layer
   directionsDisplay.setMap(map);
   // add_directions();
+
+  //set rain image
+  GetRainDrop();
 }
 
 //for deciding whether set markers to null or not
@@ -223,7 +228,6 @@ var interval = setInterval(function () {
           car_markers[i] = new google.maps.Marker({
             position: car_latlng.get(JData[i]['car_license_plate']),
             icon: ambulance_marker,
-            //label: JData[i]['car_license_plate'],
             map: null,
           });
         } else {
@@ -257,8 +261,9 @@ var interval = setInterval(function () {
           }
         }
         //add firestaion on map
-        //I call this funtion here is because this function must execute after the map and the Firestation object are created
+        //I call these two funtion here is because these function must execute after the map objects are created
         load_fireStation_on_map();
+        setRainImage();
       }
       first_load_in = 0;
       car_cluster.resetViewport_();
@@ -363,11 +368,25 @@ function load_layer(checked, value) {
       });
   } else if (value == '雨量') {
     if (checked == true) {
-      rain_layer.setMap(map);
-    } else rain_layer.setMap(null);
+      Overlay.setMap(map);
+    } else Overlay.setMap(null);
   } else if (value == '中寮隧道種子') {
     if (checked == true) {
       layer4.setMap(map);
     } else layer4.setMap(null);
   }
+}
+function setRainImage() {
+  let pos = [];
+  pos[0] = {
+    lat: imageBounds[0][0],
+    lng: imageBounds[0][1],
+  };
+  pos[1] = {
+    lat: imageBounds[1][0],
+    lng: imageBounds[1][1],
+  };
+  var Bounds = new google.maps.LatLngBounds(pos[0], pos[1]);
+
+  Overlay = new google.maps.GroundOverlay(returnImage(), Bounds);
 }
