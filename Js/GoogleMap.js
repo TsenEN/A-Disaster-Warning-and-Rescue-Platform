@@ -400,7 +400,6 @@ function setRainImage() {
   var K_Bounds = new google.maps.LatLngBounds(pos[0][0], pos[0][1]);
   //Tainan
   var T_Bounds = new google.maps.LatLngBounds(pos[1][0], pos[1][1]);
-  console.log(returnImage2());
   Kaohsiung_Rain_Layer = new google.maps.GroundOverlay(returnImage(), K_Bounds);
   Tainan_Rain_Layer = new google.maps.GroundOverlay(returnImage2(), T_Bounds);
 }
