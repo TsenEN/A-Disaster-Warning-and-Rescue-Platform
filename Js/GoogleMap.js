@@ -16,8 +16,8 @@ let fire_station_infobox = [];
 var directionsService;
 var directionsDisplay;
 //for rain
-let rain_layer;
-let Overlay;
+let Kaohsiung_Rain_Layer;
+let Tainan_Rain_Layer;
 
 // 中寮隧道
 let layer4;
@@ -48,12 +48,6 @@ function initMap() {
       });
 
       //add layer
-      //rain layer
-
-      rain_layer = new google.maps.KmlLayer({
-        url: 'https://alerts.ncdr.nat.gov.tw/DownLoadNewAssistData.ashx/5',
-        map: null,
-      });
 
       //layer1 - ground slip
       layer1 = new google.maps.Data({ map: map });
@@ -368,8 +362,12 @@ function load_layer(checked, value) {
       });
   } else if (value == '雨量') {
     if (checked == true) {
-      Overlay.setMap(map);
-    } else Overlay.setMap(null);
+      Kaohsiung_Rain_Layer.setMap(map);
+      Tainan_Rain_Layer.setMap(map);
+    } else {
+      Kaohsiung_Rain_Layer.setMap(null);
+      Tainan_Rain_Layer.setMap(null);
+    }
   } else if (value == '中寮隧道種子') {
     if (checked == true) {
       layer4.setMap(map);
@@ -378,15 +376,31 @@ function load_layer(checked, value) {
 }
 function setRainImage() {
   let pos = [];
-  pos[0] = {
-    lat: imageBounds[0][0],
-    lng: imageBounds[0][1],
-  };
-  pos[1] = {
-    lat: imageBounds[1][0],
-    lng: imageBounds[1][1],
-  };
-  var Bounds = new google.maps.LatLngBounds(pos[0], pos[1]);
-
-  Overlay = new google.maps.GroundOverlay(returnImage(), Bounds);
+  pos[0] = [
+    {
+      lat: imageBounds[0][0][0],
+      lng: imageBounds[0][0][1],
+    },
+    {
+      lat: imageBounds[0][1][0],
+      lng: imageBounds[0][1][1],
+    },
+  ];
+  pos[1] = [
+    {
+      lat: imageBounds[1][0][0],
+      lng: imageBounds[1][0][1],
+    },
+    {
+      lat: imageBounds[1][1][0],
+      lng: imageBounds[1][1][1],
+    },
+  ];
+  //kaohsiung
+  var K_Bounds = new google.maps.LatLngBounds(pos[0][0], pos[0][1]);
+  //Tainan
+  var T_Bounds = new google.maps.LatLngBounds(pos[1][0], pos[1][1]);
+  console.log(returnImage2());
+  Kaohsiung_Rain_Layer = new google.maps.GroundOverlay(returnImage(), K_Bounds);
+  Tainan_Rain_Layer = new google.maps.GroundOverlay(returnImage2(), T_Bounds);
 }
