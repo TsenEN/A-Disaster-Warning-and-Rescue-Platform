@@ -48,6 +48,12 @@ function initMap() {
 
       //add layer
 
+      //rain layer
+      rain_layer = new google.maps.KmlLayer({
+        url: 'https://alerts.ncdr.nat.gov.tw/DownLoadNewAssistData.ashx/5',
+        map: null,
+      });
+
       //layer1 - ground slip
       layer1 = new google.maps.Data({ map: map });
       layer1.setStyle({
@@ -539,7 +545,7 @@ function setRainImage() {
   var T_Bounds = new google.maps.LatLngBounds(pos[1][0], pos[1][1]);
   Kaohsiung_Rain_Layer = new google.maps.GroundOverlay(returnImage(), K_Bounds);
   Tainan_Rain_Layer = new google.maps.GroundOverlay(returnImage2(), T_Bounds);
-
+}
 function reset_info_box(num, unsent_cars, sent_cars) {
   let tmp_content =
     '<div id="infoDiv' +
@@ -565,5 +571,4 @@ function reset_info_box(num, unsent_cars, sent_cars) {
     sent_cars +
     '</b></p>';
   fire_station_infobox[num].setContent(tmp_content);
-}
 }
