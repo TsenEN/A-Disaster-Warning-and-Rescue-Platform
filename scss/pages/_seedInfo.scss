@@ -3,3 +3,17 @@
 	width: 100%;
 } 
 
+.raindrop {
+    height: 320px;
+    width: 250px;
+    display: inline-block;
+    margin: 15px 15px 30px;
+    overflow: hidden;
+    text-align: center;
+    border-radius: 10px;
+    border: 1.5px solid #fff;
+}
+
+.btn-more {
+    border-radius: 5px;
+}
