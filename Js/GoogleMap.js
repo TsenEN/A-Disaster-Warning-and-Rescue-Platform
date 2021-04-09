@@ -46,14 +46,6 @@ function initMap() {
         i++;
       });
 
-      //add layer
-
-      //rain layer
-      rain_layer = new google.maps.KmlLayer({
-        url: 'https://alerts.ncdr.nat.gov.tw/DownLoadNewAssistData.ashx/5',
-        map: null,
-      });
-
       //layer1 - ground slip
       layer1 = new google.maps.Data({ map: map });
       layer1.setStyle({
