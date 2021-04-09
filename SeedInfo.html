@@ -54,7 +54,7 @@
   <!-- content -->
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12 col-md-3">
+      <div class="col-12 col-md-5">
         <div id="Sidebar">
           <div id=SelectFireStation>
             <div class="form-group">
@@ -88,12 +88,21 @@
           <table class="table table-bordered table-hover" id="CarsTable">
             <thead class="thead-light">
               <tr>
-
                 <td Align="Center" scope="col"><B>車牌</B></Td>
                 <td Align="Center" scope="col"><B>派遣狀態</B></Td>
+                <td><button id=CarButton class="btn btn-primary  text-light">派遣</button></td>
+                <td><button id=CarButtonReset class="btn btn-primary  text-light">取消派遣</button></td>
               </tr>
             </thead>
-            <tbody id="CarsList"></tbody>
+            <tbody id="CarsList">
+              <tr>
+                <td Align="Center" scope="col">-先選擇消防隊-</Td>
+                <td Align="Center" scope="col">-先選擇消防隊-</Td>
+                <td Align='Center' scope='col'>-先選擇消防隊-</Td>
+                <td Align='Center' scope='col'>-先選擇消防隊-</Td>
+              </tr>
+            </tbody>
+
           </table>
         </div>
         <hr />
@@ -115,7 +124,7 @@
           <font size="4">中寮隧道種子分布</font>
         </div>
       </div>
-      <div class=" col-12 col-md-9">
+      <div class=" col-12 col-md-7">
         <div id="Header">
           <canvas id="TainanRainDrop" style="display: none;"></canvas>
           <canvas id="KaohsiungRainDrop" style="display: none;"></canvas>
@@ -166,7 +175,7 @@
   <script src="Js/taiwan.js"></script>
   <script src="Js/RainDrop.js"></script>
   <script src="Js/GetSeedJson.js"></script>
-  <script src="Js/FireStation.js"></script>
+  <script src="Js/FireStationAndCar.js"></script>
   <script src="Js/GoogleMap.js"></script>
   <script src="Js/ChangeStatus.js"></script>
 

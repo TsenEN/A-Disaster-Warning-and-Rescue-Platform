@@ -1,4 +1,8 @@
 var FireStations;
+//team name - brigade
+let firestation_brigade = new Map();
+//team name - squadron
+let firestation_squadron = new Map();
 function GetFireStation() {
   $.ajax({
     type: 'GET',
@@ -10,6 +14,14 @@ function GetFireStation() {
       var team_1 = []; //存大隊資料
       $.each(FireStations, function () {
         team_1[i] = FireStations[i].brigade;
+        firestation_brigade.set(
+          FireStations[i].team_name,
+          FireStations[i].brigade
+        );
+        firestation_squadron.set(
+          FireStations[i].team_name,
+          FireStations[i].squadron
+        );
         i++;
       });
 
@@ -17,6 +29,34 @@ function GetFireStation() {
       team_1 = team_1.filter(function (element, index, arr) {
         return arr.indexOf(element) === index;
       });
+
+      //sort (in chinese)
+      let sort_team = [];
+      for (i = 0; i < team_1.length; i++) {
+        sort_team[i] = team_1[i];
+      }
+      for (i = 0; i < team_1.length; i++) {
+        switch (sort_team[i]) {
+          case '第一救災救護大隊':
+            team_1[0] = sort_team[i];
+            break;
+          case '第二救災救護大隊':
+            team_1[1] = sort_team[i];
+            break;
+          case '第三救災救護大隊':
+            team_1[2] = sort_team[i];
+            break;
+          case '第四救災救護大隊':
+            team_1[3] = sort_team[i];
+            break;
+          case '第五救災救護大隊':
+            team_1[4] = sort_team[i];
+            break;
+          case '第六救災救護大隊':
+            team_1[5] = sort_team[i];
+            break;
+        }
+      }
 
       //write back to SeedInfo.html
       var team_1_back = '<option>-大隊-</option>';
@@ -49,6 +89,28 @@ function SelectTeam1(value) {
   team_2 = team_2.filter(function (element, index, arr) {
     return arr.indexOf(element) === index;
   });
+
+  //sort (in chinese)
+  let sort_team = [];
+  for (i = 0; i < team_2.length; i++) {
+    sort_team[i] = team_2[i];
+  }
+  for (i = 0; i < team_2.length; i++) {
+    switch (sort_team[i]) {
+      case '第一中隊':
+        team_2[0] = sort_team[i];
+        break;
+      case '第二中隊':
+        team_2[1] = sort_team[i];
+        break;
+      case '第三中隊':
+        team_2[2] = sort_team[i];
+        break;
+      case '第四中隊':
+        team_2[3] = sort_team[i];
+        break;
+    }
+  }
 
   //write back to SeedInfo.html
   var team_2_back = '<option>-中隊-</option>';
@@ -127,39 +189,36 @@ function SelectTeam3(value_1, value_2, value_3) {
       var i = 0;
       var j = 0;
       var CarsListData = '';
-      var CarStatString = '';
-      var CarButtonString = '';
+      var CarCheckboxString = '';
+      //checkbarstring2 for reset
+      var CarCheckboxString2 = '';
       $.each(JData, function () {
         if (value_3 == JData[i].team_name) {
-          if (JData[i].car_status == 1) {
-            CarStatString = '派遣中';
-            CarButtonString =
-              '<td><button id = CarButton button_id = "' +
-              JData[i].car_license_plate +
-              '"stat = 1 class="btn btn-primary  text-light disabled">派遣</button></td>';
-          } else {
-            CarStatString = '未派遣';
-            CarButtonString =
-              '<td><button id = CarButton button_id = "' +
-              JData[i].car_license_plate +
-              '" stat = 0 class="btn btn-primary text-light">派遣</button></td>';
-          }
-          //for checkbox
-          // CarButtonString =
-          //   '<td><input type="checkbox" value="活動斷層" id="car_button_' +
-          //   JData[i].car_license_plate +
-          //   '"><label for="car_button_' +
-          //   JData[i].car_license_plate +
-          //   '"> ' +
-          //   JData[i].car_license_plate +
-          //   '</label></td>';
+          CarCheckboxString =
+            '<td><input type="checkbox"  id="car_checkbox_' +
+            j +
+            '" ' +
+            (JData[i].car_status ? 'disabled="true"' : ' ') +
+            'car_license_plate=' +
+            JData[i].car_license_plate +
+            '></td>';
+          CarCheckboxString2 =
+            '<td><input type="checkbox"  id="car_checkbox2_' +
+            j +
+            '" ' +
+            (JData[i].car_status ? '' : 'disabled="true" ') +
+            'car_license_plate=' +
+            JData[i].car_license_plate +
+            '></td>';
           CarsListData +=
             '<tr id="rowCarsStatus' +
             JData[i].car_license_plate +
             '" class="">';
           CarsListData += '<td>' + JData[i].car_license_plate + '</td>';
-          CarsListData += '<td>' + CarStatString + '</td>';
-          CarsListData += CarButtonString;
+          CarsListData +=
+            '<td>' + (JData[i].car_status ? '值勤中' : '待命中') + '</td>';
+          CarsListData += CarCheckboxString;
+          CarsListData += CarCheckboxString2;
           CarsListData += '</tr>';
           j++;
         }
