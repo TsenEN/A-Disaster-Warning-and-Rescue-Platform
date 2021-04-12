@@ -45,15 +45,15 @@ $(document).ready(function () {
             </li>
             <li class="card-body list-group-item text-center">
               <h6 class="card-title">10分鐘累積雨量</h6>
-              <p class="card-text text-primary">${item.tenMinute}</p>
+              <p class="card-text text-secondary">${item.tenMinute}</p>
             </li>
             <li class="card-body list-group-item text-center">
               <h6 class="card-title">3小時累積雨量</h6>
-              <p class="card-text text-primary">${item.threeHour}</p>
+              <p class="card-text text-secondary">${item.threeHour}</p>
             </li>
             <li class="card-body list-group-item text-center">
               <h6 class="card-title">日累積雨量</h6>
-              <p class="card-text text-primary">${item.daily}</p>
+              <p class="card-text text-secondary">${item.daily}</p>
             </li>
           </ul>
         </div>`;

@@ -26,11 +26,11 @@ $(document).ready(function () {
         str += `
           <h5 class="card-title">高雄市</h5>
           <h6 class="card-subtitle mb-2 text-muted">10分鐘平均累積雨量</h6>
-          <p class="card-text text-primary">${item.tenMinute}</p>
+          <p class="card-text text-secondary">${item.tenMinute}</p>
           <h6 class="card-subtitle mb-2 text-muted">3小時平均累積雨量</h6>
-          <p class="card-text text-primary">${item.threeHour}</p>
+          <p class="card-text text-secondary">${item.threeHour}</p>
           <h6 class="card-subtitle mb-2 text-muted">日平均累積雨量</h6>
-          <p class="card-text text-primary">${item.daily}</p>
+          <p class="card-text text-secondary">${item.daily}</p>
           <a href="getRainFrame.html" class="card-link btn btn-primary text-white">查看各地區</a>      
           `                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
       });
