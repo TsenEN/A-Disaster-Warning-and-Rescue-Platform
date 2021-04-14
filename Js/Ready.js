@@ -1,7 +1,4 @@
 $(document).ready(function () {
-  // Fetch the initial table
-  refreshTable();
-
   //Get firestation first
   GetFireStation();
   let retun_tmp =

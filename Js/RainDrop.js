@@ -22,7 +22,6 @@ function GetRainDrop() {
           k++;
         }
       }
-      console.log(Tainan_raindrop);
       loadkriging();
       loadkriging2();
     },
