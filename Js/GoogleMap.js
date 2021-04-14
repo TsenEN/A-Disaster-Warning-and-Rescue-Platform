@@ -1,5 +1,5 @@
 let car_last_status = new Map();
-//team name - num
+//team name - num(firestation_infobox_num)
 let firestation_infobox_num = new Map();
 let car_markers = [];
 let seed_markers = [];
@@ -7,7 +7,6 @@ let car_cluster;
 let locations = [];
 let firestaions_location = [];
 let map;
-let rain_layer;
 let layer1;
 let layer2;
 let layer3;
@@ -23,13 +22,16 @@ let Tainan_Rain_Layer;
 
 // 中寮隧道
 let layer4;
+
 function initMap() {
+  //for direction service
   directionsService = new google.maps.DirectionsService();
   directionsDisplay = new google.maps.DirectionsRenderer();
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 8,
     center: { lat: 23.745523, lng: 120.912494 },
   });
+
   $.ajax({
     type: 'GET',
     url: 'http://140.116.245.229:3000/GetSeedsJson',
@@ -96,11 +98,6 @@ function initMap() {
         preserveViewport: true,
         map: null,
       });
-      // layer4 = new google.maps.KmlLayer(src, {
-      //   suppressInfoWindows: true,
-      //   preserveViewport: false,
-      //   map: null,
-      // });
 
       //blue spot image
       var blue_marker = {
