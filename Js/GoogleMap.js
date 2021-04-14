@@ -44,6 +44,7 @@ function initMap() {
     dataType: 'json',
     success: function (JData) {
       let seed_id = [];
+      let area = [];
       var i = 0;
       $.each(JData, function () {
         locations[i] = {
@@ -51,6 +52,7 @@ function initMap() {
           lng: parseFloat(JData[i].seed_longitude),
         };
         seed_id[i] = JData[i].seed_id.toString();
+
         i++;
       });
 
@@ -591,4 +593,30 @@ function reset_info_box(num, unsent_cars, sent_cars) {
     sent_cars +
     '</b></p>';
   fire_station_infobox[num].setContent(tmp_content);
+}
+
+function how_to_get_seed_area() {
+  //for area
+  var geocoder = new google.maps.Geocoder();
+
+  //get area
+  geocoder.geocode(
+    {
+      latLng: locations[i],
+    },
+    function (results, status) {
+      if (status == 'OK') {
+        console.log(i);
+        console.log(
+          results[results.length - 6].address_components[1].long_name
+        );
+        console.log(
+          results[results.length - 6].address_components[2].long_name
+        );
+      } else {
+        console.log(i);
+        console.log(status);
+      }
+    }
+  );
 }
