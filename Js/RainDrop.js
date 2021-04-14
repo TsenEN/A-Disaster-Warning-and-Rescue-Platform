@@ -23,7 +23,8 @@ function GetRainDrop() {
         }
       }
       loadkriging(Kaohsiung, 'KaohsiungRainDrop', Kaohsiung_raindrop, 0);
-      loadkriging(tainan, 'TainanRainDrop', Tainan_raindrop, 1);
+      loadkriging(Tainan, 'TainanRainDrop', Tainan_raindrop, 1);
+      setRainImage();
     },
 
     error: function (xhr) {

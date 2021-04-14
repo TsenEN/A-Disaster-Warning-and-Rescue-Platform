@@ -7,9 +7,12 @@ let car_cluster;
 let locations = [];
 let firestaions_location = [];
 let map;
+
 let layer1;
 let layer2;
 let layer3;
+// 中寮隧道
+let layer4;
 let seed_infobox = [];
 let fire_station_infobox = [];
 let car_infobox = [];
@@ -20,18 +23,21 @@ var directionsDisplay;
 let Kaohsiung_Rain_Layer;
 let Tainan_Rain_Layer;
 
-// 中寮隧道
-let layer4;
-
 function initMap() {
   //for direction service
   directionsService = new google.maps.DirectionsService();
   directionsDisplay = new google.maps.DirectionsRenderer();
+
+  //create map
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 8,
     center: { lat: 23.745523, lng: 120.912494 },
   });
 
+  //layers init
+  load_layer();
+
+  //seed init
   $.ajax({
     type: 'GET',
     url: 'http://140.116.245.229:3000/GetSeedsJson',
@@ -48,57 +54,6 @@ function initMap() {
         i++;
       });
 
-      //layer1 - ground slip
-      layer1 = new google.maps.Data({ map: map });
-      layer1.setStyle({
-        visible: false,
-      });
-      //GeoJson
-      //玉井
-      layer1.loadGeoJson(
-        'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E8%87%BA%E5%8D%97%E5%B8%82&town=%E7%8E%89%E4%BA%95%E5%8D%80&all=true'
-      );
-      //南化
-      layer1.loadGeoJson(
-        'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E8%87%BA%E5%8D%97%E5%B8%82&town=%E5%8D%97%E5%8C%96%E5%8D%80&all=true'
-      );
-      //楠西
-      layer1.loadGeoJson(
-        'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E8%87%BA%E5%8D%97%E5%B8%82&town=%E6%A5%A0%E8%A5%BF%E5%8D%80&all=true'
-      );
-
-      //layer2 - under water
-      layer2 = new google.maps.Data({ map: map });
-      layer2.setStyle({
-        visible: false,
-      });
-      //嘉南平原
-      layer2.loadGeoJson(
-        'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%9C%B0%E4%B8%8B%E6%B0%B4%E8%A3%9C%E6%B3%A8&name=%E5%98%89%E5%8D%97%E5%B9%B3%E5%8E%9F'
-      );
-
-      //layer 3 - fault
-      layer3 = new google.maps.Data({ map: map });
-      layer3.setStyle({
-        visible: false,
-      });
-      //六甲斷層
-      layer3.loadGeoJson(
-        'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E6%B4%BB%E5%8B%95%E6%96%B7%E5%B1%A4&name=%E5%85%AD%E7%94%B2%E6%96%B7%E5%B1%A4'
-      );
-      //新化斷層
-      layer3.loadGeoJson(
-        'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E6%B4%BB%E5%8B%95%E6%96%B7%E5%B1%A4&name=%E6%96%B0%E5%8C%96%E6%96%B7%E5%B1%A4'
-      );
-
-      //layer 4 - 中寮隧道
-      layer4 = new google.maps.KmlLayer({
-        url: 'http://140.116.245.229:3000/GetTunnelKML',
-        suppressInfoWindows: true,
-        preserveViewport: true,
-        map: null,
-      });
-
       //blue spot image
       var blue_marker = {
         url: './Img/blue_spot.png',
@@ -111,7 +66,6 @@ function initMap() {
         size: new google.maps.Size(42, 42),
         scaledSize: new google.maps.Size(42, 42),
       };
-      i = 0;
 
       for (i = 0; i < JData.length; i++) {
         seed_infobox[i] = new google.maps.InfoWindow({
@@ -147,11 +101,89 @@ function initMap() {
         );
       }
     },
-
     error: function (xhr) {
       alert('ERROR: ' + xhr.status + ' ' + xhr.statusText);
     },
   });
+
+  //car init
+  $.ajax({
+    url: 'http://140.116.245.229:3000/GetCarsJson',
+    type: 'POST',
+    dataType: 'json',
+    success: function (JData) {
+      let car_location;
+      var ambu_size;
+      ambu_size = new google.maps.Size(42, 42);
+
+      //ambulance marker image
+      var ambulance_marker = {
+        url: './Img/ambulance_red.png',
+        size: ambu_size,
+        scaledSize: ambu_size,
+      };
+      var NumOfJData = JData.length;
+      //all car data
+      for (var i = 0; i < NumOfJData; i++) {
+        //first load in setting
+        car_location = {
+          lat: JData[i].car_latitude,
+          lng: JData[i].car_longitude,
+        };
+        //get brigade and squadron for infobox
+        let tmp_b = firestation_brigade.get(JData[i].team_name);
+        let tmp_s = firestation_squadron.get(JData[i].team_name);
+        car_infobox[i] = new google.maps.InfoWindow({
+          content:
+            '<div id="car_info' +
+            i +
+            'class="infoDiv><h6>車牌: <br>  ' +
+            JData[i].car_license_plate +
+            '</h6>' +
+            '<p id="infoDivCarStat' +
+            i +
+            '" class="infoDiv">' +
+            '車輛狀態:' +
+            (JData[i].car_status ? '值勤中' : '待命中') +
+            '<br>隸屬分隊:' +
+            JData[i].team_name +
+            '<br>' +
+            tmp_b +
+            '>>' +
+            tmp_s +
+            '</p></div>',
+        });
+        car_markers[i] = new google.maps.Marker({
+          position: car_location,
+          icon: ambulance_marker,
+          map: null,
+        });
+        car_markers[i].addListener(
+          'click',
+          (function (i) {
+            return function () {
+              car_infobox[i].open(map, car_markers[i]);
+            };
+          })(i)
+        );
+      }
+      car_cluster = new MarkerClusterer(map, car_markers, {
+        imagePath:
+          'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
+      });
+      for (var i = 0; i < car_markers.length; i++) {
+        if (JData[i]['car_status'] == 0) {
+          car_cluster.removeMarker(car_markers[i], true);
+        }
+      }
+      car_cluster.resetViewport_();
+      car_cluster.redraw_();
+    },
+    error: function () {
+      alert('ERROR!!!');
+    },
+  });
+
   //navigation function
   //set direction display layer
   directionsDisplay.setMap(map);
@@ -161,19 +193,7 @@ function initMap() {
   GetRainDrop();
 }
 
-//for deciding whether set markers to null or not
-var first_load_in = 1;
-
-var interval = setInterval(function () {
-  var ambu_size;
-  ambu_size = new google.maps.Size(42, 42);
-
-  //ambulance marker image
-  var ambulance_marker = {
-    url: './Img/ambulance_red.png',
-    size: ambu_size,
-    scaledSize: ambu_size,
-  };
+var seed_interval = setInterval(function () {
   //blue spot image
   var blue_marker = {
     url: './Img/blue_spot.png',
@@ -221,60 +241,32 @@ var interval = setInterval(function () {
       alert('ERROR!!!');
     },
   });
+}, 1000);
+
+var car_interval = setInterval(function () {
+  var ambu_size;
+  ambu_size = new google.maps.Size(42, 42);
+
+  //ambulance marker image
+  var ambulance_marker = {
+    url: './Img/ambulance_red.png',
+    size: ambu_size,
+    scaledSize: ambu_size,
+  };
+
   //set car markers on map
-  let car_location;
   $.ajax({
     url: 'http://140.116.245.229:3000/GetCarsJson',
     type: 'POST',
     dataType: 'json',
     success: function (JData) {
       var NumOfJData = JData.length;
+      //all car data
       for (var i = 0; i < NumOfJData; i++) {
-        if (first_load_in == 1) {
-          car_location = {
-            lat: JData[i].car_latitude,
-            lng: JData[i].car_longitude,
-          };
-          //get brigade and squadron for infobox
-          let tmp_b = firestation_brigade.get(JData[i].team_name);
-          let tmp_s = firestation_squadron.get(JData[i].team_name);
-          car_infobox[i] = new google.maps.InfoWindow({
-            content:
-              '<div id="car_info' +
-              i +
-              'class="infoDiv><h6>車牌: <br>  ' +
-              JData[i].car_license_plate +
-              '</h6>' +
-              '<p id="infoDivCarStat' +
-              i +
-              '" class="infoDiv">' +
-              '車輛狀態:' +
-              (JData[i].car_status ? '值勤中' : '待命中') +
-              '<br>隸屬分隊:' +
-              JData[i].team_name +
-              '<br>' +
-              tmp_b +
-              '>>' +
-              tmp_s +
-              '</p></div>',
-          });
-          car_markers[i] = new google.maps.Marker({
-            position: car_location,
-            icon: ambulance_marker,
-            map: null,
-          });
-          car_markers[i].addListener(
-            'click',
-            (function (i) {
-              return function () {
-                car_infobox[i].open(map, car_markers[i]);
-              };
-            })(i)
-          );
-        } else {
+        {
           if (JData[i]['car_status'] == 0) {
             if (car_last_status.get(JData[i]['car_license_plate']) == 1) {
-              //changed
+              //changed from unsent to sent
               //reset car container
               var element1 = document.getElementById('team_1');
               var element2 = document.getElementById('team_2');
@@ -304,7 +296,7 @@ var interval = setInterval(function () {
           } else {
             //car status = 1
             if (car_last_status.get(JData[i]['car_license_plate']) == 0) {
-              //changed
+              //changed from sent to unsent
               //reset car container
               var element1 = document.getElementById('team_1');
               var element2 = document.getElementById('team_2');
@@ -340,22 +332,6 @@ var interval = setInterval(function () {
           }
         }
       }
-      if (first_load_in == 1) {
-        car_cluster = new MarkerClusterer(map, car_markers, {
-          imagePath:
-            'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
-        });
-        for (var i = 0; i < car_markers.length; i++) {
-          if (JData[i]['car_status'] == 0) {
-            car_cluster.removeMarker(car_markers[i], true);
-          }
-        }
-        //add firestaion on map
-        //I call these two funtion here is because these function must execute after the map objects are created
-        load_fireStation_on_map();
-        setRainImage();
-      }
-      first_load_in = 0;
       car_cluster.resetViewport_();
       car_cluster.redraw_();
     },
@@ -455,7 +431,60 @@ function load_fireStation_on_map() {
   });
 }
 
-function load_layer(checked, value) {
+function load_layer() {
+  //layer1 - ground slip
+  layer1 = new google.maps.Data({ map: map });
+  layer1.setStyle({
+    visible: false,
+  });
+  //GeoJson
+  //玉井
+  layer1.loadGeoJson(
+    'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E8%87%BA%E5%8D%97%E5%B8%82&town=%E7%8E%89%E4%BA%95%E5%8D%80&all=true'
+  );
+  //南化
+  layer1.loadGeoJson(
+    'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E8%87%BA%E5%8D%97%E5%B8%82&town=%E5%8D%97%E5%8C%96%E5%8D%80&all=true'
+  );
+  //楠西
+  layer1.loadGeoJson(
+    'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E8%87%BA%E5%8D%97%E5%B8%82&town=%E6%A5%A0%E8%A5%BF%E5%8D%80&all=true'
+  );
+
+  //layer2 - under water
+  layer2 = new google.maps.Data({ map: map });
+  layer2.setStyle({
+    visible: false,
+  });
+  //嘉南平原
+  layer2.loadGeoJson(
+    'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%9C%B0%E4%B8%8B%E6%B0%B4%E8%A3%9C%E6%B3%A8&name=%E5%98%89%E5%8D%97%E5%B9%B3%E5%8E%9F'
+  );
+
+  //layer 3 - fault
+  layer3 = new google.maps.Data({ map: map });
+  layer3.setStyle({
+    visible: false,
+  });
+  //六甲斷層
+  layer3.loadGeoJson(
+    'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E6%B4%BB%E5%8B%95%E6%96%B7%E5%B1%A4&name=%E5%85%AD%E7%94%B2%E6%96%B7%E5%B1%A4'
+  );
+  //新化斷層
+  layer3.loadGeoJson(
+    'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E6%B4%BB%E5%8B%95%E6%96%B7%E5%B1%A4&name=%E6%96%B0%E5%8C%96%E6%96%B7%E5%B1%A4'
+  );
+
+  //layer 4 - 中寮隧道
+  layer4 = new google.maps.KmlLayer({
+    url: 'http://140.116.245.229:3000/GetTunnelKML',
+    suppressInfoWindows: true,
+    preserveViewport: true,
+    map: null,
+  });
+}
+
+function show_layer(checked, value) {
   if (value == '山崩與地滑') {
     if (checked == true) {
       layer1.setStyle({
@@ -506,6 +535,7 @@ function load_layer(checked, value) {
     } else layer4.setMap(null);
   }
 }
+
 function setRainImage() {
   let pos = [];
   pos[0] = [
@@ -535,6 +565,7 @@ function setRainImage() {
   Kaohsiung_Rain_Layer = new google.maps.GroundOverlay(returnImage(), K_Bounds);
   Tainan_Rain_Layer = new google.maps.GroundOverlay(returnImage2(), T_Bounds);
 }
+
 function reset_info_box(num, unsent_cars, sent_cars) {
   let tmp_content =
     '<div id="infoDiv' +
