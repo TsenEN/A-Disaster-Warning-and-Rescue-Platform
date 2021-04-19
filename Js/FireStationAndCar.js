@@ -64,7 +64,7 @@ function GetFireStation() {
         team_1_back += '<option>' + team_1[i] + '</option>';
       }
       $('#team_1').html(team_1_back);
-      // 會把寫好的內容填回去 #id .class
+      load_fireStation_on_map();
     },
 
     error: function (xhr) {

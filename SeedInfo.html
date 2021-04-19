@@ -45,9 +45,6 @@
         <li class="nav-item">
           <a class="nav-link" href="RegisterSeed.html">註冊種子</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="RainDrop.html">雨量資訊</a>
-        </li>
       </ul>
     </div>
   </nav>
@@ -78,9 +75,7 @@
             </div>
           </div>
           <div id=FireStationInfo>
-
             <!--for fire station information -->
-
           </div>
         </div>
         <hr />
@@ -102,30 +97,33 @@
                 <td Align='Center' scope='col'>-先選擇消防隊-</Td>
               </tr>
             </tbody>
-
           </table>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">車輛目的地</span>
+            </div>
+            <input type="text" id="destination_button" placeholder="目的地" class="form-control">
+          </div>
         </div>
         <hr />
-        <div id=layer_select>
-          <input type="checkbox" value="山崩與地滑" id="layer_1_checkbox">
-          <font size="4">山崩與地滑</font>
-          <br>
-          <input type="checkbox" value="地下水補注" id="layer_2_checkbox">
-          <font size="4">地下水補注</font>
-          <br>
-          <input type="checkbox" value="活動斷層" id="layer_3_checkbox">
-          <font size="4">活動斷層</font>
-          <br>
-          <input type="checkbox" value="雨量" id="rain_layer_checkbox">
-          <font size="4">雨量</font>
-          <!-- 新增中寮隧道種子範圍 -->
-          <br>
-          <input type="checkbox" value="中寮隧道種子" id="layer_4_checkbox">
-          <font size="4">中寮隧道種子分布</font>
+
+        <div id=layer_select style="text-align:center;">
+          <h5>圖層: <h5>
+              <input type="checkbox" value="山崩與地滑" id="layer_1_checkbox">
+              <font size="4">山崩與地滑</font>
+              <input type="checkbox" value="地下水補注" id="layer_2_checkbox">
+              <font size="4">地下水補注</font>
+              <input type="checkbox" value="活動斷層" id="layer_3_checkbox">
+              <font size="4">活動斷層</font>
+              <input type="checkbox" value="雨量" id="rain_layer_checkbox">
+              <font size="4">雨量</font>
+              <!-- 新增中寮隧道種子範圍 -->
+              <input type="checkbox" value="中寮隧道種子" id="layer_4_checkbox">
+              <font size="4">中寮隧道種子分布</font>
         </div>
         <div class="card mt-3 text-center w-100" style="width: 18rem;" id="高雄市">
           <div id="kaohsiung" class="card-body">
-            
+
           </div>
         </div>
       </div>
@@ -139,24 +137,7 @@
           </div>
         </div>
       </div>
-      <div class="col-12 mt-4">
-        <div id="Body">
-          <table class="table table-bordered table-hover" id="SeedsTable">
-            <thead class="thead-light">
-              <tr>
-                <th scope="col">地區</th>
-                <th scope="col">種子編號</th>
-                <th scope="col">電量</th>
-                <th scope="col">警告等級</th>
-                <th scope="col">北緯</th>
-                <th scope="col">東經</th>
-              </tr>
-            </thead>
-            <tbody id="SeedsList"></tbody>
-          </table>
-        </div>
-        <div style='clear:both;'></div>
-      </div>
+
     </div>
   </div>
 
@@ -180,14 +161,12 @@
   <script src="Js/taiwan.js"></script>
   <script src="Js/RainDrop.js"></script>
   <script src="Js/Ready.js"></script>
-  <script src="Js/GetSeedJson.js"></script>
   <script src="Js/FireStationAndCar.js"></script>
   <script src="Js/GoogleMap.js"></script>
   <script src="Js/ChangeStatus.js"></script>
   <script src="Js/getKaohsiungRain.js"></script>
   <!-- <script src="Js/MapDirections.js"></script> -->
 
-  <!-- <script src="Js/MapDirections.js"></script> -->
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjKizr4VzV2pJ2zaT4FL0gQ-Baglyps-Q&callback=initMap">
     </script>
