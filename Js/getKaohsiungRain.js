@@ -15,9 +15,6 @@ $(document).ready(function () {
         showKaohsiungData();
       },
     });
-
-    
-
 });
 
 // 擷取所需的雨量資料加入陣列
