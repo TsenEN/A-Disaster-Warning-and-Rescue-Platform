@@ -11,10 +11,13 @@ $(document).ready(function () {
       dataType: "json",
       success: function (re) {
         KaohsiungRainData = re.records.location;
-        addKaohsiungData();
+        addKaohsiungData(KaohsiungRainData);
         showKaohsiungData();
       },
     });
+
+    
+
 });
 
 // 擷取所需的雨量資料加入陣列
