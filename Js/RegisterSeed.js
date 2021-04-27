@@ -5,78 +5,13 @@ $(document).ready(function () {
   var latitudeValue = document.getElementById("latitude").value;
   var numberValue = document.getElementById("number").value;
 
-  
-  // 獲得焦點時，警告訊息移除
-  function focusLongitude(){
-    $('#longitude-error').empty();
-    $('#longitude').removeClass('errorClass');
-  };
-
-  function focuslatitude() {
-    $('#latitude-error').empty();
-    $('#latitude').removeClass('errorClass');
-  };
-
-  function focusNumber() {
-    $('#number-error').empty();
-    $('#number').removeClass('errorClass');
-  };
-
-  // 驗證經度
-  function verityLongitude() {
-   
-    longitudeValue = document.getElementById("longitude").value;
-    if (!(/^[\-\+]?(0(\.\d{1,10})?|([1-9](\d)?)(\.\d{1,10})?|1[0-7]\d{1}(\.\d{1,10})?|180\.0{1,10})?|$/.test(longitudeValue)) || longitudeValue == ""  ) {
-      $('#longitude-error').text('請輸入有效經度數值');
-      $('#longitude').addClass('errorClass');
-      return false;
-    } else if (!(/^(\-)?\d+(\.\d{7})?$/.test(longitudeValue))) {
-      $('#longitude-error').text('請含小數點後七位');
-      $('#longitude').addClass('errorClass');
-      return false;
-    } else {
-      $('#longitude').addClass('rightClass');
-      return true;
-    }
-  };
-
-  // 驗證緯度
-  function veritylatitude() {
-    latitudeValue = document.getElementById("latitude").value;
-    if (!(/^[\-\+]?((0|([1-8]\d?))(\.\d{1,10})?|90(\.0{1,10})?)$/.test(latitudeValue)) || latitudeValue == "" ) {
-      $('#latitude-error').text('請輸入有效緯度數值');
-      $('#latitude').addClass('errorClass');
-      return false;
-    } else if (!(/^(\-)?\d+(\.\d{7})?$/.test(latitudeValue))) {
-      $('#latitude-error').text('請含小數點後七位');
-      $('#latitude').addClass('errorClass');
-      return false;
-    } else {
-      $('#latitude').addClass('rightClass');
-      return true;
-    }
-  };
-
-  // 驗證種子編號：只能是數字
-  function verityNumber() {
-    numberValue = document.getElementById("number").value;
-    if (!(/^[0-9]*$/.test(numberValue)) || numberValue == "" ) {
-      $('#number-error').text('請輸入數字');
-      $('#number').addClass('errorClass');
-      return false;
-    } else {
-      $('#number').addClass('rightClass');
-      return true;
-    }
-  };
-  
   // 監聽事件
   $("#longitude").focus(focusLongitude);
-  $("#latitude").focus(focuslatitude);
+  $("#latitude").focus(focusLatitude);
   $("#number").focus(focusNumber);
 
   $("#longitude").blur(verityLongitude);
-  $("#latitude").blur(veritylatitude);
+  $("#latitude").blur(verityLatitude);
   $("#number").blur(verityNumber);
 
 
@@ -116,7 +51,7 @@ $(document).ready(function () {
         'Access-Control-Allow-Origin': '*'
       },
       success: function (res) {
-        console.log(seed);
+        // console.log(res);
       },
     });
     $('input').val(""); 
@@ -126,3 +61,67 @@ $(document).ready(function () {
   });
 });
 
+// 獲得焦點時，警告訊息移除
+function focusLongitude(){
+  $('#longitude-error').empty();
+  $('#longitude').removeClass('errorClass');
+};
+
+function focusLatitude() {
+  $('#latitude-error').empty();
+  $('#latitude').removeClass('errorClass');
+};
+
+function focusNumber() {
+  $('#number-error').empty();
+  $('#number').removeClass('errorClass');
+};
+
+// 驗證經度
+function verityLongitude() {
+  longitudeValue = document.getElementById("longitude").value;
+  // if (!(/^[\-\+]?(0(\.\d{1,10})?|([1-8](\d)?)(\.\d{1,10})?|1[0-7]\d{1}(\.\d{1,10})?|180\.0{1,10})?|$/.test(longitudeValue)) || longitudeValue == ""  ) {
+  if (!(/^[\-\+]?(0(\.\d{1,10})?|([1-9](\d)?)(\.\d{1,10})?|1[0-7]\d{1}(\.\d{1,10})?|180\.0{1,10})$/.test(longitudeValue)) || longitudeValue == ""  ) {
+    $('#longitude-error').text('請輸入有效經度數值');
+    $('#longitude').addClass('errorClass');
+    return false;
+  } else if (!(/^(\-)?\d+(\.\d{7})?$/.test(longitudeValue))) {
+    $('#longitude-error').text('請含小數點後七位');
+    $('#longitude').addClass('errorClass');
+    return false;
+  } else {
+    $('#longitude').addClass('rightClass');
+    return true;
+  }
+};
+
+// 驗證緯度
+function verityLatitude() {
+  latitudeValue = document.getElementById("latitude").value;
+  // if (!(/^[\-\+]?((0|([1-8]\d?))(\.\d{1,10})?|90(\.0{1,10})?)$/.test(latitudeValue)) || latitudeValue == "" ) {
+  if (!(/^[\-\+]?((0|([1-8]\d?))(\.\d{1,10})?|90(\.0{1,10})?)$/.test(latitudeValue)) || latitudeValue == "" ) {
+    $('#latitude-error').text('請輸入有效緯度數值');
+    $('#latitude').addClass('errorClass');
+    return false;
+  } else if (!(/^(\-)?\d+(\.\d{7})?$/.test(latitudeValue))) {
+    $('#latitude-error').text('請含小數點後七位');
+    $('#latitude').addClass('errorClass');
+    return false;
+  } else {
+    $('#latitude').addClass('rightClass');
+    return true;
+  }
+};
+
+// 驗證種子編號：只能是數字
+function verityNumber() {
+  numberValue = document.getElementById("number").value;
+  if (!(/^[0-9]*$/.test(numberValue)) || numberValue == "" ) {
+    $('#number-error').text('請輸入數字');
+    $('#number').addClass('errorClass');
+    return false;
+  } else {
+    $('#number').addClass('rightClass');
+    return true;
+  }
+};
