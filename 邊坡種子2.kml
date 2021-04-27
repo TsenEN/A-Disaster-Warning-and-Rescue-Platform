@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>邊坡種子2</name>
+	<gx:CascadingStyle kml:id="__managed_style_16453B7AEE1936CDBE88">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>4</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<displayMode>hide</displayMode>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_012251537F1936CDBE88">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_16453B7AEE1936CDBE88</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_23E21E84A21936CDBE88</styleUrl>
+		</Pair>
+	</StyleMap>
+	<gx:CascadingStyle kml:id="__managed_style_09A6BC0DDA1936C4C846">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=d32f2f&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>6</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<displayMode>hide</displayMode>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_1958FBA5101936C4C845">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=d32f2f&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>4</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<displayMode>hide</displayMode>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_23E21E84A21936CDBE88">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>6</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<displayMode>hide</displayMode>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_094A620D201936C4C845">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_1958FBA5101936C4C845</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_09A6BC0DDA1936C4C846</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark id="029636EB7C1936C4BD58">
+		<name>seed 01</name>
+		<LookAt>
+			<longitude>120.5521099999184</longitude>
+			<latitude>23.06908000056816</latitude>
+			<altitude>312.619294243288</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>205.3410839567005</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_094A620D201936C4C845</styleUrl>
+		<Point>
+			<coordinates>120.5520289179584,23.06902230361153,319.1457470222468</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="0CB14F2A811936C5790E">
+		<name>seed 02</name>
+		<LookAt>
+			<longitude>120.5515000001244</longitude>
+			<latitude>23.06974999992359</latitude>
+			<altitude>326.7036975171054</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>191.3511197495427</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_094A620D201936C4C845</styleUrl>
+		<Point>
+			<coordinates>120.5513303059877,23.06973899783844,339.3890558759904</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="03207D07C61936C5EB32">
+		<name>seed 03</name>
+		<LookAt>
+			<longitude>120.5508500000387</longitude>
+			<latitude>23.07047999992144</latitude>
+			<altitude>323.5260260458729</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>90.94140772874198</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_094A620D201936C4C845</styleUrl>
+		<Point>
+			<coordinates>120.5507334571227,23.07048560105895,323.6767756160399</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="050F930D021936C694E6">
+		<name>seed 04</name>
+		<LookAt>
+			<longitude>120.5524999999295</longitude>
+			<latitude>23.06944000003477</latitude>
+			<altitude>287.8979723511092</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>126.5695325293927</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_094A620D201936C4C845</styleUrl>
+		<Point>
+			<coordinates>120.552274793259,23.06938890535737,294.3723698217542</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="063BD80F2D1936C709A6">
+		<name>seed 05</name>
+		<LookAt>
+			<longitude>120.55193</longitude>
+			<latitude>23.0711</latitude>
+			<altitude>277.4949831</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>136.9724966932336</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_094A620D201936C4C845</styleUrl>
+		<Point>
+			<coordinates>120.5518424939703,23.07111811402963,277.2113388896504</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="0B4DD077671936CB5679">
+		<name>seed 06</name>
+		<LookAt>
+			<longitude>120.5532299998364</longitude>
+			<latitude>23.07011000014217</latitude>
+			<altitude>244.4576963048726</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>266.7746321829327</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_094A620D201936C4C845</styleUrl>
+		<Point>
+			<coordinates>120.5531241804192,23.06994119605038,243.1871976582813</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="0D2522F4761936CBAA19">
+		<name>seed 07</name>
+		<LookAt>
+			<longitude>120.5531999999901</longitude>
+			<latitude>23.07080999985077</latitude>
+			<altitude>247.1971169070778</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>264.5579961129624</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_094A620D201936C4C845</styleUrl>
+		<Point>
+			<coordinates>120.5529886844259,23.07075765726606,228.0768028755298</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="0EB7657A1F1936CC4535">
+		<name>seed 08</name>
+		<LookAt>
+			<longitude>120.552710000172</longitude>
+			<latitude>23.07128999987791</latitude>
+			<altitude>243.8156978030624</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>267.9393992611585</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_094A620D201936C4C845</styleUrl>
+		<Point>
+			<coordinates>120.5527789125596,23.07134943793998,241.1881461478212</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="073DEB89F41936CDBE88">
+		<name>種子範圍</name>
+		<LookAt>
+			<longitude>120.5518397397707</longitude>
+			<latitude>23.07104287560158</latitude>
+			<altitude>278.3118499456844</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>792.6792753071641</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_012251537F1936CDBE88</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						120.5520317740286,23.06910162862244,316.6034304780505 120.5522864969498,23.06947411032494,290.9357917085519 120.5531256659013,23.07003749068007,239.3374652384054 120.5530105348744,23.07087240420074,226.9502799991176 120.5527857893195,23.07146833837583,240.3967916637687 120.5518397398683,23.07122216724591,275.5525465776551 120.5507248952896,23.07056760920399,315.8993216699644 120.5513309776249,23.06982115491355,337.584472296963 120.5520317740286,23.06910162862244,316.6034304780505 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+</Document>
+</kml>
