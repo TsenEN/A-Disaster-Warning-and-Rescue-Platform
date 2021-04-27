@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <title>高雄市地區雨量</title>
+  <!-- custom -->
+  <link rel="stylesheet" href="Css/all.css">
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+</head>
+<body>
+  <div id="content" class="container my-5">
+    <div class="row">
+      <div class="col-12 w-100">
+        <h2 class="text-secondary text-center position-relative">高雄市各地區雨量
+          <a href="./SeedInfo.html" type="button" class="btn btn-primary text-white position-absolute" style="right:0;">回前頁</a>
+        </h2>
+        <hr>
+        <div class="row">
+          <div class="col-12">
+            <ul class="list-group">
+              <li class="" style="list-style-type: disc;display: list-item; margin-left: 15px; font-size: 14px;">
+                資料來源：<a href="https://data.gov.tw/dataset/9177">政府資料開放平臺</a>
+              </li>
+              <li class="" style="list-style-type: disc;display: list-item; margin-left: 15px; font-size: 14px;">
+                雨量單位：毫米
+              </li>
+              <!-- <li class="" style="list-style-type: disc;display: list-item; margin-left: 15px; font-size: 14px;">
+                雨量分級定義：<br>
+                大雨：24小時大於80毫米或時雨量大於40毫米。<br>
+                豪雨：24小時累積雨量達200毫米以上，或3小時累積雨量達100毫米以上。<br>
+                大豪雨：24小時累積雨量達350毫米以上。<br>
+                超大豪雨：24小時累積雨量達500毫米以上。
+              </li> -->
+              <li class="" style="list-style-type: disc;display: list-item; margin-left: 15px; font-size: 14px;">
+                雨量值為 -998.00 表示RAIN=MIN_10=HOUR_3=HOUR_6= 0.00 <a href="https://opendata.cwb.gov.tw/opendatadoc/DIV2/A0002-001.pdf">資料集說明檔</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="card-area">
+      
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  <script src="Js/getRainFrame.js"></script>
+</body>
+</html>
