@@ -31,7 +31,7 @@ function initMap() {
   //create map
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 8,
-    center: { lat: 23.745523, lng: 120.912494 },
+    center: { lat: 22.5, lng: 120.512494 },
   });
 
   //layers init
@@ -124,6 +124,12 @@ function initMap() {
         size: ambu_size,
         scaledSize: ambu_size,
       };
+      //firetruck marker image
+      var firetruck_marker = {
+        url: './Img/fire-truck_red.png',
+        size: ambu_size,
+        scaledSize: ambu_size,
+      };
       var NumOfJData = JData.length;
       //all car data
       for (var i = 0; i < NumOfJData; i++) {
@@ -144,9 +150,8 @@ function initMap() {
             '</h6>' +
             '<p id="infoDivCarStat' +
             i +
-            '" class="infoDiv">' +
-            '車輛狀態:' +
-            (JData[i].car_status ? '值勤中' : '待命中') +
+            '" class="infoDiv"><br>車種:' +
+            (JData[i].car_kind ? '消防車' : '救護車') +
             '<br>隸屬分隊:' +
             JData[i].team_name +
             '<br>' +
@@ -157,7 +162,7 @@ function initMap() {
         });
         car_markers[i] = new google.maps.Marker({
           position: car_location,
-          icon: ambulance_marker,
+          icon: JData[i].car_kind ? firetruck_marker : ambulance_marker,
           map: null,
         });
         car_markers[i].addListener(
@@ -193,8 +198,6 @@ function initMap() {
 
   //set rain image
   GetRainDrop();
-
-  how_to_get_seed_area();
 }
 
 var seed_interval = setInterval(function () {
@@ -254,6 +257,12 @@ var car_interval = setInterval(function () {
   //ambulance marker image
   var ambulance_marker = {
     url: './Img/ambulance_red.png',
+    size: ambu_size,
+    scaledSize: ambu_size,
+  };
+  //firetruck marker image
+  var firetruck_marker = {
+    url: './Img/fire-truck_red.png',
     size: ambu_size,
     scaledSize: ambu_size,
   };
@@ -331,7 +340,9 @@ var car_interval = setInterval(function () {
               lat: JData[i]['car_latitude'],
               lng: JData[i]['car_longitude'],
             });
-            car_markers[i].setIcon(ambulance_marker);
+            car_markers[i].setIcon(
+              JData[i].car_kind ? firetruck_marker : ambulance_marker
+            );
             car_last_status.set(JData[i]['car_license_plate'], 1);
           }
         }
@@ -596,3 +607,4 @@ function reset_info_box(num, unsent_cars, sent_cars) {
     '</b></p>';
   fire_station_infobox[num].setContent(tmp_content);
 }
+function reset_dest_info() {}

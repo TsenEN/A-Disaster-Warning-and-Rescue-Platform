@@ -214,7 +214,12 @@ function SelectTeam3(value_1, value_2, value_3) {
             '<tr id="rowCarsStatus' +
             JData[i].car_license_plate +
             '" class="">';
-          CarsListData += '<td>' + JData[i].car_license_plate + '</td>';
+          CarsListData +=
+            '<td><span class="badge badge-secondary">' +
+            (JData[i].car_kind ? '消防車' : '救護車') +
+            '</span><br>' +
+            JData[i].car_license_plate +
+            '</td>';
           CarsListData +=
             '<td>' + (JData[i].car_status ? '值勤中' : '待命中') + '</td>';
           CarsListData += CarCheckboxString;

@@ -106,28 +106,29 @@
           </div>
         </div>
         <hr />
-
-        <div id=layer_select style="text-align:center;">
-          <h5>圖層: <h5>
-              <input type="checkbox" value="山崩與地滑" id="layer_1_checkbox">
-              <font size="4">山崩與地滑</font>
-              <input type="checkbox" value="地下水補注" id="layer_2_checkbox">
-              <font size="4">地下水補注</font>
-              <input type="checkbox" value="活動斷層" id="layer_3_checkbox">
-              <font size="4">活動斷層</font>
-              <input type="checkbox" value="雨量" id="rain_layer_checkbox">
-              <font size="4">雨量</font>
-              <!-- 新增中寮隧道種子範圍 -->
-              <input type="checkbox" value="中寮隧道種子" id="layer_4_checkbox">
-              <font size="4">中寮隧道種子分布</font>
+        <div id="send_car_destination_info">
+          <select class="form-control text-dark" id="dest">
+            <option>-選擇目的地-</option>
+          </select>
         </div>
-        <div class="card mt-3 text-center w-100" style="width: 18rem;" id="高雄市">
-          <div id="kaohsiung" class="card-body">
 
-          </div>
-        </div>
+
       </div>
       <div class=" col-12 col-md-7">
+        <div id=layer_select style="text-align:center;background-color: rgb(129, 150, 136);">
+          <font size="4" style="color:white">圖層：</font>
+          <input type="checkbox" value="山崩與地滑" id="layer_1_checkbox">
+          <font size="4" style="color:white">山崩與地滑</font>
+          <input type="checkbox" value="地下水補注" id="layer_2_checkbox">
+          <font size="4" style="color:white">地下水補注</font>
+          <input type="checkbox" value="活動斷層" id="layer_3_checkbox">
+          <font size="4" style="color:white">活動斷層</font>
+          <input type="checkbox" value="雨量" id="rain_layer_checkbox">
+          <font size="4" style="color:white">雨量</font>
+          <!-- 新增中寮隧道種子範圍 -->
+          <input type="checkbox" value="中寮隧道種子" id="layer_4_checkbox">
+          <font size="4" style="color:white">中寮隧道種子分布</font>
+        </div>
         <div id="Header">
           <canvas id="TainanRainDrop" style="display: none;"></canvas>
           <canvas id="KaohsiungRainDrop" style="display: none;"></canvas>
@@ -139,6 +140,13 @@
       </div>
 
     </div>
+    <div class="row">
+      <div class="card mt-3 text-center w-100" style="width: 18rem;" id="高雄市">
+        <div id="kaohsiung" class="card-body">
+
+        </div>
+      </div>
+    </div>>
   </div>
 
 
