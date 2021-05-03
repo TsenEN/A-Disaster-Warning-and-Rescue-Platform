@@ -194,7 +194,7 @@ function initMap() {
   //set rain image
   GetRainDrop();
 
-  how_to_get_seed_area();
+  // how_to_get_seed_area();
 }
 
 var seed_interval = setInterval(function () {
