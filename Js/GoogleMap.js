@@ -131,8 +131,18 @@ function initMap() {
         scaledSize: ambu_size,
       };
       var NumOfJData = JData.length;
+
       //all car data
       for (var i = 0; i < NumOfJData; i++) {
+        //for sent cars destination info
+        if (JData[i].car_status == 1) {
+          let a_sent_car = new sent_car(
+            JData[i].car_license_plate,
+            JData[i].car_where
+          );
+          sent_cars_dest.push(a_sent_car);
+        }
+
         //first load in setting
         car_location = {
           lat: JData[i].car_latitude,
@@ -174,6 +184,7 @@ function initMap() {
           })(i)
         );
       }
+      reset_dest_info();
       car_cluster = new MarkerClusterer(map, car_markers, {
         imagePath:
           'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
@@ -267,7 +278,9 @@ var car_interval = setInterval(function () {
     scaledSize: ambu_size,
   };
 
-  //set car markers on map
+  //for sent cars destination info
+  let tmp_sent_cars = [];
+  let changed = false;
   $.ajax({
     url: 'http://140.116.245.229:3000/GetCarsJson',
     type: 'POST',
@@ -280,6 +293,7 @@ var car_interval = setInterval(function () {
           if (JData[i]['car_status'] == 0) {
             if (car_last_status.get(JData[i]['car_license_plate']) == 1) {
               //changed from unsent to sent
+              changed = true;
               //reset car container
               var element1 = document.getElementById('team_1');
               var element2 = document.getElementById('team_2');
@@ -308,8 +322,15 @@ var car_interval = setInterval(function () {
             car_last_status.set(JData[i]['car_license_plate'], 0);
           } else {
             //car status = 1
+            //for sent cars destination info
+            let a_sent_car = new sent_car(
+              JData[i].car_license_plate,
+              JData[i].car_where
+            );
+            tmp_sent_cars.push(a_sent_car);
             if (car_last_status.get(JData[i]['car_license_plate']) == 0) {
               //changed from sent to unsent
+              changed = true;
               //reset car container
               var element1 = document.getElementById('team_1');
               var element2 = document.getElementById('team_2');
@@ -346,6 +367,10 @@ var car_interval = setInterval(function () {
             car_last_status.set(JData[i]['car_license_plate'], 1);
           }
         }
+      }
+      if (changed == true) {
+        sent_cars_dest = tmp_sent_cars;
+        reset_dest_info();
       }
       car_cluster.resetViewport_();
       car_cluster.redraw_();
@@ -607,4 +632,3 @@ function reset_info_box(num, unsent_cars, sent_cars) {
     '</b></p>';
   fire_station_infobox[num].setContent(tmp_content);
 }
-function reset_dest_info() {}

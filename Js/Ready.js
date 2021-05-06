@@ -51,4 +51,10 @@ $(document).ready(function () {
   $(document).on('click', '#CarButtonReset', function () {
     change_status2();
   });
+  //change car dest select bar
+  $(document).on('change', '#dest', function () {
+    $('#car_dest_info').html('');
+    var element = document.getElementById('dest');
+    look_up_dest(element.value);
+  });
 });

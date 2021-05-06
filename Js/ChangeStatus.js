@@ -42,9 +42,7 @@ function change_status() {
     dataType: 'json',
     crossDomain: true,
     data: JSON.stringify(data),
-    success: function () {
-      alert('success ');
-    },
+    success: function () {},
     error: function (xhr) {
       alert('ERROR IN CHANGE STAT: ' + xhr.status + ' ' + xhr.statusText);
     },
@@ -56,9 +54,7 @@ function change_status() {
     dataType: 'json',
     crossDomain: true,
     data: JSON.stringify(dest_data),
-    success: function () {
-      alert('success');
-    },
+    success: function () {},
     error: function (xhr) {
       alert('ERROR IN CHANGE ADDRESS: ' + xhr.status + ' ' + xhr.statusText);
     },
@@ -106,9 +102,7 @@ function change_status2() {
     dataType: 'json',
     crossDomain: true,
     data: JSON.stringify(data),
-    success: function () {
-      alert('success');
-    },
+    success: function () {},
     error: function (xhr) {
       alert('ERROR IN CHANGE STAT: ' + xhr.status + ' ' + xhr.statusText);
     },
@@ -120,9 +114,7 @@ function change_status2() {
     dataType: 'json',
     crossDomain: true,
     data: JSON.stringify(dest_data),
-    success: function () {
-      alert('success');
-    },
+    success: function () {},
     error: function (xhr) {
       alert('ERROR IN CHANGE ADDRESS: ' + xhr.status + ' ' + xhr.statusText);
     },
