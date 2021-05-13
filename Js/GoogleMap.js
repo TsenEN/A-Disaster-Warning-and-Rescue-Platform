@@ -97,7 +97,11 @@ function initMap() {
           'click',
           (function (i) {
             return function () {
-              seed_infobox[i].open(map, seed_markers[i]);
+              if (seed_infobox[i].anchor == null) {
+                seed_infobox[i].open(map, seed_markers[i]);
+              } else {
+                seed_infobox[i].close();
+              }
             };
           })(i)
         );
@@ -179,7 +183,11 @@ function initMap() {
           'click',
           (function (i) {
             return function () {
-              car_infobox[i].open(map, car_markers[i]);
+              if (car_infobox[i].anchor == null) {
+                car_infobox[i].open(map, car_markers[i]);
+              } else {
+                car_infobox[i].close();
+              }
             };
           })(i)
         );
@@ -459,8 +467,11 @@ function load_fireStation_on_map() {
               alert('ERROR!!!');
             },
           });
-
-          fire_station_infobox[i].open(map, firestation_markers[i]);
+          if (fire_station_infobox[i].anchor == null) {
+            fire_station_infobox[i].open(map, firestation_markers[i]);
+          } else {
+            fire_station_infobox[i].close();
+          }
         };
       })(i)
     );
