@@ -98,6 +98,8 @@ function initMap() {
           (function (i) {
             return function () {
               if (seed_infobox[i].anchor == null) {
+                map.setCenter(locations[i]);
+                if (map.zoom < 11) map.setZoom(11);
                 seed_infobox[i].open(map, seed_markers[i]);
               } else {
                 seed_infobox[i].close();
@@ -184,6 +186,11 @@ function initMap() {
           (function (i) {
             return function () {
               if (car_infobox[i].anchor == null) {
+                map.setCenter({
+                  lat: JData[i].car_latitude,
+                  lng: JData[i].car_longitude,
+                });
+                if (map.zoom < 11) map.setZoom(11);
                 car_infobox[i].open(map, car_markers[i]);
               } else {
                 car_infobox[i].close();
@@ -223,14 +230,14 @@ var seed_interval = setInterval(function () {
   //blue spot image
   var blue_marker = {
     url: './Img/blue_spot.png',
-    size: new google.maps.Size(42, 42),
-    scaledSize: new google.maps.Size(42, 42),
+    size: new google.maps.Size(45, 45),
+    scaledSize: new google.maps.Size(45, 45),
   };
   //red spot image
   var red_marker = {
     url: './Img/red_spot.png',
-    size: new google.maps.Size(42, 42),
-    scaledSize: new google.maps.Size(42, 42),
+    size: new google.maps.Size(53, 53),
+    scaledSize: new google.maps.Size(53, 53),
   };
   //if seed status changed
   $.ajax({
@@ -468,6 +475,8 @@ function load_fireStation_on_map() {
             },
           });
           if (fire_station_infobox[i].anchor == null) {
+            map.setCenter(firestaions_location[i]);
+            if (map.zoom < 11) map.setZoom(11);
             fire_station_infobox[i].open(map, firestation_markers[i]);
           } else {
             fire_station_infobox[i].close();
