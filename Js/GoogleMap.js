@@ -59,14 +59,14 @@ function initMap() {
       //blue spot image
       var blue_marker = {
         url: './Img/blue_spot.png',
-        size: new google.maps.Size(42, 42),
-        scaledSize: new google.maps.Size(42, 42),
+        size: new google.maps.Size(45, 45),
+        scaledSize: new google.maps.Size(45, 45),
       };
       //red spot image
       var red_marker = {
         url: './Img/red_spot.png',
-        size: new google.maps.Size(42, 42),
-        scaledSize: new google.maps.Size(42, 42),
+        size: new google.maps.Size(53, 53),
+        scaledSize: new google.maps.Size(53, 53),
       };
 
       for (i = 0; i < JData.length; i++) {
@@ -78,13 +78,14 @@ function initMap() {
             '<h6>種子ID:' +
             seed_id[i] +
             '</h6>' +
-            '<p id="infoDivSeedStat' +
-            i +
-            '" class="infoDiv">' +
-            '種子狀態:' +
-            (JData[i].seed_status ? '危險' : '安全') +
-            '<br>地區:北區<br>電量:' +
+            '<p><br>地區:北區<br>電量:' +
             JData[i].seed_battery +
+            '</p><p id="infoDivSeedStat' +
+            i +
+            '" class="infoDiv"' +
+            (JData[i].seed_status
+              ? 'style="color: red">危險'
+              : 'style="color: green">安全') +
             '</p></div>',
         });
         seed_markers[i] = new google.maps.Marker({
@@ -154,6 +155,9 @@ function initMap() {
           lat: JData[i].car_latitude,
           lng: JData[i].car_longitude,
         };
+        let car_where_str;
+        if (JData[i].car_where == '') car_where_str = '未知';
+        else car_where_str = JData[i].car_where;
         //get brigade and squadron for infobox
         let tmp_b = firestation_brigade.get(JData[i].team_name);
         let tmp_s = firestation_squadron.get(JData[i].team_name);
@@ -174,6 +178,8 @@ function initMap() {
             tmp_b +
             '>>' +
             tmp_s +
+            '<br>目的地:' +
+            car_where_str +
             '</p></div>',
         });
         car_markers[i] = new google.maps.Marker({
@@ -259,13 +265,14 @@ var seed_interval = setInterval(function () {
           '<h6>種子ID:' +
           JData[i].seed_id +
           '</h6>' +
-          '<p id="infoDivSeedStat' +
-          i +
-          '" class="infoDiv">' +
-          '種子狀態:' +
-          (JData[i].seed_status ? '危險' : '安全') +
-          '<br>地區:北區<br>電量:' +
+          '<p><br>地區:北區<br>電量:' +
           JData[i].seed_battery +
+          '</p><p id="infoDivSeedStat' +
+          i +
+          '" class="infoDiv"' +
+          (JData[i].seed_status
+            ? 'style="color: red">種子狀態: 危險'
+            : 'style="color: green">種子狀態: 安全') +
           '</p></div>';
         seed_infobox[i].setContent(seed_content);
       }
@@ -343,6 +350,34 @@ var car_interval = setInterval(function () {
               JData[i].car_where
             );
             tmp_sent_cars.push(a_sent_car);
+            //reset car infobox everyseconds
+            let car_content;
+            let car_where_str;
+            if (JData[i].car_where == '') car_where_str = '未知';
+            else car_where_str = JData[i].car_where;
+            //get brigade and squadron for infobox
+            let tmp_b = firestation_brigade.get(JData[i].team_name);
+            let tmp_s = firestation_squadron.get(JData[i].team_name);
+            car_content =
+              '<div id="car_info' +
+              i +
+              'class="infoDiv><h6>車牌: <br>  ' +
+              JData[i].car_license_plate +
+              '</h6>' +
+              '<p id="infoDivCarStat' +
+              i +
+              '" class="infoDiv"><br>車種:' +
+              (JData[i].car_kind ? '消防車' : '救護車') +
+              '<br>隸屬分隊:' +
+              JData[i].team_name +
+              '<br>' +
+              tmp_b +
+              '>>' +
+              tmp_s +
+              '<br>目的地:' +
+              car_where_str +
+              '</p></div>';
+            car_infobox[i].setContent(car_content);
             if (car_last_status.get(JData[i]['car_license_plate']) == 0) {
               //changed from sent to unsent
               changed = true;
@@ -396,7 +431,9 @@ var car_interval = setInterval(function () {
   });
 }, 1000);
 
-function load_fireStation_on_map() {
+setTimeout(function load_fireStation_on_map() {
+  console.log('load firestation');
+
   //add firestation markers
   var i = 0;
   var firestaion_img = {
@@ -405,6 +442,7 @@ function load_fireStation_on_map() {
     scaledSize: new google.maps.Size(42, 42),
   };
   var firestation_markers = [];
+
   $.each(FireStations, function () {
     firestaions_location[i] = {
       lat: FireStations[i].fireStation_latitude,
@@ -420,7 +458,18 @@ function load_fireStation_on_map() {
       icon: firestaion_img,
       map: map,
     });
-
+    let car_data;
+    $.ajax({
+      url: 'http://140.116.245.229:3000/GetCarsJson',
+      type: 'POST',
+      dataType: 'json',
+      success: function (JData) {
+        car_data = JData;
+      },
+      error: function () {
+        alert('ERROR IN LOAD FIRESTATION ON MAP - GET CAR');
+      },
+    });
     firestation_markers[i].addListener(
       'click',
       (function (i) {
@@ -445,35 +494,25 @@ function load_fireStation_on_map() {
 
           let sent_cars = 0;
           let unsent_cars = 0;
-          $.ajax({
-            url: 'http://140.116.245.229:3000/GetCarsJson',
-            type: 'POST',
-            dataType: 'json',
-            success: function (JData) {
-              let j = 0;
-              for (j = 0; j < JData.length; j++) {
-                if (name == JData[j].team_name) {
-                  if (JData[j].car_status == 0) {
-                    unsent_cars++;
-                  } else sent_cars++;
-                }
-              }
-              tmp_content +=
-                '<p id="unsent_car_info_' +
-                i +
-                '" style="color: green;font-size: 14px;"><b>待命中:' +
-                unsent_cars +
-                '</b></p><p id="unsent_car_info_' +
-                i +
-                '" style="color: red;font-size: 14px;"><b>值勤中:' +
-                sent_cars +
-                '</b></p>';
-              fire_station_infobox[i].setContent(tmp_content);
-            },
-            error: function () {
-              alert('ERROR!!!');
-            },
-          });
+          let j = 0;
+          for (j = 0; j < car_data.length; j++) {
+            if (name == car_data[j].team_name) {
+              if (car_data[j].car_status == 0) {
+                unsent_cars++;
+              } else sent_cars++;
+            }
+          }
+          tmp_content +=
+            '<p id="unsent_car_info_' +
+            i +
+            '" style="color: green;font-size: 14px;"><b>待命中:' +
+            unsent_cars +
+            '</b></p><p id="unsent_car_info_' +
+            i +
+            '" style="color: red;font-size: 14px;"><b>值勤中:' +
+            sent_cars +
+            '</b></p>';
+          fire_station_infobox[i].setContent(tmp_content);
           if (fire_station_infobox[i].anchor == null) {
             map.setCenter(firestaions_location[i]);
             if (map.zoom < 11) map.setZoom(11);
@@ -489,7 +528,7 @@ function load_fireStation_on_map() {
   var firestation_cluster = new MarkerClusterer(map, firestation_markers, {
     imagePath: './Img/cluster_orange/m',
   });
-}
+}, 1000);
 
 function load_layer() {
   //layer1 - ground slip

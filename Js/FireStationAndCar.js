@@ -64,7 +64,6 @@ function GetFireStation() {
         team_1_back += '<option>' + team_1[i] + '</option>';
       }
       $('#team_1').html(team_1_back);
-      load_fireStation_on_map();
     },
 
     error: function (xhr) {

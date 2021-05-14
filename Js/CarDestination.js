@@ -31,10 +31,13 @@ function reset_dest_info() {
   $('#dest').html(return_str);
 }
 function look_up_dest(destination) {
-  let return_str = '<p>前往車輛: &nbsp';
+  let return_str = '<p><strong>前往車輛: &nbsp</strong>';
   for (let i = 0; i < sent_cars_dest.length; i++) {
     if (sent_cars_dest[i].car_destination == destination) {
       return_str += sent_cars_dest[i].plate + '&nbsp';
+    } else if (destination == '未知') {
+      if (sent_cars_dest[i].car_destination == '')
+        return_str += sent_cars_dest[i].plate + '&nbsp';
     }
   }
   return_str += '</p>';
