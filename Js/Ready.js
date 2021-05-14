@@ -57,4 +57,14 @@ $(document).ready(function () {
     var element = document.getElementById('dest');
     look_up_dest(element.value);
   });
+  //test zoom in
+  $(document).on('click', '#rowCarsStatus_0', function () {
+    alert('click 0');
+  });
+  $(document).on('click', '#rowCarsStatus_1', function () {
+    alert('click 1');
+  });
+  $(document).on('click', '#rowCarsStatus_2', function () {
+    alert('click 2');
+  });
 });

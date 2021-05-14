@@ -209,10 +209,7 @@ function SelectTeam3(value_1, value_2, value_3) {
             'car_license_plate=' +
             JData[i].car_license_plate +
             '></td>';
-          CarsListData +=
-            '<tr id="rowCarsStatus' +
-            JData[i].car_license_plate +
-            '" class="">';
+          CarsListData += '<tr id="rowCarsStatus_' + j + '" class="">';
           CarsListData +=
             '<td><span class="badge badge-secondary">' +
             (JData[i].car_kind ? '消防車' : '救護車') +

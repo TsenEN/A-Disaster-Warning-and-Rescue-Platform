@@ -52,9 +52,11 @@ function look_up_dest(destination) {
   }
   let return_str = '<p><strong>前往車輛: &nbsp</strong></p>';
   return_str +=
-    '<table class="table table-bordered table-hover" id="dest_table"><thead class="thead-light"><tr><td Align="Center" scope="col"><B>車牌</B></Td><td Align="Center" scope="col"><B>隸屬分隊</B></Td></tr></thead><tbody>';
+    '<table class="table table-bordered table-hover" id="dest_table"><thead class="thead-light"><tr><td Align="Center" scope="col"><B>車牌</B></Td><td Align="Center" scope="col"><B>隸屬分隊</B></Td><td Align="Center" scope="col"><B>大隊>>中隊</B></Td></tr></thead><tbody>';
   for (let i = 0; i < sent_cars_dest.length; i++) {
     if (sent_cars_dest[i].car_destination == destination) {
+      let tmp_b = firestation_brigade.get(sent_cars_dest[i].team_name);
+      let tmp_s = firestation_squadron.get(sent_cars_dest[i].team_name);
       return_str +=
         '<tr><td><span class="badge badge-secondary">' +
         (sent_cars_dest[i].kind ? '消防車' : '救護車') +
@@ -63,9 +65,15 @@ function look_up_dest(destination) {
         '</td>' +
         '<td>' +
         sent_cars_dest[i].team_name +
+        '</td><td>' +
+        tmp_b +
+        '>>' +
+        tmp_s +
         '</td></tr>';
     } else if (destination == '未知') {
-      if (sent_cars_dest[i].car_destination == '')
+      if (sent_cars_dest[i].car_destination == '') {
+        let tmp_b = firestation_brigade.get(sent_cars_dest[i].team_name);
+        let tmp_s = firestation_squadron.get(sent_cars_dest[i].team_name);
         return_str +=
           '<tr><td><span class="badge badge-secondary">' +
           (sent_cars_dest[i].kind ? '消防車' : '救護車') +
@@ -74,7 +82,12 @@ function look_up_dest(destination) {
           '</td>' +
           '<td>' +
           sent_cars_dest[i].team_name +
+          '</td><td>' +
+          tmp_b +
+          '>>' +
+          tmp_s +
           '</td></tr>';
+      }
     }
   }
   return_str += '</tbody></table>';
