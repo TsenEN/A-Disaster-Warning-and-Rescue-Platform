@@ -145,7 +145,9 @@ function initMap() {
         if (JData[i].car_status == 1) {
           let a_sent_car = new sent_car(
             JData[i].car_license_plate,
-            JData[i].car_where
+            JData[i].car_where,
+            JData[i].car_kind,
+            JData[i].team_name
           );
           sent_cars_dest.push(a_sent_car);
         }
@@ -347,7 +349,9 @@ var car_interval = setInterval(function () {
             //for sent cars destination info
             let a_sent_car = new sent_car(
               JData[i].car_license_plate,
-              JData[i].car_where
+              JData[i].car_where,
+              JData[i].car_kind,
+              JData[i].team_name
             );
             tmp_sent_cars.push(a_sent_car);
             //reset car infobox everyseconds
