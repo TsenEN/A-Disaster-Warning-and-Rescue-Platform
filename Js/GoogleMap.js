@@ -207,10 +207,8 @@ function initMap() {
           })(i)
         );
       }
-      reset_dest_info();
       car_cluster = new MarkerClusterer(map, car_markers, {
-        imagePath:
-          'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
+        imagePath: './Img/cluster_yellow/m',
       });
       for (var i = 0; i < car_markers.length; i++) {
         if (JData[i]['car_status'] == 0) {
