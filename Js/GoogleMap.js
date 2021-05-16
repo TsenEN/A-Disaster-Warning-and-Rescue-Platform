@@ -58,13 +58,13 @@ function initMap() {
 
       //blue spot image
       var blue_marker = {
-        url: './Img/blue_spot.png',
+        url: './Img/safe_seed.png',
         size: new google.maps.Size(45, 45),
         scaledSize: new google.maps.Size(45, 45),
       };
       //red spot image
       var red_marker = {
-        url: './Img/red_spot.png',
+        url: './Img/danger_seed.png',
         size: new google.maps.Size(53, 53),
         scaledSize: new google.maps.Size(53, 53),
       };
@@ -127,13 +127,13 @@ function initMap() {
 
       //ambulance marker image
       var ambulance_marker = {
-        url: './Img/ambulance_red.png',
+        url: './Img/ambulance_sent.png',
         size: ambu_size,
         scaledSize: ambu_size,
       };
       //firetruck marker image
       var firetruck_marker = {
-        url: './Img/fire-truck_red.png',
+        url: './Img/fire-truck_sent.png',
         size: ambu_size,
         scaledSize: ambu_size,
       };
@@ -237,13 +237,13 @@ function initMap() {
 var seed_interval = setInterval(function () {
   //blue spot image
   var blue_marker = {
-    url: './Img/blue_spot.png',
+    url: './Img/safe_seed.png',
     size: new google.maps.Size(45, 45),
     scaledSize: new google.maps.Size(45, 45),
   };
   //red spot image
   var red_marker = {
-    url: './Img/red_spot.png',
+    url: './Img/danger_seed.png',
     size: new google.maps.Size(53, 53),
     scaledSize: new google.maps.Size(53, 53),
   };
@@ -291,13 +291,13 @@ var car_interval = setInterval(function () {
 
   //ambulance marker image
   var ambulance_marker = {
-    url: './Img/ambulance_red.png',
+    url: './Img/ambulance_sent.png',
     size: ambu_size,
     scaledSize: ambu_size,
   };
   //firetruck marker image
   var firetruck_marker = {
-    url: './Img/fire-truck_red.png',
+    url: './Img/fire-truck_sent.png',
     size: ambu_size,
     scaledSize: ambu_size,
   };
