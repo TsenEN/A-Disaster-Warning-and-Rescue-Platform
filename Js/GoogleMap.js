@@ -217,6 +217,7 @@ function initMap() {
       }
       car_cluster.resetViewport_();
       car_cluster.redraw_();
+      reset_dest_info();
     },
     error: function () {
       alert('ERROR!!!');
