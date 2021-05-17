@@ -180,9 +180,9 @@ function initMap() {
             (JData[i].car_kind ? '消防車' : '救護車') +
             '<br>隸屬分隊:' +
             JData[i].team_name +
-            '<br>' +
+            '<br>隸屬大隊:' +
             tmp_b +
-            '\\\\' +
+            '<br>隸屬中隊:' +
             tmp_s +
             '<br>目的地:' +
             car_where_str +
@@ -382,8 +382,9 @@ var car_interval = setInterval(function () {
               '<br>隸屬分隊:' +
               JData[i].team_name +
               '<br>' +
+              '隸屬大隊: ' +
               tmp_b +
-              '\\\\' +
+              '<br>隸屬中隊:' +
               tmp_s +
               '<br>目的地:' +
               car_where_str +
@@ -497,9 +498,9 @@ setTimeout(function load_fireStation_on_map() {
             tmp_address +
             '<br>電話:' +
             tmp_tel +
-            '<br><br>' +
+            '<br><br>隸屬大隊:' +
             FireStations[i].brigade +
-            '\\\\' +
+            '<br>隸屬中隊:' +
             FireStations[i].squadron +
             '</p></div>';
 
