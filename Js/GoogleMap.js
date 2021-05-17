@@ -147,7 +147,11 @@ function initMap() {
             JData[i].car_license_plate,
             JData[i].car_where,
             JData[i].car_kind,
-            JData[i].team_name
+            JData[i].team_name,
+            {
+              lat: JData[i].car_latitude,
+              lng: JData[i].car_longitude,
+            }
           );
           sent_cars_dest.push(a_sent_car);
         }
@@ -350,7 +354,11 @@ var car_interval = setInterval(function () {
               JData[i].car_license_plate,
               JData[i].car_where,
               JData[i].car_kind,
-              JData[i].team_name
+              JData[i].team_name,
+              {
+                lat: JData[i]['car_latitude'],
+                lng: JData[i]['car_longitude'],
+              }
             );
             tmp_sent_cars.push(a_sent_car);
             //reset car infobox everyseconds
