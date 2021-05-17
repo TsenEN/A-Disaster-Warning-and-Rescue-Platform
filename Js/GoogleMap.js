@@ -182,7 +182,7 @@ function initMap() {
             JData[i].team_name +
             '<br>' +
             tmp_b +
-            '>>' +
+            '\\\\' +
             tmp_s +
             '<br>目的地:' +
             car_where_str +
@@ -383,7 +383,7 @@ var car_interval = setInterval(function () {
               JData[i].team_name +
               '<br>' +
               tmp_b +
-              '>>' +
+              '\\\\' +
               tmp_s +
               '<br>目的地:' +
               car_where_str +
@@ -499,7 +499,7 @@ setTimeout(function load_fireStation_on_map() {
             tmp_tel +
             '<br><br>' +
             FireStations[i].brigade +
-            '>>' +
+            '\\\\' +
             FireStations[i].squadron +
             '</p></div>';
 
