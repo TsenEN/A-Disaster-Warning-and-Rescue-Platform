@@ -42,7 +42,7 @@ async function look_up_dest(destination) {
   }
   let return_str = '<p><strong>前往車輛: &nbsp</strong></p>';
   return_str +=
-    '<table class="table table-bordered table-hover" id="dest_table"><thead class="thead-light"><tr><td Align="Center" scope="col"><B>車牌</B></Td><td Align="Center" scope="col"><B>距離目的地</B></Td><td Align="Center" scope="col"><B>隸屬分隊</B></Td><td Align="Center" scope="col"><B>隸屬中隊</B></Td><td Align="Center" scope="col"><B>隸屬大隊</B></Td></tr></thead><tbody>';
+    '<table class="table table-bordered table-hover" id="dest_table"><thead class="thead-light"><tr><td Align="Center" scope="col"><B>車牌</B></Td><td Align="Center" scope="col"><B>距離目的地</B></Td><td Align="Center" scope="col"><B>隸屬分隊</B></Td><td Align="Center" scope="col"><B>隸屬大隊</B></Td><td Align="Center" scope="col"><B>隸屬中隊</B></Td></tr></thead><tbody>';
   for (let i = 0; i < sent_cars_dest.length; i++) {
     if (sent_cars_dest[i].car_destination == destination) {
       return_status = await get_distance(i);
