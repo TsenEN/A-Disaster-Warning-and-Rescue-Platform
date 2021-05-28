@@ -561,7 +561,10 @@ function load_layer() {
   layer1.loadGeoJson(
     'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E8%87%BA%E5%8D%97%E5%B8%82&town=%E6%A5%A0%E8%A5%BF%E5%8D%80&all=true'
   );
-
+  //高雄甲仙
+  layer1.loadGeoJson(
+    'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E9%AB%98%E9%9B%84%E5%B8%82&town=%E7%94%B2%E4%BB%99%E5%8D%80&all=true'
+  );
   //layer2 - under water
   layer2 = new google.maps.Data({ map: map });
   layer2.setStyle({
