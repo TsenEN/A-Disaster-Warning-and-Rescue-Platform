@@ -36,12 +36,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-        <!-- <li class="nav-item active">
-          <a class="nav-link" href="SeedInfo.html">邊坡種子 <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">救災派遣</a>
-        </li> -->
         <li class="nav-item">
           <a class="nav-link" href="RegisterSeed.html">註冊種子</a>
         </li>
@@ -53,29 +47,39 @@
     <div class="row">
       <div class="col-12 col-md-5">
         <div id="Sidebar">
-          <div id=SelectFireStation>
-            <div class="form-group">
-              <div class="row">
-                <div class="col">
-                  <select class="form-control text-dark" id="team_1">
-                    <option>-大隊-</option>
-                  </select>
-                </div>
-                <div class="col">
-                  <select class="form-control text-dark" id="team_2">
-                    <option>-中隊-</option>
-                  </select>
-                </div>
-                <div class="col">
-                  <select class="form-control text-dark" id="team_3">
-                    <option>-分隊-</option>
-                  </select>
+          <div id=SelectDepartment>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <li id=SwitchFire class="page-item"><a class="page-link" href="#idontwanttogoanywhere">消防隊</a></li>
+                <li id=SwitchVolunteer class="page-item"><a class="page-link" href="#idontwanttogoanywhere">志願者</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div id=DepartmentInfoContainer>
+            <div id=SelectFireStation>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col">
+                    <select class="form-control text-dark" id="team_1">
+                      <option>-大隊-</option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <select class="form-control text-dark" id="team_2">
+                      <option>-中隊-</option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <select class="form-control text-dark" id="team_3">
+                      <option>-分隊-</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div id=FireStationInfo>
-            <!--for fire station information -->
+            <div id=FireStationInfo>
+              <!--for fire station information -->
+            </div>
           </div>
         </div>
         <hr />
@@ -91,10 +95,10 @@
             </thead>
             <tbody id="CarsList">
               <tr>
-                <td Align="Center" scope="col">-先選擇消防隊-</Td>
-                <td Align="Center" scope="col">-先選擇消防隊-</Td>
-                <td Align='Center' scope='col'>-先選擇消防隊-</Td>
-                <td Align='Center' scope='col'>-先選擇消防隊-</Td>
+                <td Align="Center" scope="col">-</Td>
+                <td Align="Center" scope="col">-</Td>
+                <td Align='Center' scope='col'>-</Td>
+                <td Align='Center' scope='col'>-</Td>
               </tr>
             </tbody>
           </table>

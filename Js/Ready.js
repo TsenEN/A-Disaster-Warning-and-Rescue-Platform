@@ -2,7 +2,7 @@ $(document).ready(function () {
   //Get firestation first
   GetFireStation();
   let retun_tmp =
-    "<tr><td Align='Center' scope='col'>-先選擇消防隊-</Td><td Align='Center' scope='col'>-先選擇消防隊-</Td><td Align='Center' scope='col'>-先選擇消防隊-</Td><td Align='Center' scope='col'>-先選擇消防隊-</Td></tr>";
+    "<tr><td Align='Center' scope='col'>-</Td><td Align='Center' scope='col'>-</Td><td Align='Center' scope='col'>-</Td><td Align='Center' scope='col'>-</Td></tr>";
   //change select bar 1
   $(document).on('change', '#team_1', function () {
     $('#FireStationInfo').html('');
@@ -56,6 +56,18 @@ $(document).ready(function () {
     $('#car_dest_info').html('');
     var element = document.getElementById('dest');
     look_up_dest(element.value);
+  });
+  //switching send cars department
+  $(document).on('click', '#SwitchFire', function () {
+    let return_string =
+      '<div id=SelectFireStation><div class="form-group"><div class="row"><div class="col"><select class="form-control text-dark" id="team_1"><option>-大隊-</option></select></div><div class="col"><select class="form-control text-dark" id="team_2"><option>-中隊-</option></select></div><div class="col"><select class="form-control text-dark" id="team_3"><option>-分隊-</option></select></div></div></div></div><div id=FireStationInfo><!--for fire station information --></div>';
+    $('#DepartmentInfoContainer').html(return_string);
+    $('#CarsList').html(retun_tmp);
+    GetFireStation();
+  });
+  $(document).on('click', '#SwitchVolunteer', function () {
+    $('#DepartmentInfoContainer').html('');
+    $('#CarsList').html(retun_tmp);
   });
   //test zoom in
   // $(document).on('click', '#rowCarsStatus_0', function () {
