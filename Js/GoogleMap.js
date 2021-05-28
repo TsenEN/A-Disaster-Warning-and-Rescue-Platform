@@ -549,9 +549,18 @@ function load_layer() {
     visible: false,
   });
   //GeoJson
+  //台南
   //玉井
   layer1.loadGeoJson(
     'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E8%87%BA%E5%8D%97%E5%B8%82&town=%E7%8E%89%E4%BA%95%E5%8D%80&all=true'
+  );
+  //龍崎
+  layer1.loadGeoJson(
+    'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E8%87%BA%E5%8D%97%E5%B8%82&town=%E9%BE%8D%E5%B4%8E%E5%8D%80&all=true'
+  );
+  //大內
+  layer1.loadGeoJson(
+    'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E8%87%BA%E5%8D%97%E5%B8%82&town=%E5%A4%A7%E5%85%A7%E5%8D%80&all=true'
   );
   //南化
   layer1.loadGeoJson(
@@ -561,10 +570,40 @@ function load_layer() {
   layer1.loadGeoJson(
     'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E8%87%BA%E5%8D%97%E5%B8%82&town=%E6%A5%A0%E8%A5%BF%E5%8D%80&all=true'
   );
-  //高雄甲仙
+  //六甲
+  layer1.loadGeoJson(
+    'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E8%87%BA%E5%8D%97%E5%B8%82&town=%E5%85%AD%E7%94%B2%E5%8D%80&all=true'
+  );
+  //官田
+  layer1.loadGeoJson(
+    'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E8%87%BA%E5%8D%97%E5%B8%82&town=%E5%AE%98%E7%94%B0%E5%8D%80&all=true'
+  );
+  //山上
+  layer1.loadGeoJson(
+    'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E8%87%BA%E5%8D%97%E5%B8%82&town=%E5%B1%B1%E4%B8%8A%E5%8D%80&all=true'
+  );
+  //東山
+  layer1.loadGeoJson(
+    'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E8%87%BA%E5%8D%97%E5%B8%82&town=%E6%9D%B1%E5%B1%B1%E5%8D%80&all=true'
+  );
+  //白河
+  layer1.loadGeoJson(
+    'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E8%87%BA%E5%8D%97%E5%B8%82&town=%E7%99%BD%E6%B2%B3%E5%8D%80&all=true'
+  );
+  //左鎮
+  layer1.loadGeoJson(
+    'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E8%87%BA%E5%8D%97%E5%B8%82&town=%E5%B7%A6%E9%8E%AE%E5%8D%80&all=true'
+  );
+  //柳營
+  layer1.loadGeoJson(
+    'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E8%87%BA%E5%8D%97%E5%B8%82&town=%E6%9F%B3%E7%87%9F%E5%8D%80&all=true'
+  );
+  //高雄
+  //甲仙
   layer1.loadGeoJson(
     'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%B1%B1%E5%B4%A9%E8%88%87%E5%9C%B0%E6%BB%91&name=%E9%AB%98%E9%9B%84%E5%B8%82&town=%E7%94%B2%E4%BB%99%E5%8D%80&all=true'
   );
+
   //layer2 - under water
   layer2 = new google.maps.Data({ map: map });
   layer2.setStyle({
@@ -573,6 +612,10 @@ function load_layer() {
   //嘉南平原
   layer2.loadGeoJson(
     'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%9C%B0%E4%B8%8B%E6%B0%B4%E8%A3%9C%E6%B3%A8&name=%E5%98%89%E5%8D%97%E5%B9%B3%E5%8E%9F'
+  );
+  //屏東平原
+  layer2.loadGeoJson(
+    'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E5%9C%B0%E4%B8%8B%E6%B0%B4%E8%A3%9C%E6%B3%A8&name=%E5%B1%8F%E6%9D%B1%E5%B9%B3%E5%8E%9F'
   );
 
   //layer 3 - fault
@@ -587,6 +630,10 @@ function load_layer() {
   //新化斷層
   layer3.loadGeoJson(
     'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E6%B4%BB%E5%8B%95%E6%96%B7%E5%B1%A4&name=%E6%96%B0%E5%8C%96%E6%96%B7%E5%B1%A4'
+  );
+  //旗山斷層
+  layer3.loadGeoJson(
+    'https://www.geologycloud.tw/data/zh-tw/GeologicalSensitiveAreas?category=%E6%B4%BB%E5%8B%95%E6%96%B7%E5%B1%A4&name=%E6%97%97%E5%B1%B1%E6%96%B7%E5%B1%A4'
   );
 
   //layer 4 - 中寮隧道
