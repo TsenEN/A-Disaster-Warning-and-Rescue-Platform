@@ -35,11 +35,11 @@ function reset_dest_info() {
 }
 async function look_up_dest(destination) {
   let return_status = '';
-  return_status = await get_latlng(destination);
   if (destination == '-選擇目的地-') {
     $('#car_dest_info').html('');
     return;
   }
+  return_status = await get_latlng(destination);
   let return_str = '<p><strong>前往車輛: &nbsp</strong></p>';
   return_str +=
     '<table class="table table-bordered table-hover" id="dest_table"><thead class="thead-light"><tr><td Align="Center" scope="col"><B>車牌</B></Td><td Align="Center" scope="col"><B>距離目的地</B></Td><td Align="Center" scope="col"><B>隸屬分隊</B></Td><td Align="Center" scope="col"><B>隸屬大隊</B></Td><td Align="Center" scope="col"><B>隸屬中隊</B></Td></tr></thead><tbody>';
