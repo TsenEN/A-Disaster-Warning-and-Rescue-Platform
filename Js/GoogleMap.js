@@ -4,7 +4,7 @@ let firestation_infobox_num = new Map();
 let car_markers = [];
 let seed_markers = [];
 let car_cluster;
-let locations = [];
+let seed_locations = [];
 let firestaions_location = [];
 let map;
 
@@ -44,10 +44,9 @@ function initMap() {
     dataType: 'json',
     success: function (JData) {
       let seed_id = [];
-      let area = [];
       var i = 0;
       $.each(JData, function () {
-        locations[i] = {
+        seed_locations[i] = {
           lat: parseFloat(JData[i].seed_latitude),
           lng: parseFloat(JData[i].seed_longitude),
         };
@@ -56,8 +55,8 @@ function initMap() {
         i++;
       });
 
-      //blue spot image
-      var blue_marker = {
+      //green spot image
+      var green_marker = {
         url: './Img/safe_seed.png',
         size: new google.maps.Size(45, 45),
         scaledSize: new google.maps.Size(45, 45),
@@ -89,8 +88,8 @@ function initMap() {
             '</p></div>',
         });
         seed_markers[i] = new google.maps.Marker({
-          position: locations[i],
-          icon: JData[i].seed_status ? red_marker : blue_marker,
+          position: seed_locations[i],
+          icon: JData[i].seed_status ? red_marker : green_marker,
           label: String(seed_id[i]),
           map: map,
         });
@@ -99,7 +98,7 @@ function initMap() {
           (function (i) {
             return function () {
               if (seed_infobox[i].anchor == null) {
-                map.setCenter(locations[i]);
+                map.setCenter(seed_locations[i]);
                 if (map.zoom < 11) map.setZoom(11);
                 seed_infobox[i].open(map, seed_markers[i]);
               } else {
@@ -165,8 +164,8 @@ function initMap() {
         if (JData[i].car_where == '') car_where_str = '未知';
         else car_where_str = JData[i].car_where;
         //get brigade and squadron for infobox
-        let tmp_b = firestation_brigade.get(JData[i].team_name);
-        let tmp_s = firestation_squadron.get(JData[i].team_name);
+        let string_b = firestation_brigade.get(JData[i].team_name);
+        let string_s = firestation_squadron.get(JData[i].team_name);
         car_infobox[i] = new google.maps.InfoWindow({
           content:
             '<div id="car_info' +
@@ -181,9 +180,9 @@ function initMap() {
             '<br>隸屬分隊:' +
             JData[i].team_name +
             '<br>隸屬大隊:' +
-            tmp_b +
+            string_b +
             '<br>隸屬中隊:' +
-            tmp_s +
+            string_s +
             '<br>目的地:' +
             car_where_str +
             '</p></div>',
@@ -238,8 +237,8 @@ function initMap() {
 }
 
 var seed_interval = setInterval(function () {
-  //blue spot image
-  var blue_marker = {
+  //green spot image
+  var green_marker = {
     url: './Img/safe_seed.png',
     size: new google.maps.Size(45, 45),
     scaledSize: new google.maps.Size(45, 45),
@@ -261,7 +260,7 @@ var seed_interval = setInterval(function () {
         if (JData[i].seed_status == 1) {
           seed_markers[i].setIcon(red_marker);
         } else {
-          seed_markers[i].setIcon(blue_marker);
+          seed_markers[i].setIcon(green_marker);
         }
         seed_content =
           '<div id="infoDiv' +
@@ -367,8 +366,8 @@ var car_interval = setInterval(function () {
             if (JData[i].car_where == '') car_where_str = '未知';
             else car_where_str = JData[i].car_where;
             //get brigade and squadron for infobox
-            let tmp_b = firestation_brigade.get(JData[i].team_name);
-            let tmp_s = firestation_squadron.get(JData[i].team_name);
+            let string_b = firestation_brigade.get(JData[i].team_name);
+            let string_s = firestation_squadron.get(JData[i].team_name);
             car_content =
               '<div id="car_info' +
               i +
@@ -383,9 +382,9 @@ var car_interval = setInterval(function () {
               JData[i].team_name +
               '<br>' +
               '隸屬大隊: ' +
-              tmp_b +
+              string_b +
               '<br>隸屬中隊:' +
-              tmp_s +
+              string_s +
               '<br>目的地:' +
               car_where_str +
               '</p></div>';
