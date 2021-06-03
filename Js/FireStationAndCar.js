@@ -3,73 +3,50 @@ var FireStations;
 let firestation_brigade = new Map();
 //team name - squadron
 let firestation_squadron = new Map();
-function GetFireStation() {
-  $.ajax({
-    type: 'GET',
-    url: 'http://140.116.245.229:3000/GetFireStationJson',
-    dataType: 'json',
-    success: function (JData) {
-      FireStations = JData;
-      var i = 0;
-      var team_1 = []; //存大隊資料
-      $.each(FireStations, function () {
-        team_1[i] = FireStations[i].brigade;
-        firestation_brigade.set(
-          FireStations[i].team_name,
-          FireStations[i].brigade
-        );
-        firestation_squadron.set(
-          FireStations[i].team_name,
-          FireStations[i].squadron
-        );
-        i++;
-      });
-
-      //filter for team_1 array(remove repeated object)
-      team_1 = team_1.filter(function (element, index, arr) {
-        return arr.indexOf(element) === index;
-      });
-
-      //sort (in chinese)
-      let sort_team = [];
-      for (i = 0; i < team_1.length; i++) {
-        sort_team[i] = team_1[i];
-      }
-      for (i = 0; i < team_1.length; i++) {
-        switch (sort_team[i]) {
-          case '第一救災救護大隊':
-            team_1[0] = sort_team[i];
-            break;
-          case '第二救災救護大隊':
-            team_1[1] = sort_team[i];
-            break;
-          case '第三救災救護大隊':
-            team_1[2] = sort_team[i];
-            break;
-          case '第四救災救護大隊':
-            team_1[3] = sort_team[i];
-            break;
-          case '第五救災救護大隊':
-            team_1[4] = sort_team[i];
-            break;
-          case '第六救災救護大隊':
-            team_1[5] = sort_team[i];
-            break;
-        }
-      }
-
-      //write back to SeedInfo.html
-      var team_1_back = '<option>-大隊-</option>';
-      for (i = 0; i < team_1.length; i++) {
-        team_1_back += '<option>' + team_1[i] + '</option>';
-      }
-      $('#team_1').html(team_1_back);
-    },
-
-    error: function (xhr) {
-      alert('ERROR IN GetFireSTation: ' + xhr.status + ' ' + xhr.statusText);
-    },
+function SetFireStation() {
+  var team_1 = []; //存大隊資料
+  for (let i = 0; i < FireStations.length; i++) {
+    team_1[i] = FireStations[i].brigade;
+  }
+  //filter for team_1 array(remove repeated object)
+  team_1 = team_1.filter(function (element, index, arr) {
+    return arr.indexOf(element) === index;
   });
+
+  //sort (in chinese)
+  let sort_team = [];
+  for (i = 0; i < team_1.length; i++) {
+    sort_team[i] = team_1[i];
+  }
+  for (i = 0; i < team_1.length; i++) {
+    switch (sort_team[i]) {
+      case '第一救災救護大隊':
+        team_1[0] = sort_team[i];
+        break;
+      case '第二救災救護大隊':
+        team_1[1] = sort_team[i];
+        break;
+      case '第三救災救護大隊':
+        team_1[2] = sort_team[i];
+        break;
+      case '第四救災救護大隊':
+        team_1[3] = sort_team[i];
+        break;
+      case '第五救災救護大隊':
+        team_1[4] = sort_team[i];
+        break;
+      case '第六救災救護大隊':
+        team_1[5] = sort_team[i];
+        break;
+    }
+  }
+
+  //write back to SeedInfo.html
+  var team_1_back = '<option>-大隊-</option>';
+  for (i = 0; i < team_1.length; i++) {
+    team_1_back += '<option>' + team_1[i] + '</option>';
+  }
+  $('#team_1').html(team_1_back);
 }
 
 function SelectTeam1(value) {

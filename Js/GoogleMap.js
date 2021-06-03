@@ -34,6 +34,33 @@ function initMap() {
     center: { lat: 22.5, lng: 120.512494 },
   });
 
+  //firestation init
+  $.ajax({
+    type: 'GET',
+    url: 'http://140.116.245.229:3000/GetFireStationJson',
+    dataType: 'json',
+    success: function (JData) {
+      FireStations = JData;
+      var i = 0;
+      $.each(FireStations, function () {
+        firestation_brigade.set(
+          FireStations[i].team_name,
+          FireStations[i].brigade
+        );
+        firestation_squadron.set(
+          FireStations[i].team_name,
+          FireStations[i].squadron
+        );
+        i++;
+      });
+      //Set firestation first
+      SetFireStation();
+    },
+    error: function (xhr) {
+      alert('ERROR IN GetFireSTation: ' + xhr.status + ' ' + xhr.statusText);
+    },
+  });
+
   //layers init
   load_layer();
 
