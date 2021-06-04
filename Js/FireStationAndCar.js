@@ -1,4 +1,5 @@
 var FireStations;
+let Cars;
 //team name - brigade
 let firestation_brigade = new Map();
 //team name - squadron
@@ -156,57 +157,45 @@ function SelectTeam3(value_1, value_2, value_3) {
     tel_str +
     '</p>';
   $('#FireStationInfo').html(back);
-  $.ajax({
-    //Get Car Json
-    type: 'GET',
-    url: 'http://140.116.245.229:3000/GetCarsJson',
-    dataType: 'json',
-    success: function (JData) {
-      var i = 0;
-      var j = 0;
-      var CarsListData = '';
-      var CarCheckboxString = '';
-      //checkbarstring2 for reset
-      var CarCheckboxString2 = '';
-      $.each(JData, function () {
-        if (value_3 == JData[i].team_name) {
-          CarCheckboxString =
-            '<td><input type="checkbox"  id="car_checkbox_' +
-            j +
-            '" ' +
-            (JData[i].car_status ? 'disabled="true"' : ' ') +
-            'car_license_plate=' +
-            JData[i].car_license_plate +
-            '></td>';
-          CarCheckboxString2 =
-            '<td><input type="checkbox"  id="car_checkbox2_' +
-            j +
-            '" ' +
-            (JData[i].car_status ? '' : 'disabled="true" ') +
-            'car_license_plate=' +
-            JData[i].car_license_plate +
-            '></td>';
-          CarsListData += '<tr id="rowCarsStatus_' + j + '" class="">';
-          CarsListData +=
-            '<td><span class="badge badge-secondary">' +
-            (JData[i].car_kind ? '消防車' : '救護車') +
-            '</span><br>' +
-            JData[i].car_license_plate +
-            '</td>';
-          CarsListData +=
-            '<td>' + (JData[i].car_status ? '值勤中' : '待命中') + '</td>';
-          CarsListData += CarCheckboxString;
-          CarsListData += CarCheckboxString2;
-          CarsListData += '</tr>';
-          j++;
-        }
-        i++;
-      });
-      $('#CarsList').html(CarsListData);
-    },
-
-    error: function (xhr) {
-      alert('ERROR IN CAR: ' + xhr.status + ' ' + xhr.statusText);
-    },
+  var i = 0;
+  var j = 0;
+  var CarsListData = '';
+  var CarCheckboxString = '';
+  //checkbarstring2 for reset
+  var CarCheckboxString2 = '';
+  $.each(Cars, function () {
+    if (value_3 == Cars[i].team_name) {
+      CarCheckboxString =
+        '<td><input type="checkbox"  id="car_checkbox_' +
+        j +
+        '" ' +
+        (Cars[i].car_status ? 'disabled="true"' : ' ') +
+        'car_license_plate=' +
+        Cars[i].car_license_plate +
+        '></td>';
+      CarCheckboxString2 =
+        '<td><input type="checkbox"  id="car_checkbox2_' +
+        j +
+        '" ' +
+        (Cars[i].car_status ? '' : 'disabled="true" ') +
+        'car_license_plate=' +
+        Cars[i].car_license_plate +
+        '></td>';
+      CarsListData += '<tr id="rowCarsStatus_' + j + '" class="">';
+      CarsListData +=
+        '<td><span class="badge badge-secondary">' +
+        (Cars[i].car_kind ? '消防車' : '救護車') +
+        '</span><br>' +
+        Cars[i].car_license_plate +
+        '</td>';
+      CarsListData +=
+        '<td>' + (Cars[i].car_status ? '值勤中' : '待命中') + '</td>';
+      CarsListData += CarCheckboxString;
+      CarsListData += CarCheckboxString2;
+      CarsListData += '</tr>';
+      j++;
+    }
+    i++;
   });
+  $('#CarsList').html(CarsListData);
 }
