@@ -1,27 +1,31 @@
 let car_last_status = new Map();
 //team name - num(firestation_infobox_num)
 let firestation_infobox_num = new Map();
+
+//map objects
 let car_markers = [];
 let seed_markers = [];
 let car_cluster;
+let seed_infobox = [];
+let fire_station_infobox = [];
+let car_infobox = [];
 let seed_locations = [];
 let firestaions_location = [];
 let map;
 
+//layers
 let layer1;
 let layer2;
 let layer3;
 // 中寮隧道
 let layer4;
-let seed_infobox = [];
-let fire_station_infobox = [];
-let car_infobox = [];
-// create direction service and direction display layer
-var directionsService;
-var directionsDisplay;
 //for rain
 let Kaohsiung_Rain_Layer;
 let Tainan_Rain_Layer;
+
+// create direction service and direction display layer
+var directionsService;
+var directionsDisplay;
 
 function initMap() {
   //for direction service
@@ -34,6 +38,33 @@ function initMap() {
     center: { lat: 22.5, lng: 120.512494 },
   });
 
+  //firestation init
+  $.ajax({
+    type: 'GET',
+    url: 'http://140.116.245.229:3000/GetFireStationJson',
+    dataType: 'json',
+    success: function (JData) {
+      FireStations = JData;
+      var i = 0;
+      $.each(FireStations, function () {
+        firestation_brigade.set(
+          FireStations[i].team_name,
+          FireStations[i].brigade
+        );
+        firestation_squadron.set(
+          FireStations[i].team_name,
+          FireStations[i].squadron
+        );
+        i++;
+      });
+      //Set firestation first
+      SetFireStation();
+    },
+    error: function (xhr) {
+      alert('ERROR IN GetFireSTation: ' + xhr.status + ' ' + xhr.statusText);
+    },
+  });
+
   //layers init
   load_layer();
 
@@ -43,14 +74,12 @@ function initMap() {
     url: 'http://140.116.245.229:3000/GetSeedsJson',
     dataType: 'json',
     success: function (JData) {
-      let seed_id = [];
       var i = 0;
       $.each(JData, function () {
         seed_locations[i] = {
           lat: parseFloat(JData[i].seed_latitude),
           lng: parseFloat(JData[i].seed_longitude),
         };
-        seed_id[i] = JData[i].seed_id.toString();
 
         i++;
       });
@@ -75,7 +104,7 @@ function initMap() {
             i +
             '" class="infoDiv">' +
             '<h6>種子ID:' +
-            seed_id[i] +
+            JData[i].seed_id +
             '</h6>' +
             '<p><br>地區:北區<br>電量:' +
             JData[i].seed_battery +
@@ -90,7 +119,7 @@ function initMap() {
         seed_markers[i] = new google.maps.Marker({
           position: seed_locations[i],
           icon: JData[i].seed_status ? red_marker : green_marker,
-          label: String(seed_id[i]),
+          label: String(JData[i].seed_id),
           map: map,
         });
         seed_markers[i].addListener(
@@ -120,6 +149,7 @@ function initMap() {
     type: 'POST',
     dataType: 'json',
     success: function (JData) {
+      Cars = JData;
       let car_location;
       var ambu_size;
       ambu_size = new google.maps.Size(42, 42);
@@ -156,6 +186,7 @@ function initMap() {
         }
 
         //first load in setting
+        car_last_status.set(JData[i]['car_license_plate'], JData[i].car_status);
         car_location = {
           lat: JData[i].car_latitude,
           lng: JData[i].car_longitude,
@@ -312,6 +343,7 @@ var car_interval = setInterval(function () {
     type: 'POST',
     dataType: 'json',
     success: function (JData) {
+      Cars = JData;
       var NumOfJData = JData.length;
       //all car data
       for (var i = 0; i < NumOfJData; i++) {
@@ -325,7 +357,7 @@ var car_interval = setInterval(function () {
               var element2 = document.getElementById('team_2');
               var element3 = document.getElementById('team_3');
               SelectTeam3(element1.value, element2.value, element3.value);
-              //reset info box
+              //reset firestation info box
               let j;
               let unsent_cars = 0;
               let sent_cars = 0;
@@ -463,66 +495,58 @@ setTimeout(function load_fireStation_on_map() {
     let tmp_tel = FireStations[i].phone_number;
     let name = FireStations[i].team_name;
     firestation_infobox_num.set(name, i);
-    fire_station_infobox[i] = new google.maps.InfoWindow({});
     firestation_markers[i] = new google.maps.Marker({
       position: firestaions_location[i],
       icon: firestaion_img,
       map: map,
     });
-    let car_data;
-    $.ajax({
-      url: 'http://140.116.245.229:3000/GetCarsJson',
-      type: 'POST',
-      dataType: 'json',
-      success: function (JData) {
-        car_data = JData;
-      },
-      error: function () {
-        alert('ERROR IN LOAD FIRESTATION ON MAP - GET CAR');
-      },
+    //set infobox content
+    let tmp_content =
+      '<div id="infoDiv' +
+      i +
+      '" class="infoDiv">' +
+      '<h6>分隊:' +
+      name +
+      '</h6>' +
+      '<p >' +
+      '地址:' +
+      tmp_address +
+      '<br>電話:' +
+      tmp_tel +
+      '<br><br>隸屬大隊:' +
+      FireStations[i].brigade +
+      '<br>隸屬中隊:' +
+      FireStations[i].squadron +
+      '</p></div>';
+
+    let sent_cars = 0;
+    let unsent_cars = 0;
+    let j = 0;
+    for (j = 0; j < Cars.length; j++) {
+      if (name == Cars[j].team_name) {
+        if (Cars[j].car_status == 0) {
+          unsent_cars++;
+        } else sent_cars++;
+      }
+    }
+    tmp_content +=
+      '<p id="unsent_car_info_' +
+      i +
+      '" style="color: green;font-size: 14px;"><b>待命中:' +
+      unsent_cars +
+      '</b></p><p id="unsent_car_info_' +
+      i +
+      '" style="color: red;font-size: 14px;"><b>值勤中:' +
+      sent_cars +
+      '</b></p>';
+    fire_station_infobox[i] = new google.maps.InfoWindow({
+      content: tmp_content,
     });
+
     firestation_markers[i].addListener(
       'click',
       (function (i) {
         return function () {
-          let tmp_content =
-            '<div id="infoDiv' +
-            i +
-            '" class="infoDiv">' +
-            '<h6>分隊:' +
-            name +
-            '</h6>' +
-            '<p >' +
-            '地址:' +
-            tmp_address +
-            '<br>電話:' +
-            tmp_tel +
-            '<br><br>隸屬大隊:' +
-            FireStations[i].brigade +
-            '<br>隸屬中隊:' +
-            FireStations[i].squadron +
-            '</p></div>';
-
-          let sent_cars = 0;
-          let unsent_cars = 0;
-          let j = 0;
-          for (j = 0; j < car_data.length; j++) {
-            if (name == car_data[j].team_name) {
-              if (car_data[j].car_status == 0) {
-                unsent_cars++;
-              } else sent_cars++;
-            }
-          }
-          tmp_content +=
-            '<p id="unsent_car_info_' +
-            i +
-            '" style="color: green;font-size: 14px;"><b>待命中:' +
-            unsent_cars +
-            '</b></p><p id="unsent_car_info_' +
-            i +
-            '" style="color: red;font-size: 14px;"><b>值勤中:' +
-            sent_cars +
-            '</b></p>';
           fire_station_infobox[i].setContent(tmp_content);
           if (fire_station_infobox[i].anchor == null) {
             map.setCenter(firestaions_location[i]);
@@ -540,6 +564,33 @@ setTimeout(function load_fireStation_on_map() {
     imagePath: './Img/cluster_orange/m',
   });
 }, 1000);
+
+function reset_info_box(num, unsent_cars, sent_cars) {
+  let tmp_content =
+    '<div id="infoDiv' +
+    num +
+    '" class="infoDiv">' +
+    '<h6>分隊:' +
+    FireStations[num].team_name +
+    '</h6>' +
+    '<p >' +
+    '地址:' +
+    FireStations[num].address +
+    '<br>電話:' +
+    FireStations[num].phone_number +
+    '</p></div>';
+  tmp_content +=
+    '<p id="unsent_car_info_' +
+    num +
+    '" style="color: green;font-size: 14px;"><b>待命中:' +
+    unsent_cars +
+    '</b></p><p id="unsent_car_info_' +
+    num +
+    '" style="color: red;font-size: 14px;"><b>值勤中:' +
+    sent_cars +
+    '</b></p>';
+  fire_station_infobox[num].setContent(tmp_content);
+}
 
 function load_layer() {
   //layer1 - ground slip
@@ -720,6 +771,36 @@ function load_layer() {
   });
 }
 
+function setRainImage() {
+  let pos = [];
+  pos[0] = [
+    {
+      lat: imageBounds[0][0][0],
+      lng: imageBounds[0][0][1],
+    },
+    {
+      lat: imageBounds[0][1][0],
+      lng: imageBounds[0][1][1],
+    },
+  ];
+  pos[1] = [
+    {
+      lat: imageBounds[1][0][0],
+      lng: imageBounds[1][0][1],
+    },
+    {
+      lat: imageBounds[1][1][0],
+      lng: imageBounds[1][1][1],
+    },
+  ];
+  //kaohsiung
+  var K_Bounds = new google.maps.LatLngBounds(pos[0][0], pos[0][1]);
+  //Tainan
+  var T_Bounds = new google.maps.LatLngBounds(pos[1][0], pos[1][1]);
+  Kaohsiung_Rain_Layer = new google.maps.GroundOverlay(returnImage(), K_Bounds);
+  Tainan_Rain_Layer = new google.maps.GroundOverlay(returnImage2(), T_Bounds);
+}
+
 function show_layer(checked, value) {
   if (value == '山崩與地滑') {
     if (checked == true) {
@@ -770,61 +851,4 @@ function show_layer(checked, value) {
       layer4.setMap(map);
     } else layer4.setMap(null);
   }
-}
-
-function setRainImage() {
-  let pos = [];
-  pos[0] = [
-    {
-      lat: imageBounds[0][0][0],
-      lng: imageBounds[0][0][1],
-    },
-    {
-      lat: imageBounds[0][1][0],
-      lng: imageBounds[0][1][1],
-    },
-  ];
-  pos[1] = [
-    {
-      lat: imageBounds[1][0][0],
-      lng: imageBounds[1][0][1],
-    },
-    {
-      lat: imageBounds[1][1][0],
-      lng: imageBounds[1][1][1],
-    },
-  ];
-  //kaohsiung
-  var K_Bounds = new google.maps.LatLngBounds(pos[0][0], pos[0][1]);
-  //Tainan
-  var T_Bounds = new google.maps.LatLngBounds(pos[1][0], pos[1][1]);
-  Kaohsiung_Rain_Layer = new google.maps.GroundOverlay(returnImage(), K_Bounds);
-  Tainan_Rain_Layer = new google.maps.GroundOverlay(returnImage2(), T_Bounds);
-}
-
-function reset_info_box(num, unsent_cars, sent_cars) {
-  let tmp_content =
-    '<div id="infoDiv' +
-    num +
-    '" class="infoDiv">' +
-    '<h6>分隊:' +
-    FireStations[num].team_name +
-    '</h6>' +
-    '<p >' +
-    '地址:' +
-    FireStations[num].address +
-    '<br>電話:' +
-    FireStations[num].phone_number +
-    '</p></div>';
-  tmp_content +=
-    '<p id="unsent_car_info_' +
-    num +
-    '" style="color: green;font-size: 14px;"><b>待命中:' +
-    unsent_cars +
-    '</b></p><p id="unsent_car_info_' +
-    num +
-    '" style="color: red;font-size: 14px;"><b>值勤中:' +
-    sent_cars +
-    '</b></p>';
-  fire_station_infobox[num].setContent(tmp_content);
 }
