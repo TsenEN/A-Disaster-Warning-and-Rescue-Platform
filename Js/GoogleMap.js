@@ -172,17 +172,7 @@ function initMap() {
       for (var i = 0; i < NumOfJData; i++) {
         //for sent cars destination info
         if (JData[i].car_status == 1) {
-          let a_sent_car = new sent_car(
-            JData[i].car_license_plate,
-            JData[i].car_where,
-            JData[i].car_kind,
-            JData[i].team_name,
-            {
-              lat: JData[i].car_latitude,
-              lng: JData[i].car_longitude,
-            }
-          );
-          sent_cars_dest.push(a_sent_car);
+          sent_cars_num.push(i);
         }
 
         //first load in setting
@@ -336,7 +326,7 @@ var car_interval = setInterval(function () {
   };
 
   //for sent cars destination info
-  let tmp_sent_cars = [];
+  let tmp_sent_cars_num = [];
   let changed = false;
   $.ajax({
     url: 'http://140.116.245.229:3000/GetCarsJson',
@@ -381,17 +371,8 @@ var car_interval = setInterval(function () {
           } else {
             //car status = 1
             //for sent cars destination info
-            let a_sent_car = new sent_car(
-              JData[i].car_license_plate,
-              JData[i].car_where,
-              JData[i].car_kind,
-              JData[i].team_name,
-              {
-                lat: JData[i]['car_latitude'],
-                lng: JData[i]['car_longitude'],
-              }
-            );
-            tmp_sent_cars.push(a_sent_car);
+
+            tmp_sent_cars_num.push(i);
             //reset car infobox everyseconds
             let car_content;
             let car_where_str;
@@ -462,7 +443,7 @@ var car_interval = setInterval(function () {
         }
       }
       if (changed == true) {
-        sent_cars_dest = tmp_sent_cars;
+        sent_cars_num = tmp_sent_cars_num;
         reset_dest_info();
       }
       car_cluster.resetViewport_();

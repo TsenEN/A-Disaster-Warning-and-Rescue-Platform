@@ -1,17 +1,33 @@
 //for destination info
 function sent_car(plate, car_destination, kind, team_name, location) {
   this.plate = plate;
-  this.car_destination = car_destination;
+  this.car_destination = car_destination; //string
   this.kind = kind;
   this.team_name = team_name;
   this.location = location;
 }
 let sent_cars_dest = [];
+let sent_cars_num = [];
 function reset_dest_info() {
+  let tmp_sent_cars = [];
+  for (let i = 0; i < Cars.length; i++) {
+    let a_sent_car = new sent_car(
+      Cars[i].car_license_plate,
+      Cars[i].car_where,
+      Cars[i].car_kind,
+      Cars[i].team_name,
+      {
+        lat: Cars[i]['car_latitude'],
+        lng: Cars[i]['car_longitude'],
+      }
+    );
+    tmp_sent_cars.push(a_sent_car);
+  }
+  sent_cars_dest = tmp_sent_cars;
   let destinations = [];
 
-  for (let i = 0; i < sent_cars_dest.length; i++) {
-    destinations.push(sent_cars_dest[i].car_destination);
+  for (let i = 0; i < sent_cars_num.length; i++) {
+    destinations.push(Cars[sent_cars_num[i]].car_where);
   }
   //remove repeated index
   destinations = destinations.filter(function (element, index, arr) {
@@ -32,6 +48,7 @@ function reset_dest_info() {
     } else return_str += '<option>' + destinations[i] + '</option>';
   }
   $('#dest').html(return_str);
+  $('#car_dest_info').html('');
 }
 async function look_up_dest(destination) {
   let return_status = '';
@@ -39,10 +56,11 @@ async function look_up_dest(destination) {
     $('#car_dest_info').html('');
     return;
   }
-  return_status = await get_latlng(destination);
+  await get_latlng(destination);
   let return_str = '<p><strong>前往車輛: &nbsp</strong></p>';
   return_str +=
     '<table class="table table-bordered table-hover" id="dest_table"><thead class="thead-light"><tr><td Align="Center" scope="col"><B>車牌</B></Td><td Align="Center" scope="col"><B>距離目的地</B></Td><td Align="Center" scope="col"><B>隸屬分隊</B></Td><td Align="Center" scope="col"><B>隸屬大隊</B></Td><td Align="Center" scope="col"><B>隸屬中隊</B></Td></tr></thead><tbody>';
+
   for (let i = 0; i < sent_cars_dest.length; i++) {
     if (sent_cars_dest[i].car_destination == destination) {
       return_status = await get_distance(i);
