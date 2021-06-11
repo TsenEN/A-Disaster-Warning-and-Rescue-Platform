@@ -152,7 +152,7 @@ function SelectTeam3(value_1, value_2, value_3) {
     tel_str +
     '</p>';
   $('#FireStationInfo').html(back);
-  var i = 0;
+  i = 0;
   var j = 0;
   var CarsListData = '';
   var CarCheckboxString = '';
@@ -192,5 +192,6 @@ function SelectTeam3(value_1, value_2, value_3) {
     }
     i++;
   });
+  checkbox_count = j;
   $('#CarsList').html(CarsListData);
 }

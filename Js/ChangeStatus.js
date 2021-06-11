@@ -1,38 +1,23 @@
+let checkbox_count;
 //unsend to send
 function change_status() {
   //suppose that there are only three cars
-  let car1 = document.getElementById('car_checkbox_0');
-  let car2 = document.getElementById('car_checkbox_1');
-  let car3 = document.getElementById('car_checkbox_2');
+  let checkbox;
   let dest_element = document.getElementById('destination_button');
   let dest_info = dest_element.value;
   let data = [];
   let dest_data = [];
   let tmp_data;
-  let i = 0;
-  let car_license_plate = $(car1).attr('car_license_plate');
-  if (car1.checked == true) {
-    tmp_data = { car_license_plate: car_license_plate, car_status: 1 };
-    data[i] = tmp_data;
-    tmp_data = { car_license_plate: car_license_plate, car_where: dest_info };
-    dest_data[i] = tmp_data;
-    i++;
-  }
-  car_license_plate = $(car2).attr('car_license_plate');
-  if (car2.checked == true) {
-    tmp_data = { car_license_plate: car_license_plate, car_status: 1 };
-    data[i] = tmp_data;
-    tmp_data = { car_license_plate: car_license_plate, car_where: dest_info };
-    dest_data[i] = tmp_data;
-    i++;
-  }
-  car_license_plate = $(car3).attr('car_license_plate');
-  if (car3.checked == true) {
-    tmp_data = { car_license_plate: car_license_plate, car_status: 1 };
-    data[i] = tmp_data;
-    tmp_data = { car_license_plate: car_license_plate, car_where: dest_info };
-    dest_data[i] = tmp_data;
-    i++;
+  for (let i = 0; i < checkbox_count; i++) {
+    let tmp = 'car_checkbox_' + String(i);
+    checkbox = document.getElementById(tmp);
+    let car_license_plate = $(checkbox).attr('car_license_plate');
+    if (checkbox.checked == true) {
+      tmp_data = { car_license_plate: car_license_plate, car_status: 1 };
+      data.push(tmp_data);
+      tmp_data = { car_license_plate: car_license_plate, car_where: dest_info };
+      dest_data.push(tmp_data);
+    }
   }
 
   $.ajax({
@@ -64,36 +49,20 @@ function change_status() {
 //send to unsend
 function change_status2() {
   //suppose that there are only three cars
-  let car1 = document.getElementById('car_checkbox2_0');
-  let car2 = document.getElementById('car_checkbox2_1');
-  let car3 = document.getElementById('car_checkbox2_2');
+  let checkbox;
   let data = [];
   let dest_data = [];
   let tmp_data;
-  let i = 0;
-  let car_license_plate = $(car1).attr('car_license_plate');
-  if (car1.checked == true) {
-    tmp_data = { car_license_plate: car_license_plate, car_status: 0 };
-    data[i] = tmp_data;
-    tmp_data = { car_license_plate: car_license_plate, car_where: ' ' };
-    dest_data[i] = tmp_data;
-    i++;
-  }
-  car_license_plate = $(car2).attr('car_license_plate');
-  if (car2.checked == true) {
-    tmp_data = { car_license_plate: car_license_plate, car_status: 0 };
-    data[i] = tmp_data;
-    tmp_data = { car_license_plate: car_license_plate, car_where: ' ' };
-    dest_data[i] = tmp_data;
-    i++;
-  }
-  car_license_plate = $(car3).attr('car_license_plate');
-  if (car3.checked == true) {
-    tmp_data = { car_license_plate: car_license_plate, car_status: 0 };
-    data[i] = tmp_data;
-    tmp_data = { car_license_plate: car_license_plate, car_where: ' ' };
-    dest_data[i] = tmp_data;
-    i++;
+  for (let i = 0; i < checkbox_count; i++) {
+    let tmp = 'car_checkbox2_' + String(i);
+    checkbox = document.getElementById(tmp);
+    let car_license_plate = $(checkbox).attr('car_license_plate');
+    if (checkbox.checked == true) {
+      tmp_data = { car_license_plate: car_license_plate, car_status: 0 };
+      data.push(tmp_data);
+      tmp_data = { car_license_plate: car_license_plate, car_where: ' ' };
+      dest_data.push(tmp_data);
+    }
   }
   $.ajax({
     url: 'http://140.116.245.229:3000/ChangeCarStatus',
