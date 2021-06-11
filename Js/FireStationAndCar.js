@@ -114,11 +114,6 @@ function SelectTeam2(value_1, value_2) {
     i++;
   });
 
-  //filter for team_2 array(remove repeated object)
-  team_3 = team_3.filter(function (element, index, arr) {
-    return arr.indexOf(element) === index;
-  });
-
   //write back to SeedInfo.html
   var team_3_back = '<option>-分隊-</option>';
   for (i = 0; i < team_3.length; i++) {
