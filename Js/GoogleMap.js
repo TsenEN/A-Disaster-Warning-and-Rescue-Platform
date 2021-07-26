@@ -100,17 +100,13 @@ function initMap() {
       for (i = 0; i < JData.length; i++) {
         seed_infobox[i] = new google.maps.InfoWindow({
           content:
-            '<div id="infoDiv' +
-            i +
-            '" class="infoDiv">' +
+            '<div>' +
             '<h6>種子ID:' +
             JData[i].seed_id +
             '</h6>' +
             '<p><br>地區:北區<br>電量:' +
             JData[i].seed_battery +
-            '</p><p id="infoDivSeedStat' +
-            i +
-            '" class="infoDiv"' +
+            '</p><p' +
             (JData[i].seed_status
               ? 'style="color: red">危險'
               : 'style="color: green">安全') +
@@ -189,14 +185,10 @@ function initMap() {
         let string_s = firestation_squadron.get(JData[i].team_name);
         car_infobox[i] = new google.maps.InfoWindow({
           content:
-            '<div id="car_info' +
-            i +
-            'class="infoDiv><h6>車牌: <br>  ' +
+            '<div><h6>車牌: <br>  ' +
             JData[i].car_license_plate +
             '</h6>' +
-            '<p id="infoDivCarStat' +
-            i +
-            '" class="infoDiv"><br>車種:' +
+            '<p><br>車種:' +
             (JData[i].car_kind ? '消防車' : '救護車') +
             '<br>隸屬分隊:' +
             JData[i].team_name +
@@ -284,17 +276,13 @@ var seed_interval = setInterval(function () {
           seed_markers[i].setIcon(green_marker);
         }
         seed_content =
-          '<div id="infoDiv' +
-          i +
-          '" class="infoDiv">' +
+          '<div>' +
           '<h6>種子ID:' +
           JData[i].seed_id +
           '</h6>' +
           '<p><br>地區:北區<br>電量:' +
           JData[i].seed_battery +
-          '</p><p id="infoDivSeedStat' +
-          i +
-          '" class="infoDiv"' +
+          '</p><p ' +
           (JData[i].seed_status
             ? 'style="color: red">種子狀態: 危險'
             : 'style="color: green">種子狀態: 安全') +
@@ -382,14 +370,10 @@ var car_interval = setInterval(function () {
             let string_b = firestation_brigade.get(JData[i].team_name);
             let string_s = firestation_squadron.get(JData[i].team_name);
             car_content =
-              '<div id="car_info' +
-              i +
-              'class="infoDiv><h6>車牌: <br>  ' +
+              '<div><h6>車牌: <br>  ' +
               JData[i].car_license_plate +
               '</h6>' +
-              '<p id="infoDivCarStat' +
-              i +
-              '" class="infoDiv"><br>車種:' +
+              '<p><br>車種:' +
               (JData[i].car_kind ? '消防車' : '救護車') +
               '<br>隸屬分隊:' +
               JData[i].team_name +
@@ -483,9 +467,7 @@ setTimeout(function load_fireStation_on_map() {
     });
     //set infobox content
     let tmp_content =
-      '<div id="infoDiv' +
-      i +
-      '" class="infoDiv">' +
+      '<div>' +
       '<h6>分隊:' +
       name +
       '</h6>' +
@@ -511,13 +493,9 @@ setTimeout(function load_fireStation_on_map() {
       }
     }
     tmp_content +=
-      '<p id="unsent_car_info_' +
-      i +
-      '" style="color: green;font-size: 14px;"><b>待命中:' +
+      '<p  style="color: green;font-size: 14px;"><b>待命中:' +
       unsent_cars +
-      '</b></p><p id="unsent_car_info_' +
-      i +
-      '" style="color: red;font-size: 14px;"><b>值勤中:' +
+      '</b></p><p style="color: red;font-size: 14px;"><b>值勤中:' +
       sent_cars +
       '</b></p>';
     fire_station_infobox[i] = new google.maps.InfoWindow({
@@ -548,9 +526,7 @@ setTimeout(function load_fireStation_on_map() {
 
 function reset_info_box(num, unsent_cars, sent_cars) {
   let tmp_content =
-    '<div id="infoDiv' +
-    num +
-    '" class="infoDiv">' +
+    '<div>' +
     '<h6>分隊:' +
     FireStations[num].team_name +
     '</h6>' +
@@ -561,13 +537,9 @@ function reset_info_box(num, unsent_cars, sent_cars) {
     FireStations[num].phone_number +
     '</p></div>';
   tmp_content +=
-    '<p id="unsent_car_info_' +
-    num +
-    '" style="color: green;font-size: 14px;"><b>待命中:' +
+    '<p style="color: green;font-size: 14px;"><b>待命中:' +
     unsent_cars +
-    '</b></p><p id="unsent_car_info_' +
-    num +
-    '" style="color: red;font-size: 14px;"><b>值勤中:' +
+    '</b></p><p style="color: red;font-size: 14px;"><b>值勤中:' +
     sent_cars +
     '</b></p>';
   fire_station_infobox[num].setContent(tmp_content);
