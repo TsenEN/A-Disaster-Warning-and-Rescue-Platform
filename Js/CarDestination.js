@@ -11,24 +11,26 @@ let sent_cars_num = [];
 function reset_dest_info() {
   let tmp_sent_cars = [];
   for (let i = 0; i < Cars.length; i++) {
-    let a_sent_car = new sent_car(
-      Cars[i].car_license_plate,
-      Cars[i].car_where,
-      Cars[i].car_kind,
-      Cars[i].team_name,
-      {
-        lat: Cars[i]['car_latitude'],
-        lng: Cars[i]['car_longitude'],
-      }
-    );
-    tmp_sent_cars.push(a_sent_car);
+    if (Cars[i].car_status == 1) {
+      let a_sent_car = new sent_car(
+        Cars[i].car_license_plate,
+        Cars[i].car_where,
+        Cars[i].car_kind,
+        Cars[i].team_name,
+        {
+          lat: Cars[i]['car_latitude'],
+          lng: Cars[i]['car_longitude'],
+        }
+      );
+      tmp_sent_cars.push(a_sent_car);
+    }
   }
   sent_cars_dest = tmp_sent_cars;
   let destinations = [];
-
-  for (let i = 0; i < sent_cars_num.length; i++) {
-    destinations.push(Cars[sent_cars_num[i]].car_where);
+  for (let i = 0; i < sent_cars_dest.length; i++) {
+    destinations.push(sent_cars_dest[i].car_destination);
   }
+
   //remove repeated index
   destinations = destinations.filter(function (element, index, arr) {
     return arr.indexOf(element) === index;
@@ -107,15 +109,16 @@ async function look_up_dest(destination) {
 
 //get dest latlng
 function get_latlng(destination) {
-  let address;
   var geocoder = new google.maps.Geocoder();
-
   return new Promise((resolve, reject) => {
-    if (address == '未知') resolve('ok');
+    if (destination == '未知') {
+      resolve('ok');
+    }
     geocoder.geocode({ address: destination }, function (results, status) {
       if (status == 'OK') {
         for (let j = 0; j < sent_cars_dest.length; j++) {
           if (sent_cars_dest[j].car_destination == destination) {
+            //可以直接新增項目
             sent_cars_dest[j].dest_latlng = results[0].geometry.location;
           }
         }
