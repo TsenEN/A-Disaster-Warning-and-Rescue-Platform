@@ -73,6 +73,7 @@ $(document).ready(function () {
       "<tr><td Align='Center' scope='col'>-</Td><td Align='Center' scope='col'>-</Td><td Align='Center' scope='col'>-</Td><td Align='Center' scope='col'>-</Td></tr>";
 
     $('#SelectContainer').html(return_select);
+    $('#VolunteerList').html(retun_tmp);
     $('#VolunteerContainer').show();
     $('#CarContainer').hide();
   });
