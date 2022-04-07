@@ -61,8 +61,11 @@ $(document).ready(function () {
       '<div id=SelectFireStation><div class="form-group"><div class="row"><div class="col"><select class="form-control text-dark" id="team_1"><option>-大隊-</option></select></div><div class="col"><select class="form-control text-dark" id="team_2"><option>-中隊-</option></select></div><div class="col"><select class="form-control text-dark" id="team_3"><option>-分隊-</option></select></div></div></div></div><div id=FireStationInfo><!--for fire station information --></div>';
     $('#SelectContainer').html(return_string);
     $('#CarsList').html(retun_tmp);
+    $('#CarContainer').show();
+    $('#VolunteerContainer').hide();
     SetFireStation();
   });
+
   $(document).on('click', '#SwitchVolunteer', function () {
     let return_select =
       '<div id=SelectAreaContainer class="form-group"><div class="row"><div class="col"><select class="form-control text-dark" id="SelectArea"><option>-選擇區域-</option></select></div></div></div>';
@@ -70,7 +73,8 @@ $(document).ready(function () {
       "<tr><td Align='Center' scope='col'>-</Td><td Align='Center' scope='col'>-</Td><td Align='Center' scope='col'>-</Td><td Align='Center' scope='col'>-</Td></tr>";
 
     $('#SelectContainer').html(return_select);
-    $('#CarsList').html(retun_tmp);
+    $('#VolunteerContainer').show();
+    $('#CarContainer').hide();
   });
   //test zoom in
   // $(document).on('click', '#rowCarsStatus_0', function () {
