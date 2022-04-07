@@ -240,6 +240,19 @@ function initMap() {
     },
   });
 
+  //volunteer init
+  $.ajax({
+    type: 'GET',
+    url: 'http://140.116.245.229:3000/GetVolunteersJson',
+    dataType: 'json',
+    success: function (JData) {
+      Volunteers = JData;
+    },
+    error: function (xhr) {
+      alert('ERROR IN GetVolunteer: ' + xhr.status + ' ' + xhr.statusText);
+    },
+  });
+
   //navigation function
   //set direction display layer
   directionsDisplay.setMap(map);

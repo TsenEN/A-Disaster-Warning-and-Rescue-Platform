@@ -55,16 +55,21 @@ $(document).ready(function () {
     var element = document.getElementById('dest');
     look_up_dest(element.value);
   });
-  //switching send cars department
+  //switching send cars department(select container: for select bars)
   $(document).on('click', '#SwitchFire', function () {
     let return_string =
       '<div id=SelectFireStation><div class="form-group"><div class="row"><div class="col"><select class="form-control text-dark" id="team_1"><option>-大隊-</option></select></div><div class="col"><select class="form-control text-dark" id="team_2"><option>-中隊-</option></select></div><div class="col"><select class="form-control text-dark" id="team_3"><option>-分隊-</option></select></div></div></div></div><div id=FireStationInfo><!--for fire station information --></div>';
-    $('#DepartmentInfoContainer').html(return_string);
+    $('#SelectContainer').html(return_string);
     $('#CarsList').html(retun_tmp);
     SetFireStation();
   });
   $(document).on('click', '#SwitchVolunteer', function () {
-    $('#DepartmentInfoContainer').html('');
+    let return_select =
+      '<div id=SelectAreaContainer class="form-group"><div class="row"><div class="col"><select class="form-control text-dark" id="SelectArea"><option>-選擇區域-</option></select></div></div></div>';
+    return_tmp =
+      "<tr><td Align='Center' scope='col'>-</Td><td Align='Center' scope='col'>-</Td><td Align='Center' scope='col'>-</Td><td Align='Center' scope='col'>-</Td></tr>";
+
+    $('#SelectContainer').html(return_select);
     $('#CarsList').html(retun_tmp);
   });
   //test zoom in
