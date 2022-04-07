@@ -501,7 +501,6 @@ setTimeout(function load_fireStation_on_map() {
     fire_station_infobox[i] = new google.maps.InfoWindow({
       content: tmp_content,
     });
-
     firestation_markers[i].addListener(
       'click',
       (function (i) {
