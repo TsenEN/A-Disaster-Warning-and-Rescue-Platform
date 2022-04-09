@@ -77,6 +77,13 @@ $(document).ready(function () {
     $('#VolunteerContainer').show();
     $('#CarContainer').hide();
   });
+  $(document).on('click', '#VolunteerButton', function () {
+    change_volunteer_status();
+  });
+  $(document).on('click', '#VolunteerButtonReset', function () {
+    change_volunteer_status2();
+  });
+
   //test zoom in
   // $(document).on('click', '#rowCarsStatus_0', function () {
   //   alert('click 0');

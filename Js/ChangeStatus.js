@@ -19,7 +19,6 @@ function change_status() {
       dest_data.push(tmp_data);
     }
   }
-
   $.ajax({
     url: 'http://140.116.245.229:3000/ChangeCarStatus',
     type: 'POST',
@@ -88,4 +87,62 @@ function change_status2() {
       alert('ERROR IN CHANGE ADDRESS: ' + xhr.status + ' ' + xhr.statusText);
     },
   });
+}
+async function change_volunteer_status() {
+  let have_task = 1;
+  let task_descript = document.getElementById('task_descript_button').value;
+  let task_dest = document.getElementById('task_dest_button').value;
+  let time_phase = [5];
+  let error_num = 0;
+  for (let i = 0; i < 5; i++) {
+    time_phase[i] = document.getElementById('task_button' + (i + 1)).value;
+    if (time_phase[i] > 7 || time_phase[i] < 0 || time_phase[i] == '') {
+      // alert(i + 1 + '號桿輸入錯誤\n範圍: 0~7');
+      // error_num = 1;
+    }
+  }
+  if (error_num == 1) return;
+  let dest_latlng = await get_latlng_v(task_dest);
+  tmp =
+    String(time_phase[0]) +
+    ',' +
+    String(time_phase[1]) +
+    ',' +
+    String(time_phase[2]) +
+    ',' +
+    String(time_phase[3]) +
+    ',' +
+    String(time_phase[4]);
+  tmp2 = String(dest_latlng);
+  tmp2 = tmp2.split(' ');
+  lat = tmp2[0];
+  lat = lat.split('(');
+  lat = lat[1].split(',');
+  lng = tmp2[1];
+  lng = lng.split(')');
+  send_data = {
+    nofv: 1,
+    id: [1],
+    latitude: parseFloat(lat[0]),
+    longitude: parseFloat(lng[0]),
+    taskinfo: task_descript,
+    lightpoles_phase: tmp,
+  };
+  send_data = JSON.stringify(send_data);
+  console.log(send_data);
+  $.ajax({
+    url: 'http://140.116.245.229:3000/SetTask',
+    type: 'POST',
+    contentType: 'application/x-www-form-urlencoded',
+    dataType: 'json',
+    crossDomain: true,
+    data: test_data,
+    success: function () {},
+    error: function (xhr) {
+      alert('ERROR IN CHANGE ADDRESS: ' + xhr.status + ' ' + xhr.statusText);
+    },
+  });
+}
+function change_volunteer_status2() {
+  let have_task = 0;
 }
