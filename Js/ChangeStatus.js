@@ -120,9 +120,12 @@ async function change_volunteer_status() {
   lat = lat[1].split(',');
   lng = tmp2[1];
   lng = lng.split(')');
+  num = 2;
+
+  test_id = [1, 3];
   send_data = {
-    nofv: 1,
-    id: [1],
+    nofv: num,
+    id: test_id,
     latitude: parseFloat(lat[0]),
     longitude: parseFloat(lng[0]),
     taskinfo: task_descript,
@@ -136,7 +139,7 @@ async function change_volunteer_status() {
     contentType: 'application/x-www-form-urlencoded',
     dataType: 'json',
     crossDomain: true,
-    data: test_data,
+    data: send_data,
     success: function () {},
     error: function (xhr) {
       alert('ERROR IN CHANGE ADDRESS: ' + xhr.status + ' ' + xhr.statusText);

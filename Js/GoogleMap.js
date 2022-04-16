@@ -246,7 +246,13 @@ function initMap() {
     url: 'http://140.116.245.229:3000/GetVolunteersJson',
     dataType: 'json',
     success: function (JData) {
-      Volunteers = JData;
+      // Volunteers = JData;
+      for (let i = 0; JData[i + 1] != null; i++) {
+        Volunteers[i] = JData[i + 1];
+      }
+      set_area_v();
+
+      console.log(Volunteers);
     },
     error: function (xhr) {
       alert('ERROR IN GetVolunteer: ' + xhr.status + ' ' + xhr.statusText);

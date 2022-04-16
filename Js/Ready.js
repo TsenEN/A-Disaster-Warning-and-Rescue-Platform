@@ -76,12 +76,16 @@ $(document).ready(function () {
     $('#VolunteerList').html(retun_tmp);
     $('#VolunteerContainer').show();
     $('#CarContainer').hide();
+    set_v_select();
   });
   $(document).on('click', '#VolunteerButton', function () {
     change_volunteer_status();
   });
   $(document).on('click', '#VolunteerButtonReset', function () {
     change_volunteer_status2();
+  });
+  $(document).on('change', '#SelectArea', function () {
+    SelectV(this.value);
   });
 
   //test zoom in
