@@ -80,6 +80,9 @@ $(document).ready(function () {
   });
   $(document).on('click', '#VolunteerButton', function () {
     change_volunteer_status();
+    return_str =
+      '<div class="input-group"> <div class="input-group-prepend"> <span class="input-group-text">任務目標</span> </div> <input type="text" id="task_descript_button" placeholder="任務目標" class="form-control"> </div> <div class="input-group"> <div class="input-group-prepend"> <span class="input-group-text">任務地址</span> </div> <input type="text" id="task_dest_button" placeholder="任務地址" class="form-control"> </div> <div class="input-group"> <div class="input-group-prepend"> <span class="input-group-text">時相</span> </div> <input type="number" id="task_button1" placeholder="一號桿" class="form-control"> <input type="number" id="task_button2" placeholder="二號桿" class="form-control"> <input type="number" id="task_button3" placeholder="三號桿" class="form-control"> <input type="number" id="task_button4" placeholder="四號桿" class="form-control"> <input type="number" id="task_button5" placeholder="五號桿" class="form-control"> </div>';
+    $('#v_input').html(return_str);
   });
   $(document).on('click', '#VolunteerButtonReset', function () {
     change_volunteer_status2();

@@ -97,8 +97,8 @@ async function change_volunteer_status() {
   for (let i = 0; i < 5; i++) {
     time_phase[i] = document.getElementById('task_button' + (i + 1)).value;
     if (time_phase[i] > 7 || time_phase[i] < 0 || time_phase[i] == '') {
-      // alert(i + 1 + '號桿輸入錯誤\n範圍: 0~7');
-      // error_num = 1;
+      alert(i + 1 + '號桿輸入錯誤\n範圍: 0~7');
+      error_num = 1;
     }
   }
   if (error_num == 1) return;
@@ -120,12 +120,25 @@ async function change_volunteer_status() {
   lat = lat[1].split(',');
   lng = tmp2[1];
   lng = lng.split(')');
-  num = 2;
 
-  test_id = [1, 3];
+  let num = 0;
+  let id = [];
+  for (let i = 0; i < Volunteers.length; i++) {
+    checkbox = document.getElementById('V_checkbox_' + (i + 1));
+    if (checkbox != null) {
+      if (checkbox.checked == true) {
+        console.log('checked', i);
+        num++;
+        id.push(i + 1);
+        Volunteers[i].have_task = 1;
+      }
+    }
+  }
+  console.log(num, id);
+  // test_id = [1, 3];
   send_data = {
     nofv: num,
-    id: test_id,
+    id: id,
     latitude: parseFloat(lat[0]),
     longitude: parseFloat(lng[0]),
     taskinfo: task_descript,
@@ -145,6 +158,27 @@ async function change_volunteer_status() {
       alert('ERROR IN CHANGE ADDRESS: ' + xhr.status + ' ' + xhr.statusText);
     },
   });
+  let return_str = '';
+  let area = document.getElementById('SelectArea').value;
+  for (let i = 0; i < Volunteers.length; i++) {
+    if (Volunteers[i].area == area) {
+      return_str +=
+        '<tr><td>' +
+        (i + 1) +
+        '</td><td>' +
+        (Volunteers[i].have_task ? '值勤中' : '待命中') +
+        '</td><td><input type="checkbox"  id="V_checkbox_' +
+        (i + 1) +
+        '" ' +
+        (Volunteers[i].have_task ? 'disabled="true"' : ' ') +
+        '></td><td><input type="checkbox"  id="V_checkbox2_' +
+        (i + 1) +
+        '" ' +
+        (Volunteers[i].have_task ? '' : 'disabled="true"') +
+        '></td></tr>';
+    }
+  }
+  $('#VolunteerList').html(return_str);
 }
 function change_volunteer_status2() {
   let have_task = 0;
