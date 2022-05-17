@@ -89,7 +89,6 @@ function change_status2() {
   });
 }
 async function change_volunteer_status() {
-  let have_task = 1;
   let task_descript = document.getElementById('task_descript_button').value;
   let task_dest = document.getElementById('task_dest_button').value;
   let time_phase = [5];
@@ -127,15 +126,12 @@ async function change_volunteer_status() {
     checkbox = document.getElementById('V_checkbox_' + (i + 1));
     if (checkbox != null) {
       if (checkbox.checked == true) {
-        console.log('checked', i);
         num++;
         id.push(i + 1);
         Volunteers[i].have_task = 1;
       }
     }
   }
-  console.log(num, id);
-  // test_id = [1, 3];
   send_data = {
     nofv: num,
     id: id,
@@ -145,7 +141,6 @@ async function change_volunteer_status() {
     lightpoles_phase: tmp,
   };
   send_data = JSON.stringify(send_data);
-  console.log(send_data);
   $.ajax({
     url: 'http://140.116.245.229:3000/SetTask',
     type: 'POST',
@@ -182,4 +177,59 @@ async function change_volunteer_status() {
 }
 function change_volunteer_status2() {
   let have_task = 0;
+  let empty_str = '';
+  let num = 0;
+  let id = [];
+  for (let i = 0; i < Volunteers.length; i++) {
+    checkbox = document.getElementById('V_checkbox2_' + (i + 1));
+    if (checkbox != null) {
+      if (checkbox.checked == true) {
+        num++;
+        id.push(i + 1);
+        Volunteers[i].have_task = 0;
+      }
+    }
+  }
+  num = -num;
+  send_data = {
+    nofv: num,
+    id: id,
+    latitude: empty_str,
+    longitude: empty_str,
+    taskinfo: empty_str,
+    lightpoles_phase: empty_str,
+  };
+  send_data = JSON.stringify(send_data);
+  $.ajax({
+    url: 'http://140.116.245.229:3000/SetTask',
+    type: 'POST',
+    contentType: 'application/x-www-form-urlencoded',
+    dataType: 'json',
+    crossDomain: true,
+    data: send_data,
+    success: function () {},
+    error: function (xhr) {
+      alert('ERROR IN CHANGE ADDRESS: ' + xhr.status + ' ' + xhr.statusText);
+    },
+  });
+  let area = document.getElementById('SelectArea').value;
+  for (let i = 0; i < Volunteers.length; i++) {
+    if (Volunteers[i].area == area) {
+      empty_str +=
+        '<tr><td>' +
+        (i + 1) +
+        '</td><td>' +
+        (Volunteers[i].have_task ? '值勤中' : '待命中') +
+        '</td><td><input type="checkbox"  id="V_checkbox_' +
+        (i + 1) +
+        '" ' +
+        (Volunteers[i].have_task ? 'disabled="true"' : ' ') +
+        '></td><td><input type="checkbox"  id="V_checkbox2_' +
+        (i + 1) +
+        '" ' +
+        (Volunteers[i].have_task ? '' : 'disabled="true"') +
+        '></td></tr>';
+    }
+  }
+  $('#VolunteerList').html(empty_str);
 }

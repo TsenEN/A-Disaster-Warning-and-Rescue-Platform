@@ -251,8 +251,6 @@ function initMap() {
         Volunteers[i] = JData[i + 1];
       }
       set_area_v();
-
-      console.log(Volunteers);
     },
     error: function (xhr) {
       alert('ERROR IN GetVolunteer: ' + xhr.status + ' ' + xhr.statusText);
