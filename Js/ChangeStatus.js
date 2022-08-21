@@ -1,74 +1,23 @@
-$(document).ready(function () {
-  //button change car stat
-  $(document).on('click', '#CarButtonssss', function () {
-    var car_license_plate = $(this).attr('button_id');
-    var stat = $(this).attr('stat');
-    if (stat == 1) {
-      stat = 0;
-    } else {
-      stat = 1;
-    }
-    var data = [{ car_license_plate: car_license_plate, car_status: stat }];
-    $.ajax({
-      url: 'http://140.116.245.229:3000/ChangeCarStatus',
-      type: 'POST',
-      contentType: 'application/x-www-form-urlencoded',
-      dataType: 'json',
-      crossDomain: true,
-      data: JSON.stringify(data),
-      success: function () {
-        var CarsListData = '';
-        var CarStatString = '';
-        var CarButtonString = '';
-        if (stat == 1) {
-          CarStatString = '派遣中';
-          CarButtonString =
-            '<td><button id = CarButton button_id = "' +
-            car_license_plate +
-            '"stat = 1 class="btn btn-primary  text-light disabled">派遣</button></td>';
-        } else {
-          CarStatString = '未派遣';
-          CarButtonString =
-            '<td><button id = CarButton button_id = "' +
-            car_license_plate +
-            '" stat = 0 class="btn btn-primary text-light">派遣</button></td>';
-        }
-        CarsListData += '<td>' + car_license_plate + '</td>';
-        CarsListData += '<td>' + CarStatString + '</td>';
-        CarsListData += CarButtonString;
-        $('#rowCarsStatus' + car_license_plate).html(CarsListData);
-      },
-      error: function (xhr) {
-        alert('ERROR IN CHANGE STAT: ' + xhr.status + ' ' + xhr.statusText);
-      },
-    });
-  });
-});
+let checkbox_count;
+//unsend to send
 function change_status() {
   //suppose that there are only three cars
-  let car1 = document.getElementById('car_checkbox_0');
-  let car2 = document.getElementById('car_checkbox_1');
-  let car3 = document.getElementById('car_checkbox_2');
+  let checkbox;
+  let dest_element = document.getElementById('destination_button');
+  let dest_info = dest_element.value;
   let data = [];
+  let dest_data = [];
   let tmp_data;
-  let i = 0;
-  let car_license_plate = $(car1).attr('car_license_plate');
-  if (car1.checked == true) {
-    tmp_data = { car_license_plate: car_license_plate, car_status: 1 };
-    data[i] = tmp_data;
-    i++;
-  }
-  car_license_plate = $(car2).attr('car_license_plate');
-  if (car2.checked == true) {
-    tmp_data = { car_license_plate: car_license_plate, car_status: 1 };
-    data[i] = tmp_data;
-    i++;
-  }
-  car_license_plate = $(car3).attr('car_license_plate');
-  if (car3.checked == true) {
-    tmp_data = { car_license_plate: car_license_plate, car_status: 1 };
-    data[i] = tmp_data;
-    i++;
+  for (let i = 0; i < checkbox_count; i++) {
+    let tmp = 'car_checkbox_' + String(i);
+    checkbox = document.getElementById(tmp);
+    let car_license_plate = $(checkbox).attr('car_license_plate');
+    if (checkbox.checked == true) {
+      tmp_data = { car_license_plate: car_license_plate, car_status: 1 };
+      data.push(tmp_data);
+      tmp_data = { car_license_plate: car_license_plate, car_where: dest_info };
+      dest_data.push(tmp_data);
+    }
   }
   $.ajax({
     url: 'http://140.116.245.229:3000/ChangeCarStatus',
@@ -77,52 +26,210 @@ function change_status() {
     dataType: 'json',
     crossDomain: true,
     data: JSON.stringify(data),
-    success: function () {
-      alert('success');
-    },
+    success: function () {},
     error: function (xhr) {
       alert('ERROR IN CHANGE STAT: ' + xhr.status + ' ' + xhr.statusText);
+    },
+  });
+  $.ajax({
+    url: 'http://140.116.245.229:3000/ChangeCarAddress',
+    type: 'POST',
+    contentType: 'application/x-www-form-urlencoded',
+    dataType: 'json',
+    crossDomain: true,
+    data: JSON.stringify(dest_data),
+    success: function () {},
+    error: function (xhr) {
+      alert('ERROR IN CHANGE ADDRESS: ' + xhr.status + ' ' + xhr.statusText);
+    },
+  });
+  dest_element.value = '';
+}
+//send to unsend
+function change_status2() {
+  //suppose that there are only three cars
+  let checkbox;
+  let data = [];
+  let dest_data = [];
+  let tmp_data;
+  for (let i = 0; i < checkbox_count; i++) {
+    let tmp = 'car_checkbox2_' + String(i);
+    checkbox = document.getElementById(tmp);
+    let car_license_plate = $(checkbox).attr('car_license_plate');
+    if (checkbox.checked == true) {
+      tmp_data = { car_license_plate: car_license_plate, car_status: 0 };
+      data.push(tmp_data);
+      tmp_data = { car_license_plate: car_license_plate, car_where: ' ' };
+      dest_data.push(tmp_data);
+    }
+  }
+  $.ajax({
+    url: 'http://140.116.245.229:3000/ChangeCarStatus',
+    type: 'POST',
+    contentType: 'application/x-www-form-urlencoded',
+    dataType: 'json',
+    crossDomain: true,
+    data: JSON.stringify(data),
+    success: function () {},
+    error: function (xhr) {
+      alert('ERROR IN CHANGE STAT: ' + xhr.status + ' ' + xhr.statusText);
+    },
+  });
+  $.ajax({
+    url: 'http://140.116.245.229:3000/ChangeCarAddress',
+    type: 'POST',
+    contentType: 'application/x-www-form-urlencoded',
+    dataType: 'json',
+    crossDomain: true,
+    data: JSON.stringify(dest_data),
+    success: function () {},
+    error: function (xhr) {
+      alert('ERROR IN CHANGE ADDRESS: ' + xhr.status + ' ' + xhr.statusText);
     },
   });
 }
-function change_status2() {
-  //suppose that there are only three cars
-  let car1 = document.getElementById('car_checkbox2_0');
-  let car2 = document.getElementById('car_checkbox2_1');
-  let car3 = document.getElementById('car_checkbox2_2');
-  let data = [];
-  let tmp_data;
-  let i = 0;
-  let car_license_plate = $(car1).attr('car_license_plate');
-  if (car1.checked == true) {
-    tmp_data = { car_license_plate: car_license_plate, car_status: 0 };
-    data[i] = tmp_data;
-    i++;
+async function change_volunteer_status() {
+  let task_descript = document.getElementById('task_descript_button').value;
+  let task_dest = document.getElementById('task_dest_button').value;
+  let time_phase = [5];
+  let error_num = 0;
+  for (let i = 0; i < 5; i++) {
+    time_phase[i] = document.getElementById('task_button' + (i + 1)).value;
+    if (time_phase[i] > 7 || time_phase[i] < 0 || time_phase[i] == '') {
+      alert(i + 1 + '號桿輸入錯誤\n範圍: 0~7');
+      error_num = 1;
+    }
   }
-  car_license_plate = $(car2).attr('car_license_plate');
-  if (car2.checked == true) {
-    tmp_data = { car_license_plate: car_license_plate, car_status: 0 };
-    data[i] = tmp_data;
-    i++;
+  if (error_num == 1) return;
+  let dest_latlng = await get_latlng_v(task_dest);
+  tmp =
+    String(time_phase[0]) +
+    ',' +
+    String(time_phase[1]) +
+    ',' +
+    String(time_phase[2]) +
+    ',' +
+    String(time_phase[3]) +
+    ',' +
+    String(time_phase[4]);
+  tmp2 = String(dest_latlng);
+  tmp2 = tmp2.split(' ');
+  lat = tmp2[0];
+  lat = lat.split('(');
+  lat = lat[1].split(',');
+  lng = tmp2[1];
+  lng = lng.split(')');
+
+  let num = 0;
+  let id = [];
+  for (let i = 0; i < Volunteers.length; i++) {
+    checkbox = document.getElementById('V_checkbox_' + (i + 1));
+    if (checkbox != null) {
+      if (checkbox.checked == true) {
+        num++;
+        id.push(i + 1);
+        Volunteers[i].have_task = 1;
+      }
+    }
   }
-  car_license_plate = $(car3).attr('car_license_plate');
-  if (car3.checked == true) {
-    tmp_data = { car_license_plate: car_license_plate, car_status: 0 };
-    data[i] = tmp_data;
-    i++;
-  }
+  send_data = {
+    nofv: num,
+    id: id,
+    latitude: parseFloat(lat[0]),
+    longitude: parseFloat(lng[0]),
+    taskinfo: task_descript,
+    lightpoles_phase: tmp,
+  };
+  send_data = JSON.stringify(send_data);
   $.ajax({
-    url: 'http://140.116.245.229:3000/ChangeCarStatus',
+    url: 'http://140.116.245.229:3000/SetTask',
     type: 'POST',
     contentType: 'application/x-www-form-urlencoded',
     dataType: 'json',
     crossDomain: true,
-    data: JSON.stringify(data),
-    success: function () {
-      alert('success');
-    },
+    data: send_data,
+    success: function () {},
     error: function (xhr) {
-      alert('ERROR IN CHANGE STAT: ' + xhr.status + ' ' + xhr.statusText);
+      alert('ERROR IN CHANGE ADDRESS: ' + xhr.status + ' ' + xhr.statusText);
     },
   });
+  let return_str = '';
+  let area = document.getElementById('SelectArea').value;
+  for (let i = 0; i < Volunteers.length; i++) {
+    if (Volunteers[i].area == area) {
+      return_str +=
+        '<tr><td>' +
+        (i + 1) +
+        '</td><td>' +
+        (Volunteers[i].have_task ? '值勤中' : '待命中') +
+        '</td><td><input type="checkbox"  id="V_checkbox_' +
+        (i + 1) +
+        '" ' +
+        (Volunteers[i].have_task ? 'disabled="true"' : ' ') +
+        '></td><td><input type="checkbox"  id="V_checkbox2_' +
+        (i + 1) +
+        '" ' +
+        (Volunteers[i].have_task ? '' : 'disabled="true"') +
+        '></td></tr>';
+    }
+  }
+  $('#VolunteerList').html(return_str);
+}
+function change_volunteer_status2() {
+  let have_task = 0;
+  let empty_str = '';
+  let num = 0;
+  let id = [];
+  for (let i = 0; i < Volunteers.length; i++) {
+    checkbox = document.getElementById('V_checkbox2_' + (i + 1));
+    if (checkbox != null) {
+      if (checkbox.checked == true) {
+        num++;
+        id.push(i + 1);
+        Volunteers[i].have_task = 0;
+      }
+    }
+  }
+  num = -num;
+  send_data = {
+    nofv: num,
+    id: id,
+    latitude: empty_str,
+    longitude: empty_str,
+    taskinfo: empty_str,
+    lightpoles_phase: empty_str,
+  };
+  send_data = JSON.stringify(send_data);
+  $.ajax({
+    url: 'http://140.116.245.229:3000/SetTask',
+    type: 'POST',
+    contentType: 'application/x-www-form-urlencoded',
+    dataType: 'json',
+    crossDomain: true,
+    data: send_data,
+    success: function () {},
+    error: function (xhr) {
+      alert('ERROR IN CHANGE ADDRESS: ' + xhr.status + ' ' + xhr.statusText);
+    },
+  });
+  let area = document.getElementById('SelectArea').value;
+  for (let i = 0; i < Volunteers.length; i++) {
+    if (Volunteers[i].area == area) {
+      empty_str +=
+        '<tr><td>' +
+        (i + 1) +
+        '</td><td>' +
+        (Volunteers[i].have_task ? '值勤中' : '待命中') +
+        '</td><td><input type="checkbox"  id="V_checkbox_' +
+        (i + 1) +
+        '" ' +
+        (Volunteers[i].have_task ? 'disabled="true"' : ' ') +
+        '></td><td><input type="checkbox"  id="V_checkbox2_' +
+        (i + 1) +
+        '" ' +
+        (Volunteers[i].have_task ? '' : 'disabled="true"') +
+        '></td></tr>';
+    }
+  }
+  $('#VolunteerList').html(empty_str);
 }

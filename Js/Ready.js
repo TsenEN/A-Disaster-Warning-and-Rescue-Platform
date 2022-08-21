@@ -1,8 +1,6 @@
 $(document).ready(function () {
-  //Get firestation first
-  GetFireStation();
   let retun_tmp =
-    "<tr><td Align='Center' scope='col'>-先選擇消防隊-</Td><td Align='Center' scope='col'>-先選擇消防隊-</Td><td Align='Center' scope='col'>-先選擇消防隊-</Td><td Align='Center' scope='col'>-先選擇消防隊-</Td></tr>";
+    "<tr><td Align='Center' scope='col'>-</Td><td Align='Center' scope='col'>-</Td><td Align='Center' scope='col'>-</Td><td Align='Center' scope='col'>-</Td></tr>";
   //change select bar 1
   $(document).on('change', '#team_1', function () {
     $('#FireStationInfo').html('');
@@ -51,4 +49,56 @@ $(document).ready(function () {
   $(document).on('click', '#CarButtonReset', function () {
     change_status2();
   });
+  //change car dest select bar
+  $(document).on('change', '#dest', function () {
+    $('#car_dest_info').html('');
+    var element = document.getElementById('dest');
+    look_up_dest(element.value);
+  });
+  //switching send cars department(select container: for select bars)
+  $(document).on('click', '#SwitchFire', function () {
+    let return_string =
+      '<div id=SelectFireStation><div class="form-group"><div class="row"><div class="col"><select class="form-control text-dark" id="team_1"><option>-大隊-</option></select></div><div class="col"><select class="form-control text-dark" id="team_2"><option>-中隊-</option></select></div><div class="col"><select class="form-control text-dark" id="team_3"><option>-分隊-</option></select></div></div></div></div><div id=FireStationInfo><!--for fire station information --></div>';
+    $('#SelectContainer').html(return_string);
+    $('#CarsList').html(retun_tmp);
+    $('#CarContainer').show();
+    $('#VolunteerContainer').hide();
+    SetFireStation();
+  });
+
+  $(document).on('click', '#SwitchVolunteer', function () {
+    let return_select =
+      '<div id=SelectAreaContainer class="form-group"><div class="row"><div class="col"><select class="form-control text-dark" id="SelectArea"><option>-選擇區域-</option></select></div></div></div>';
+    return_tmp =
+      "<tr><td Align='Center' scope='col'>-</Td><td Align='Center' scope='col'>-</Td><td Align='Center' scope='col'>-</Td><td Align='Center' scope='col'>-</Td></tr>";
+
+    $('#SelectContainer').html(return_select);
+    $('#VolunteerList').html(retun_tmp);
+    $('#VolunteerContainer').show();
+    $('#CarContainer').hide();
+    set_v_select();
+  });
+  $(document).on('click', '#VolunteerButton', function () {
+    change_volunteer_status();
+    return_str =
+      '<div class="input-group"> <div class="input-group-prepend"> <span class="input-group-text">任務目標</span> </div> <input type="text" id="task_descript_button" placeholder="任務目標" class="form-control"> </div> <div class="input-group"> <div class="input-group-prepend"> <span class="input-group-text">任務地址</span> </div> <input type="text" id="task_dest_button" placeholder="任務地址" class="form-control"> </div> <div class="input-group"> <div class="input-group-prepend"> <span class="input-group-text">時相</span> </div> <input type="number" id="task_button1" placeholder="一號桿" class="form-control"> <input type="number" id="task_button2" placeholder="二號桿" class="form-control"> <input type="number" id="task_button3" placeholder="三號桿" class="form-control"> <input type="number" id="task_button4" placeholder="四號桿" class="form-control"> <input type="number" id="task_button5" placeholder="五號桿" class="form-control"> </div>';
+    $('#v_input').html(return_str);
+  });
+  $(document).on('click', '#VolunteerButtonReset', function () {
+    change_volunteer_status2();
+  });
+  $(document).on('change', '#SelectArea', function () {
+    SelectV(this.value);
+  });
+
+  //test zoom in
+  // $(document).on('click', '#rowCarsStatus_0', function () {
+  //   alert('click 0');
+  // });
+  // $(document).on('click', '#rowCarsStatus_1', function () {
+  //   alert('click 1');
+  // });
+  // $(document).on('click', '#rowCarsStatus_2', function () {
+  //   alert('click 2');
+  // });
 });

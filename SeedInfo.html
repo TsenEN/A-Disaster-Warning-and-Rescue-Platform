@@ -18,7 +18,7 @@
   <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
   <script src="https://unpkg.com/esri-leaflet@2.2.4/dist/esri-leaflet.js"></script>
 
-
+</head>
 
 <body>
 
@@ -36,12 +36,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-        <!-- <li class="nav-item active">
-          <a class="nav-link" href="SeedInfo.html">邊坡種子 <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">救災派遣</a>
-        </li> -->
         <li class="nav-item">
           <a class="nav-link" href="RegisterSeed.html">註冊種子</a>
         </li>
@@ -53,29 +47,39 @@
     <div class="row">
       <div class="col-12 col-md-5">
         <div id="Sidebar">
-          <div id=SelectFireStation>
-            <div class="form-group">
-              <div class="row">
-                <div class="col">
-                  <select class="form-control text-dark" id="team_1">
-                    <option>-大隊-</option>
-                  </select>
-                </div>
-                <div class="col">
-                  <select class="form-control text-dark" id="team_2">
-                    <option>-中隊-</option>
-                  </select>
-                </div>
-                <div class="col">
-                  <select class="form-control text-dark" id="team_3">
-                    <option>-分隊-</option>
-                  </select>
+          <div id=SelectDepartment>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <li id=SwitchFire class="page-item"><a class="page-link" href="#idontwanttogoanywhere">消防隊</a></li>
+                <li id=SwitchVolunteer class="page-item"><a class="page-link" href="#idontwanttogoanywhere">志願者</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div id=SelectContainer>
+            <div id=SelectFireStation>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col">
+                    <select class="form-control text-dark" id="team_1">
+                      <option>-大隊-</option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <select class="form-control text-dark" id="team_2">
+                      <option>-中隊-</option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <select class="form-control text-dark" id="team_3">
+                      <option>-分隊-</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div id=FireStationInfo>
-            <!--for fire station information -->
+            <div id=FireStationInfo>
+              <!--for fire station information -->
+            </div>
           </div>
         </div>
         <hr />
@@ -91,10 +95,10 @@
             </thead>
             <tbody id="CarsList">
               <tr>
-                <td Align="Center" scope="col">-先選擇消防隊-</Td>
-                <td Align="Center" scope="col">-先選擇消防隊-</Td>
-                <td Align='Center' scope='col'>-先選擇消防隊-</Td>
-                <td Align='Center' scope='col'>-先選擇消防隊-</Td>
+                <td Align="Center" scope="col">-</Td>
+                <td Align="Center" scope="col">-</Td>
+                <td Align='Center' scope='col'>-</Td>
+                <td Align='Center' scope='col'>-</Td>
               </tr>
             </tbody>
           </table>
@@ -105,40 +109,92 @@
             <input type="text" id="destination_button" placeholder="目的地" class="form-control">
           </div>
         </div>
-        <hr />
+        <div id="VolunteerContainer" style="display:none">
+          <table class="table table-bordered table-hover" id="VolunteerTable">
+            <thead class="thead-light">
+              <tr>
+                <td Align="Center" scope="col"><B>編號</B></Td>
+                <td Align="Center" scope="col"><B>派遣狀態</B></Td>
+                <td><button id=VolunteerButton class="btn btn-primary  text-light">派遣</button></td>
+                <td><button id=VolunteerButtonReset class="btn btn-primary  text-light">取消派遣</button></td>
+              </tr>
+            </thead>
+            <tbody id="VolunteerList">
+              <tr>
+                <td Align="Center" scope="col">-</Td>
+                <td Align="Center" scope="col">-</Td>
+                <td Align='Center' scope='col'>-</Td>
+                <td Align='Center' scope='col'>-</Td>
+              </tr>
+            </tbody>
+          </table>
+          <div id="v_input">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">任務目標</span>
+              </div>
+              <input type="text" id="task_descript_button" placeholder="任務目標" class="form-control">
+            </div>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">任務地址</span>
+              </div>
+              <input type="text" id="task_dest_button" placeholder="任務地址" class="form-control">
+            </div>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">時相</span>
+              </div>
+              <input type="number" id="task_button1" placeholder="一號桿" class="form-control">
+              <input type="number" id="task_button2" placeholder="二號桿" class="form-control">
+              <input type="number" id="task_button3" placeholder="三號桿" class="form-control">
+              <input type="number" id="task_button4" placeholder="四號桿" class="form-control">
+              <input type="number" id="task_button5" placeholder="五號桿" class="form-control">
 
-        <div id=layer_select style="text-align:center;">
-          <h5>圖層: <h5>
-              <input type="checkbox" value="山崩與地滑" id="layer_1_checkbox">
-              <font size="4">山崩與地滑</font>
-              <input type="checkbox" value="地下水補注" id="layer_2_checkbox">
-              <font size="4">地下水補注</font>
-              <input type="checkbox" value="活動斷層" id="layer_3_checkbox">
-              <font size="4">活動斷層</font>
-              <input type="checkbox" value="雨量" id="rain_layer_checkbox">
-              <font size="4">雨量</font>
-              <!-- 新增中寮隧道種子範圍 -->
-              <input type="checkbox" value="中寮隧道種子" id="layer_4_checkbox">
-              <font size="4">中寮隧道種子分布</font>
-        </div>
-        <div class="card mt-3 text-center w-100" style="width: 18rem;" id="高雄市">
-          <div id="kaohsiung" class="card-body">
-
+            </div>
           </div>
         </div>
+        <hr />
+        <div id="send_car_destination_info">
+          <select class="form-control text-dark" id="dest">
+            <option>-選擇目的地-</option>
+          </select>
+          <div id="car_dest_info"></div>
+        </div>
+
+
       </div>
       <div class=" col-12 col-md-7">
-        <div id="Header">
-          <canvas id="TainanRainDrop" style="display: none;"></canvas>
-          <canvas id="KaohsiungRainDrop" style="display: none;"></canvas>
+        <div id=layer_select style="text-align:center;background-color: rgb(129, 150, 136);">
+          <font size="4" style="color:white">圖層：</font>
+          <input type="checkbox" value="山崩與地滑" id="layer_1_checkbox">
+          <font size="4" style="color:white">山崩與地滑</font>
+          <input type="checkbox" value="地下水補注" id="layer_2_checkbox">
+          <font size="4" style="color:white">地下水補注</font>
+          <input type="checkbox" value="活動斷層" id="layer_3_checkbox">
+          <font size="4" style="color:white">活動斷層</font>
+          <input type="checkbox" value="雨量" id="rain_layer_checkbox">
+          <font size="4" style="color:white">雨量</font>
+          <!-- 新增中寮隧道種子範圍 -->
+          <input type="checkbox" value="中寮隧道種子" id="layer_4_checkbox">
+          <font size="4" style="color:white">中寮隧道種子分布</font>
+        </div>
+        <canvas id="TainanRainDrop" style="display: none;"></canvas>
+        <canvas id="KaohsiungRainDrop" style="display: none;"></canvas>
 
-          <div id="map" class="map">
+        <div id="map" class="map">
 
-          </div>
         </div>
       </div>
 
     </div>
+    <div class="row">
+      <div class="card mt-3 text-center w-100" style="width: 18rem;" id="高雄市">
+        <div id="kaohsiung" class="card-body">
+
+        </div>
+      </div>
+    </div>>
   </div>
 
 
@@ -152,6 +208,8 @@
               href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
           <div class="text-light">Icons made by <a href="https://icon54.com/" title="Pixel perfect">Pixel perfect</a>
             from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+          <div class="text-light">Icons made by <a href="https://creativemarket.com/eucalyp" title="Eucalyp">Eucalyp</a>
+            from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
         </small>
       </div>
     </div>
@@ -162,13 +220,15 @@
   <script src="Js/RainDrop.js"></script>
   <script src="Js/Ready.js"></script>
   <script src="Js/FireStationAndCar.js"></script>
+  <script src="Js/Volunteer.js"></script>
+  <script src="Js/CarDestination.js"></script>
   <script src="Js/GoogleMap.js"></script>
   <script src="Js/ChangeStatus.js"></script>
   <script src="Js/getKaohsiungRain.js"></script>
   <!-- <script src="Js/MapDirections.js"></script> -->
 
   <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjKizr4VzV2pJ2zaT4FL0gQ-Baglyps-Q&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-1oo2yTVMQRulYO48BlSsC7-NItaZoZQ&callback=initMap">
     </script>
 </body>
 

@@ -2,8 +2,7 @@ let imageBounds = [];
 function GetRainDrop() {
   $.ajax({
     type: 'GET',
-    url:
-      'https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0002-001?Authorization=CWB-37D2694B-14C9-47FB-BB98-4A36CDABFED5&format=JSON&elementName=HOUR_24&parameterName=CITY',
+    url: 'https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0002-001?Authorization=CWB-37D2694B-14C9-47FB-BB98-4A36CDABFED5&format=JSON&elementName=HOUR_24&parameterName=CITY',
     dataType: 'json',
     success: function (JData) {
       let raindrop;
@@ -55,11 +54,10 @@ function loadkriging(city, ele_name, raindrop, pos_num) {
   var canvas = document.getElementById(ele_name);
   canvas.width = 1000;
   canvas.height = 1000;
-  var n = raindrop.length;
   var t = [];
   var x = [];
   var y = [];
-  for (var i = 0; i < n; i++) {
+  for (var i = 0; i < raindrop.length; i++) {
     if (raindrop[i].weatherElement[0].elementValue < 0) t.push(0.01);
     else if (raindrop[i].weatherElement[0].elementValue == 0) t.push(0.01);
     else t.push(raindrop[i].weatherElement[0].elementValue);
